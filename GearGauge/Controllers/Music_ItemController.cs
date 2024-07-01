@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GearGauge.ViewModels;
+using Microsoft.EntityFrameworkCore;
+using GearGauge.Data;
 
 namespace GearGauge.Controllers;
 
@@ -19,7 +21,7 @@ public class MusicItemsController : Controller
 
     public IActionResult Index()
     {
-        List<MusicItem> musicItems = context.MusicItems.Include(m => m.Category).ToList();
+        List<MusicItem> musicItems = context.MusicItems.ToList();
 
         return View(musicItems);
     }
@@ -27,7 +29,7 @@ public class MusicItemsController : Controller
     [HttpGet]
     public IActionResult Add()
     {
-        AddMusicItemViewModel addMusicItemViewModel  = new AddMusicItemViewModel(context.Categories.ToList());
+        AddMusicItemViewModel addMusicItemViewModel  = new AddMusicItemViewModel(context.MusicItems.ToList());
         return View(addMusicItemViewModel);
     }
 
@@ -36,7 +38,7 @@ public class MusicItemsController : Controller
     {
         if (ModelState.IsValid)
         {
-            MusicItem theCategory = context.Categories.Find(addMusicItemViewModel.CategoryId);
+            
             MusicItem newMusicItem = new MusicItem
             {
                 Title = addMusicItemViewModel.Title,
@@ -72,7 +74,6 @@ public class MusicItemsController : Controller
     public IActionResult Detail(int id)
     {
         MusicItem theMusicItem = context.MusicItems
-            .Include(m => m.Category)
             .Single(m => m.Id == id);
 
         MusicItemViewModel viewModel = new MusicItemViewModel(theMusicItem);

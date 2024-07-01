@@ -14,7 +14,7 @@ public class MusicItem
 
     public int commentId { get; set; }
 
-    public ICollection<Instrument>? Instruments { get; set; }
+    public ICollection<MusicItem>? MusicItems { get; set; }
 
     public MusicItem() { }
 
