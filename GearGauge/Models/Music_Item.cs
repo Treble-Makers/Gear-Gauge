@@ -1,54 +1,41 @@
 ﻿using System;
+using System.Diagnostics.Metrics;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Components.Web;
 
-
 namespace GearGauge.Models;
 
-public class Music_Item
+public class MusicItem
 {
-    public int Id {get; }
-    static private int nextId = 1;
-    public string? Title {get; set; }
-    public CommentId commentId{get; set; }
+    public int Id { get; set; }
+    public string? Title { get; set; }
+    public string? Description { get; set; }
+    public int categoryId { get; set; }
 
-    public CategoryId categoryId {get; set; }
+    public int commentId { get; set; }
 
+    public ICollection<Instrument>? Instruments { get; set; }
 
-}
+    public MusicItem() { }
 
-public MusicItem()
-{
-    Id = nextId;
-    nextId++;
-}
-
-public MusicItem()
-{
-    Title = title;
-    CommentId = commentId;
-    CategoryId = categoryId;
-}
-
-public override string ToString()
-{
-    string output = "";
-    if(Title.Equals(""))
+    public MusicItem(string title, string description)
     {
-        PageTitle = "Data not available";
+        Title = title;
+        Description = description;
     }
 
-    output = string.Format("\nID: %d\n" + "Title: %s\n", Id, Title);
-    return output;
-}
+    public override string? ToString()
+    {
+        return Title;
+    }
 
-public override bool Equals(object obj)
-{
-    return obj is MusicItem musicItem &&
-    Id == musicItem.Id;
-}
+    public override bool Equals(object? obj)
+    {
+        return obj is MusicItem @musicItem && Id == @musicItem.Id;
+    }
 
-public override int GetHashCode()
-{
-    return HashCode.Combine(Id);
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Id);
+    }
 }
