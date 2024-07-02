@@ -1,4 +1,5 @@
 ﻿using System;
+using GearGauge.ViewModels;
 
 namespace GearGauge.Models;
 
@@ -36,5 +37,10 @@ public ContactUs()
     public override int GetHashCode()
     {
         return HashCode.Combine(UserName);
+    }
+
+    public static implicit operator ContactUs(ContactUsViewModel v)
+    {
+        throw new NotImplementedException();
     }
 }
