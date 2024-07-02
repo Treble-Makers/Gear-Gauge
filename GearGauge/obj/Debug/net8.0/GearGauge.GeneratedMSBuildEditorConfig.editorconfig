@@ -18,6 +18,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /Users/telly/Desktop/LaunchCode/LaunchCode_Liftoff_Project/Gear-Gauge/GearGauge
 build_property._RazorSourceGeneratorDebug = 
 
+[/Users/telly/Desktop/LaunchCode/LaunchCode_Liftoff_Project/Gear-Gauge/GearGauge/Views/ContactUs/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ29udGFjdFVzL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/telly/Desktop/LaunchCode/LaunchCode_Liftoff_Project/Gear-Gauge/GearGauge/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

@@ -1,0 +1,41 @@
+﻿@using GearGauge.Models
+
+@model List<ContactUs>
+
+    <h1>Contact Us!</h1>
+
+    <p>
+        <a asp-controller="ContactUs" asp-action="Add">Add UserName</a>
+    </p>
+
+    <p>
+        <a asp-controller="ContactUs" asp-action="Add">Add Email</a>
+    </p>
+    <p>
+        <a asp-controller="ContactUs" asp-action="Add">Add Message</a>
+    </p>
+
+    <table class="table">
+        <tr>
+            <th>
+                GearEmail
+            </th>
+            <th>
+                UserName
+            </th>
+            <th>
+                ContactEmail
+            </th>
+            <th>
+                MessageBody
+            </th>
+        </tr>
+        @foreach (var evt in Model)
+        {
+            <tr>
+                <td>@evt.UserName</td>
+                <td>@evt.ContactEmail</td>
+                <td>@evt.MessageBody</td>
+            </tr>
+        }
+    </table>
