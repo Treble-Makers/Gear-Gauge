@@ -34,8 +34,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/16362/Gear-Gauge/GearGauge/Views/MusicItem/AddMusicItem.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTXVzaWNJdGVtXEFkZE11c2ljSXRlbS5jc2h0bWw=
+[C:/Users/16362/Gear-Gauge/GearGauge/Views/MusicItem/Add.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTXVzaWNJdGVtXEFkZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/16362/Gear-Gauge/GearGauge/Views/MusicItem/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTXVzaWNJdGVtXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/16362/Gear-Gauge/GearGauge/Views/MusicItem/Index.cshtml]

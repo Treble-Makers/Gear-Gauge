@@ -10,9 +10,13 @@ public class MusicItem
     public int Id { get; set; }
     public string? Title { get; set; }
     public string? Description { get; set; }
-    public int categoryId { get; set; }
+    public int MarketValue { get; set; }
+    public bool HaveOne { get; set; }
+    public bool WantOne { get; set; }
 
-    public int commentId { get; set; }
+    public int CategoryId { get; set; }
+
+    public int CommentId { get; set; }
 
     public ICollection<MusicItem>? MusicItems { get; set; }
 

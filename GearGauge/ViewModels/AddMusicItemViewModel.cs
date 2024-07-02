@@ -4,6 +4,7 @@ using GearGauge.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 
+
 namespace GearGauge.ViewModels;
 
 public class AddMusicItemViewModel
@@ -12,6 +13,9 @@ public class AddMusicItemViewModel
     public string? Title { get; set; }
 
     public string? Description { get; set; }
+    public int MarketValue { get; set; }
+    public bool HaveOne { get; set; }
+    public bool WantOne { get; set; }
 
     public string? MusicItemCategory {get; set; }
 
@@ -27,7 +31,9 @@ public class AddMusicItemViewModel
                 new SelectListItem
                 {
                     Value = category.Id.ToString(),
-                    Text = category.Title
+                    Text = category.Title,
+                    
+
 
                 });
         }

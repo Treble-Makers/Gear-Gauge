@@ -8,12 +8,18 @@ public class MusicItemViewModel
     public int MusicItemId { get; set; }
     public string? Title { get; set; }
     public string? Description { get; set; }
+    public int MarketValue { get; set; }
+    public bool HaveOne { get; set; }
+    public bool WantOne { get; set; }
     public string? MusicItemCategory { get; set; }
 
-    public MusicItemViewModel(MusicItem theMusicItem)
+    public MusicItemViewModel(MusicItem theMusicItems)
     {
-        MusicItemId = theMusicItem.Id;
-        Title = theMusicItem.Title;
-        Description = theMusicItem.Description;
+        MusicItemId = theMusicItems.Id;
+        Title = theMusicItems.Title;
+        Description = theMusicItems.Description;
+        MarketValue = theMusicItems.MarketValue;
+        HaveOne = theMusicItems.HaveOne;
+        WantOne = theMusicItems.WantOne;
     }
 }

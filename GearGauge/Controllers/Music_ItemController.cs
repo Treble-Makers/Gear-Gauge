@@ -10,11 +10,11 @@ using GearGauge.Data;
 
 namespace GearGauge.Controllers;
 
-public class MusicItemsController : Controller
+public class MusicItemController : Controller
 {
     private MusicItemDbContext context;
 
-    public MusicItemsController(MusicItemDbContext dbContext)
+    public MusicItemController(MusicItemDbContext dbContext)
     {
         context = dbContext;
     }
@@ -34,6 +34,7 @@ public class MusicItemsController : Controller
     }
 
     [HttpPost]
+    [Route ("/MusicItem/Add")]
     public IActionResult Add(AddMusicItemViewModel addMusicItemViewModel)
     {
         if (ModelState.IsValid)
@@ -43,13 +44,16 @@ public class MusicItemsController : Controller
             {
                 Title = addMusicItemViewModel.Title,
                 Description = addMusicItemViewModel.Description,
+                MarketValue = addMusicItemViewModel.MarketValue,
+                HaveOne = addMusicItemViewModel.HaveOne,
+                WantOne = addMusicItemViewModel.WantOne
                 
             };
 
             context.MusicItems.Add(newMusicItem);
             context.SaveChanges();
 
-            return Redirect("/MusicItems");
+            return Redirect("/MusicItem");
         }
         return View(addMusicItemViewModel);
     }
@@ -68,7 +72,7 @@ public class MusicItemsController : Controller
             context.MusicItems.Remove(theMusicItem);
         }
         context.SaveChanges();
-        return Redirect("/MusicItems");
+        return Redirect("/MusicItem");
     }
 
     public IActionResult Detail(int id)
