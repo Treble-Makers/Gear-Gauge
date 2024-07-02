@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\16362\\Gear-Gauge\\GearGauge\\GearGauge.csproj": {}
+    "/Users/StoppingBy/Documents/Lift Off/Gear-Gauge/GearGauge/GearGauge.csproj": {}
   },
   "projects": {
-    "C:\\Users\\16362\\Gear-Gauge\\GearGauge\\GearGauge.csproj": {
+    "/Users/StoppingBy/Documents/Lift Off/Gear-Gauge/GearGauge/GearGauge.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\16362\\Gear-Gauge\\GearGauge\\GearGauge.csproj",
+        "projectUniqueName": "/Users/StoppingBy/Documents/Lift Off/Gear-Gauge/GearGauge/GearGauge.csproj",
         "projectName": "GearGauge",
-        "projectPath": "C:\\Users\\16362\\Gear-Gauge\\GearGauge\\GearGauge.csproj",
-        "packagesPath": "C:\\Users\\16362\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\16362\\Gear-Gauge\\GearGauge\\obj\\",
+        "projectPath": "/Users/StoppingBy/Documents/Lift Off/Gear-Gauge/GearGauge/GearGauge.csproj",
+        "packagesPath": "/Users/StoppingBy/.nuget/packages/",
+        "outputPath": "/Users/StoppingBy/Documents/Lift Off/Gear-Gauge/GearGauge/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\16362\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/StoppingBy/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -61,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
