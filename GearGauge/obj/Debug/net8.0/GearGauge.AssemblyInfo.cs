@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GearGauge")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+424c5c4bd30f34268af3962f3bd9e39977b87eb0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a456bc7b72af5ae0712442ec5644e2a23ad46b7b")]
 [assembly: System.Reflection.AssemblyProductAttribute("GearGauge")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GearGauge")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

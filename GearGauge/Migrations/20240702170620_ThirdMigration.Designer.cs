@@ -4,6 +4,7 @@ using GearGauge.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GearGauge.Migrations
 {
     [DbContext(typeof(MusicItemDbContext))]
-    partial class MusicItemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240702170620_ThirdMigration")]
+    partial class ThirdMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,6 +42,9 @@ namespace GearGauge.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("longtext");
 
+                    b.Property<bool>("HaveOne")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<int>("MarketValue")
                         .HasColumnType("int");
 
@@ -47,6 +53,9 @@ namespace GearGauge.Migrations
 
                     b.Property<string>("Title")
                         .HasColumnType("longtext");
+
+                    b.Property<bool>("WantOne")
+                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("Id");
 

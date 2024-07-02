@@ -45,8 +45,6 @@ public class MusicItemController : Controller
                 Title = addMusicItemViewModel.Title,
                 Description = addMusicItemViewModel.Description,
                 MarketValue = addMusicItemViewModel.MarketValue,
-                HaveOne = addMusicItemViewModel.HaveOne,
-                WantOne = addMusicItemViewModel.WantOne
                 
             };
 

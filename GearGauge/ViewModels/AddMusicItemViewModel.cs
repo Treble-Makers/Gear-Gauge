@@ -14,8 +14,7 @@ public class AddMusicItemViewModel
 
     public string? Description { get; set; }
     public int MarketValue { get; set; }
-    public bool HaveOne { get; set; }
-    public bool WantOne { get; set; }
+  
 
     public string? MusicItemCategory {get; set; }
 

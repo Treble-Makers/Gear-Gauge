@@ -24,26 +24,14 @@
                 <th>
                     MarketValue
                 </th>
-                <th>
-                    HaveOne
-                </th>
-                <th>
-                    WantOne
-                </th>
-                <th>
-                    Description
-                </th>
             </tr>
             @foreach (var evt in Model)
             {
                 <tr>
-                    <td>@evt.MusicItems</td>
+                   
                     <td><a asp-controller="MusicItem" asp-action="Detail" asp-route-id="@evt.Id">@evt.Title</a></td>
-                    <td>@evt.Title</td>
                     <td>@evt.Description</td>
                     <td>@evt.MarketValue</td>
-                    <td>@evt.HaveOne</td>
-                    <td>@evt.WantOne</td>
                 </tr>
             }
         </table>
