@@ -2,21 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GearGauge.Data;
 using GearGauge.Models;
 using GearGauge.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
-//using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace GearGauge.Controllers;
 
 public class ContactUsController : Controller
 {
+    private ContactUsDbContext context;
+    public ContactUsController(ContactUsDbContext dbContext)
+    {
+        context = dbContext;
+    }
     public IActionResult Index()
     {
-        var contactUsModel = new ContactUs();
-        return View(contactUsModel);
+        List<ContactUs> contactUs = context.ContactUs.ToList();
+        return View(contactUs);
     }
 
     [HttpGet]

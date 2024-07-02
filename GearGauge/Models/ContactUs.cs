@@ -5,6 +5,7 @@ namespace GearGauge.Models;
 
 public class ContactUs
 {
+    public int Id { get; set; }
     public string? UserName { get; set; }
     public string? ContactEmail { get; set; }
     public string? MessageBody { get; set; }

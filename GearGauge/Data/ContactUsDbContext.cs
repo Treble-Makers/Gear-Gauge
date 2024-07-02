@@ -8,10 +8,16 @@ namespace GearGauge.Data;
 public class ContactUsDbContext : DbContext
 {
     
-        public DbSet<ContactUs> UserName { get; set; }
+        public DbSet<ContactUs> ContactUs { get; set; }
 
-        public DbSet<ContactUs> ContactEmail { get; set; }
+          public ContactUsDbContext(DbContextOptions<ContactUsDbContext> options) : base(options)
+        {
+        }
 
-        public DbSet<ContactUs> MessageBody
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ContactUs>();
+        }
+                
 
 }
