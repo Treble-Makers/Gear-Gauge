@@ -42,5 +42,4 @@ public class ContactUsController : Controller
         return View("Contact", contactUs);
     }
 
-    // Replace this with your actual email sending method (outside the scope of this example)
 }
