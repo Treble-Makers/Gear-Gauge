@@ -1,0 +1,8 @@
+c:\Users\dalla\LaunchCode\GearGauge\Gear-Gauge-1\GearGauge\obj\Debug\net8.0\GearGauge.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\dalla\LaunchCode\GearGauge\Gear-Gauge-1\GearGauge\obj\Debug\net8.0\GearGauge.AssemblyInfoInputs.cache
+c:\Users\dalla\LaunchCode\GearGauge\Gear-Gauge-1\GearGauge\obj\Debug\net8.0\GearGauge.AssemblyInfo.cs
+c:\Users\dalla\LaunchCode\GearGauge\Gear-Gauge-1\GearGauge\obj\Debug\net8.0\GearGauge.csproj.CoreCompileInputs.cache
+c:\Users\dalla\LaunchCode\GearGauge\Gear-Gauge-1\GearGauge\obj\Debug\net8.0\GearGauge.MvcApplicationPartsAssemblyInfo.cache
+c:\Users\dalla\LaunchCode\GearGauge\Gear-Gauge-1\GearGauge\obj\Debug\net8.0\GearGauge.RazorAssemblyInfo.cache
+c:\Users\dalla\LaunchCode\GearGauge\Gear-Gauge-1\GearGauge\obj\Debug\net8.0\GearGauge.RazorAssemblyInfo.cs
+c:\Users\dalla\LaunchCode\GearGauge\Gear-Gauge-1\GearGauge\obj\Debug\net8.0\GearGauge.sourcelink.json
