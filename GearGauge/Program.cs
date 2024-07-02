@@ -1,8 +1,16 @@
+using GearGauge.Data;
+using Microsoft.EntityFrameworkCore;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+var connectionString = "server=localhost;user=geargauge;password=geargauge;database=musicitems";
+var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
+
+builder.Services.AddDbContext<MusicItemDbContext>(DbContextOptions => DbContextOptions.UseMySql(connectionString, serverVersion));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
