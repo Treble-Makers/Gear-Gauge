@@ -31,7 +31,7 @@ namespace GearGauge.Controllers
             {
                 return NotFound();
             }
-            return Ok(watchlistItem);
+            return Ok(WatchlistItem);
         }
         [HttpPost]
         public IActionResult AddToWatchList([FromBody] Watchlist watchlist)
