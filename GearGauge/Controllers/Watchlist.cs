@@ -24,19 +24,17 @@ namespace GearGauge.Controllers
             return Ok(watchlist);
         }
 
-        // GET: api/watchlist/{id}
         [HttpGet("{id}")]
         public IActionResult GetWatchlistItem(int id)
         {
-            var watchlistItem = _context.Watchlists.Find(id);
-            if (watchlistItem == null)
+            var watchlist = _context.Watchlists.Find(id);
+            if (watchlist == null)
             {
                 return NotFound();
             }
-            return Ok(watchlistItem);
+            return Ok(watchlist);
         }
 
-        // POST: api/watchlist
         [HttpPost]
         public IActionResult AddToWatchlist([FromBody] Watchlist watchlist)
         {
@@ -49,7 +47,6 @@ namespace GearGauge.Controllers
             return BadRequest(ModelState);
         }
 
-        // PUT: api/watchlist/{id}
         [HttpPut("{id}")]
         public IActionResult UpdateWatchlistItem(int id, [FromBody] Watchlist watchlist)
         {
@@ -66,7 +63,6 @@ namespace GearGauge.Controllers
             return BadRequest(ModelState);
         }
 
-        // DELETE: api/watchlist/{id}
         [HttpDelete("{id}")]
         public IActionResult DeleteWatchlistItem(int id)
         {
