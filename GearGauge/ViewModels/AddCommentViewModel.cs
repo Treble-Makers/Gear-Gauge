@@ -4,7 +4,7 @@ using GearGauge.Models;
 
 namespace GearGauge.ViewModels
 {
-    public class CommentViewModel
+    public class AddCommentViewModel
     {
         [Required]
         public string? UserName { get; set; }

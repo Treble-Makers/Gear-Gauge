@@ -1,7 +1,4 @@
-using System;
 using GearGauge.Models;
-using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
 
 
 
