@@ -8,11 +8,10 @@ namespace GearGauge.ViewModels
     {
         [Required]
         public string? UserName { get; set; }
-
-        public string? CommentText { get; set; }
-
         [Required]
-        public int MusicItemIds { get; set; }
+        public int Id { get; set; }
+        [Required]
+        public string? CommentText { get; set; }
 
     }
 

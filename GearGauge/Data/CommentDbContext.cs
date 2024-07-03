@@ -1,11 +1,3 @@
-using System;
-using GearGauge.Models;
-using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
-using GearGauge.ViewModels;
-
-
-
 namespace GearGauge.Data;
 
 public class CommentDbContext : DbContext

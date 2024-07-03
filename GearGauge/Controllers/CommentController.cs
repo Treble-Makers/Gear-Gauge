@@ -1,11 +1,6 @@
-using System;
-using GearGauge.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using GearGauge.ViewModels;
-using Microsoft.EntityFrameworkCore;
+using GearGauge.Models;
 using GearGauge.Data;
 
 namespace GearGauge.Controllers;
@@ -18,6 +13,12 @@ public class CommentController : Controller
     {
         context = dbContext;
     }
+
+ public IActionResult Index()
+        {
+            List<Comment> comments = context.Comments.ToList();
+            return View(comments);
+        }
 
     [HttpGet]
     public IActionResult Add()
@@ -73,7 +74,7 @@ public class CommentController : Controller
         Comment theComment= context.Comments
             .Single(c=> c.Id == id);
 
-        MusicItemViewModel viewModel = new CommentViewModel(theComment);
+        CommentViewModel viewModel = new CommentViewModel(theComment);
         return View(viewModel);
     }
 }

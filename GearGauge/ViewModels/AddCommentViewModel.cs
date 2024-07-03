@@ -12,7 +12,7 @@ namespace GearGauge.ViewModels
         public string? Comment { get; set; }
 
         [Required]
-        public int ItemId { get; set; }
+        public int Id { get; set; }
 
     }
 
