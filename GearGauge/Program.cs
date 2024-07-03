@@ -2,6 +2,8 @@ using System;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using GearGauge.Data;
+using System.Configuration;
+using GearGauge.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +13,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
-builder.Services.AddDefaultIdentity<IdentityUser>
+builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<GearGaugeDbContext>();
+
+builder.Services.AddDefaultIdentity<User>
 (options =>
 {
    options.SignIn.RequireConfirmedAccount = true;
@@ -32,6 +37,14 @@ var connectionString = "server=localhost;user=geargauge;password=geargauge;datab
 var serverVersion = new MySqlServerVersion(new Version(8, 4, 0));
 
 builder.Services.AddDbContext<GearGaugeDbContext>(dbContextOptions => dbContextOptions.UseMySql(connectionString, serverVersion));
+
+// public void ConfigureServices(IServiceCollection services)
+// {
+//     services.AddDbContext<GearGaugeDbContext>(options => options.UseMySql(Configure.GetConnectionString(connectionString)));
+
+//     services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<GearGaugeDbContext>().AddDefaultTokenProviders();
+// }
+
 //--- end of connection syntax
 
 

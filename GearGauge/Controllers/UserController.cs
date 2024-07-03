@@ -17,7 +17,7 @@ namespace GearGauge.Controllers;
 
 public class UserController : Controller
 {
-    private GearGaugeDbContext context;
+    public GearGaugeDbContext context;
     public UserController(GearGaugeDbContext dbContext)
     {
         context = dbContext;
@@ -27,6 +27,11 @@ public class UserController : Controller
     public UserController(UserManager<User> userManager)
     {
         _userManager = userManager;
+    }
+    private readonly SignInManager<User> _signInManager;
+    public UserController(SignInManager<User> signInManager)
+    {
+        _signInManager = signInManager;
     }
 
     [HttpGet]
@@ -63,37 +68,37 @@ public class UserController : Controller
         return View();
     }
 
-    [HttpPost]
-    public async Task<IActionResult> Login(LoginViewModel loginViewModel, string returnUrl = null)
-    {
-        if (ModelState.IsValid)
-        {
-            var user = await _userManager.FindByEmailAsync(loginViewModel.Email);
-            if (user != null)
-            {
-                var passwordSignInResult = await _userManager.PasswordSignInAsync(user, loginViewModel.Password, loginViewModel.RememberMe, false);
-                if (passwordSignInResult.Succeeded)
-                {
-                    if (returnUrl != null)
-                    {
-                        return LocalRedirect(returnUrl); // Redirect to intended URL after login
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home"); // Redirect to home page
-                    }
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                }
-            }
-            else
-            {
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-            }
-        }
+    // [HttpPost]
+    // public async Task<IActionResult> Login(LoginViewModel loginViewModel, string returnUrl = null)
+    // {
+    //     if (ModelState.IsValid)
+    //     {
+    //         var user = await _userManager.FindByEmailAsync(loginViewModel.Email);
+    //         if (user != null)
+    //         {
+    //             var passwordSignInResult = await _signInManager.PasswordSignInAsync(user, loginViewModel.Password, loginViewModel.RememberMe, false);
+    //             if (passwordSignInResult.Succeeded)
+    //             {
+    //                 if (returnUrl != null)
+    //                 {
+    //                     return LocalRedirect(returnUrl); // Redirect to intended URL after login
+    //                 }
+    //                 else
+    //                 {
+    //                     return RedirectToAction("Index", "Home"); // Redirect to home page
+    //                 }
+    //             }
+    //             else
+    //             {
+    //                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+    //             }
+    //         }
+    //         else
+    //         {
+    //             ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+    //         }
+    //     }
 
-        return View(loginViewModel);
-    }
+        // return View(loginViewModel);
+    // }
 }

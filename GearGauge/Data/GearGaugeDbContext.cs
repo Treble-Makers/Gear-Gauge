@@ -7,7 +7,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace GearGauge.Data;
 
-public class GearGaugeDbContext : IdentityDbContext<IdentityUser, IdentityRole, string>
+public class GearGaugeDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
 {
     
         public DbSet<User> User { get; set; }
@@ -18,6 +18,7 @@ public class GearGaugeDbContext : IdentityDbContext<IdentityUser, IdentityRole, 
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+        //   builder.Entity<User>().HasMany(m => m.MusicItem).WithOne(i => i.UserName).HasForeignKey(n => n.IdentityUser.Id);
             base.OnModelCreating(builder);
         }
             // Must build out to establish one to many, many to many, etc. relationships

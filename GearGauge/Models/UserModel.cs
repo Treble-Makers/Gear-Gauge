@@ -3,22 +3,20 @@ using Microsoft.AspNetCore.Identity;
 
 namespace GearGauge.Models;
 
-public class User : IdentityUser
+public class User : IdentityUser<Guid>
 {
     public int Id { get; set; }
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
-    public string? UserName { get; set; }
+    // public int MusicItemId { get; set; }
 
 
     public User() : base() { }
 
-    public User(string userName, string email, string firstName, string lastName)
+    public User(string userName, string firstName, string lastName)
         : base(userName)
     {
-        Email = email;
         FirstName = firstName;
         LastName = lastName;
-        UserName = userName;
     }
 }
