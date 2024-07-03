@@ -1,5 +1,8 @@
 ﻿using System;
-using GearGauge.ViewModels;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GearGauge.Models;
 
@@ -10,6 +13,7 @@ public class ContactUs
     public string? ContactEmail { get; set; }
     public string? MessageBody { get; set; }
     private  readonly string? GearEmail = "geargauge@hotmail.com";
+    public ICollection<ContactUs>? contacts { get; set; }
     
 
 public ContactUs(string userName, string contactEmail, string messageBody)
@@ -32,7 +36,7 @@ public ContactUs()
     public override bool Equals(object? obj)
     {
         return obj is ContactUs @contactUs &&
-            UserName == @contactUs.UserName;
+            Id == @contactUs.Id;
        
     }
     public override int GetHashCode()
@@ -40,8 +44,5 @@ public ContactUs()
         return HashCode.Combine(UserName);
     }
 
-    public static implicit operator ContactUs(ContactUsViewModel v)
-    {
-        throw new NotImplementedException();
-    }
+    
 }
