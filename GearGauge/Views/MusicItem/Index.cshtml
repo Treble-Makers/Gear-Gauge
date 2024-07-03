@@ -1,0 +1,39 @@
+@using GearGauge.Models
+@model List<MusicItem>
+
+    <h1>Gear Gauge</h1>
+
+    <p>
+        <a asp-controller="MusicItem" asp-action="Add">Add MusicItems</a>
+    </p>
+
+    @if(Model.Count == 0)
+    {
+        <p>No Music Items yet!</p>
+    }
+    else
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    MarketValue
+                </th>
+            </tr>
+            @foreach (var evt in Model)
+            {
+                <tr>
+                   
+                    <td><a asp-controller="MusicItem" asp-action="Detail" asp-route-id="@evt.Id">@evt.Title</a></td>
+                    <td>@evt.Description</td>
+                    <td>@evt.MarketValue</td>
+                </tr>
+            }
+        </table>
+
+    }
