@@ -7,9 +7,9 @@ namespace GearGauge.Controllers;
 
 public class CommentController : Controller
 {
-    private CommentDbContext context;
+    private MusicItemDbContext context;
 
-    public CommentController (CommentDbContext dbContext)
+    public CommentController (MusicItemDbContext dbContext)
     {
         context = dbContext;
     }
@@ -74,7 +74,7 @@ public class CommentController : Controller
         Comment theComment= context.Comments
             .Single(c=> c.Id == id);
 
-        CommentViewModel viewModel = new CommentViewModel(theComment);
+        AddCommentViewModel viewModel = new AddCommentViewModel(theComment);
         return View(viewModel);
     }
 }
