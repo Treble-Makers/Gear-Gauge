@@ -1,8 +1,0 @@
-/Users/StoppingBy/Documents/Lift Off/Gear-Gauge/GearGauge/obj/Debug/net8.0/GearGauge.GeneratedMSBuildEditorConfig.editorconfig
-/Users/StoppingBy/Documents/Lift Off/Gear-Gauge/GearGauge/obj/Debug/net8.0/GearGauge.AssemblyInfoInputs.cache
-/Users/StoppingBy/Documents/Lift Off/Gear-Gauge/GearGauge/obj/Debug/net8.0/GearGauge.AssemblyInfo.cs
-/Users/StoppingBy/Documents/Lift Off/Gear-Gauge/GearGauge/obj/Debug/net8.0/GearGauge.csproj.CoreCompileInputs.cache
-/Users/StoppingBy/Documents/Lift Off/Gear-Gauge/GearGauge/obj/Debug/net8.0/GearGauge.MvcApplicationPartsAssemblyInfo.cache
-/Users/StoppingBy/Documents/Lift Off/Gear-Gauge/GearGauge/obj/Debug/net8.0/GearGauge.RazorAssemblyInfo.cache
-/Users/StoppingBy/Documents/Lift Off/Gear-Gauge/GearGauge/obj/Debug/net8.0/GearGauge.RazorAssemblyInfo.cs
-/Users/StoppingBy/Documents/Lift Off/Gear-Gauge/GearGauge/obj/Debug/net8.0/GearGauge.sourcelink.json
