@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using GearGauge.Models;
 
+
 namespace GearGauge.Data
 {
     public class ApplicationDbContext : DbContext

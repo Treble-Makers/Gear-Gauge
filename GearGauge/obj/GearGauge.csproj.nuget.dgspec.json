@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\dalla\\LaunchCode\\GearGauge\\Gear-Gauge-1\\GearGauge\\GearGauge.csproj": {}
+    "C:\\Users\\dalla\\LaunchCode\\GearGauge\\Gear-Gauge-1\\GearGauge\\GearGauge.csproj": {}
   },
   "projects": {
-    "c:\\Users\\dalla\\LaunchCode\\GearGauge\\Gear-Gauge-1\\GearGauge\\GearGauge.csproj": {
+    "C:\\Users\\dalla\\LaunchCode\\GearGauge\\Gear-Gauge-1\\GearGauge\\GearGauge.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\dalla\\LaunchCode\\GearGauge\\Gear-Gauge-1\\GearGauge\\GearGauge.csproj",
+        "projectUniqueName": "C:\\Users\\dalla\\LaunchCode\\GearGauge\\Gear-Gauge-1\\GearGauge\\GearGauge.csproj",
         "projectName": "GearGauge",
-        "projectPath": "c:\\Users\\dalla\\LaunchCode\\GearGauge\\Gear-Gauge-1\\GearGauge\\GearGauge.csproj",
+        "projectPath": "C:\\Users\\dalla\\LaunchCode\\GearGauge\\Gear-Gauge-1\\GearGauge\\GearGauge.csproj",
         "packagesPath": "C:\\Users\\dalla\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\dalla\\LaunchCode\\GearGauge\\Gear-Gauge-1\\GearGauge\\obj\\",
+        "outputPath": "C:\\Users\\dalla\\LaunchCode\\GearGauge\\Gear-Gauge-1\\GearGauge\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\dalla\\AppData\\Roaming\\NuGet\\NuGet.Config",

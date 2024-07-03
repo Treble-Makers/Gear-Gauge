@@ -2,7 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using GearGauge.Models;
 
-namespace GearGauge.Controllers;
+namespace GearGauge.Models;
 
 public class HomeController : Controller
 {

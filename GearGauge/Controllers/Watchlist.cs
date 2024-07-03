@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using GearGauge.ApplicationDbContext;
+using GearGauge.Data;
 using GearGauge.Models;
 using System.Linq;
 
