@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\16362\\Gear-Gauge\\GearGauge\\GearGauge.csproj": {}
+    "C:\\Users\\dalla\\LaunchCode\\GearGauge\\Gear-Gauge-2\\GearGauge\\GearGauge.csproj": {}
   },
   "projects": {
-    "C:\\Users\\16362\\Gear-Gauge\\GearGauge\\GearGauge.csproj": {
+    "C:\\Users\\dalla\\LaunchCode\\GearGauge\\Gear-Gauge-2\\GearGauge\\GearGauge.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\16362\\Gear-Gauge\\GearGauge\\GearGauge.csproj",
+        "projectUniqueName": "C:\\Users\\dalla\\LaunchCode\\GearGauge\\Gear-Gauge-2\\GearGauge\\GearGauge.csproj",
         "projectName": "GearGauge",
-        "projectPath": "C:\\Users\\16362\\Gear-Gauge\\GearGauge\\GearGauge.csproj",
-        "packagesPath": "C:\\Users\\16362\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\16362\\Gear-Gauge\\GearGauge\\obj\\",
+        "projectPath": "C:\\Users\\dalla\\LaunchCode\\GearGauge\\Gear-Gauge-2\\GearGauge\\GearGauge.csproj",
+        "packagesPath": "C:\\Users\\dalla\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\dalla\\LaunchCode\\GearGauge\\Gear-Gauge-2\\GearGauge\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\16362\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\dalla\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -61,7 +63,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
