@@ -7,10 +7,10 @@ using Microsoft.Extensions.Hosting;
 
 namespace GearGauge.Data;
 
-public class GearGaugeDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
+public class GearGaugeDbContext : IdentityDbContext<User>
 {
     
-        public DbSet<User> User { get; set; }
+        // public DbSet<User> User { get; set; }
 
           public GearGaugeDbContext(DbContextOptions<GearGaugeDbContext> options) : base(options)
         {

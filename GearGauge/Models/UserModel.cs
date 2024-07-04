@@ -1,22 +1,29 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 
 namespace GearGauge.Models;
 
-public class User : IdentityUser<Guid>
+public class User : IdentityUser
 {
-    public int Id { get; set; }
-    public string? FirstName { get; set; }
-    public string? LastName { get; set; }
-    // public int MusicItemId { get; set; }
+    // public int Id { get; set; }
+    [StringLength(100)]
+    [MaxLength(100)]
+    [Required]
+    public string? Name { get; set; }
+
+    public string? Address { get; set; }
+    public List<int>? MusicItemIds { get; set; }
 
 
-    public User() : base() { }
+    // public User() : base() { }
 
-    public User(string userName, string firstName, string lastName)
-        : base(userName)
-    {
-        FirstName = firstName;
-        LastName = lastName;
-    }
+    // public User(string userName, string email, string name, string address, int musicItemIds)
+    //     : base(userName)
+    // {
+    //     Email = email;
+    //     Name = name;
+    //     Address = address;
+    //     MusicItemIds = musicItemIds;
+    // }
 }

@@ -8,13 +8,16 @@ namespace GearGauge.ViewModels;
 
 public class LoginViewModel
 {
-    [Required(ErrorMessage = "The email field is required.")]
-    [EmailAddress(ErrorMessage = "Invalid email address.")]
-    public string Email { get; set; }
+    [Required(ErrorMessage = "Username is required.")]
+    public string? UserName { get; set; }
 
-    [Required(ErrorMessage = "The password field is required.")]
+    [Required(ErrorMessage = "Password is required.")]
     [DataType(DataType.Password)]
     public string Password { get; set; }
 
-    // public bool RememberMe { get; set; }
+    [Required(ErrorMessage = "The password field is required.")]
+    [DataType(DataType.Password)]
+
+    [Display(Name = "Remember Me")]
+    public bool RememberMe { get; set; }
 }
