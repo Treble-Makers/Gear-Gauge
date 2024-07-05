@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using GearGauge.Models;
 using Microsoft.AspNetCore.Authorization;
 
-namespace GearGauge.Controllers;
+namespace GearGauge.Models;
 
 public class HomeController : Controller
 {
