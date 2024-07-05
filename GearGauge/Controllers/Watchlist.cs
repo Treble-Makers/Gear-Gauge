@@ -9,9 +9,9 @@ namespace GearGauge.Controllers
     [ApiController]
     public class WatchlistController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly GearGaugeDbContext _context;
 
-        public WatchlistController(ApplicationDbContext context)
+        public WatchlistController(GearGaugeDbContext context)
         {
             _context = context;
         }

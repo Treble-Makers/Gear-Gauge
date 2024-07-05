@@ -13,6 +13,8 @@ public class GearGaugeDbContext : IdentityDbContext<User>
         public DbSet<User> User { get; set; }
         public DbSet<ContactUs> ContactUs { get; set; }
 
+        public DbSet<Watchlist> Watchlists { get; set; }
+
         public DbSet<MusicItem> MusicItems { get; set; }
 
           public GearGaugeDbContext(DbContextOptions<GearGaugeDbContext> options) : base(options)

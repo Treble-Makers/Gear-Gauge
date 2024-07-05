@@ -7,7 +7,7 @@ namespace GearGauge.Models
     {
         [Key]
         public int WatchlistId { get; set; }
-        public int UserId { get; set; }
+        // public int UserId { get; set; }
         public int GearId { get; set; }
         public DateTime DateAdded { get; set; }
         public string FormField { get; set;}
