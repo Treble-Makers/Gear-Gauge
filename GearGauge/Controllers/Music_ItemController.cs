@@ -12,9 +12,9 @@ namespace GearGauge.Controllers;
 
 public class MusicItemController : Controller
 {
-    private MusicItemDbContext context;
+    private GearGaugeDbContext context;
 
-    public MusicItemController(MusicItemDbContext dbContext)
+    public MusicItemController(GearGaugeDbContext dbContext)
     {
         context = dbContext;
     }

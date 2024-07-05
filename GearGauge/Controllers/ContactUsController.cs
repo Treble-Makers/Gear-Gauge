@@ -13,8 +13,8 @@ namespace GearGauge.Controllers;
 
 public class ContactUsController : Controller
 {
-    private ContactUsDbContext context;
-    public ContactUsController(ContactUsDbContext dbContext)
+    private GearGaugeDbContext context;
+    public ContactUsController(GearGaugeDbContext dbContext)
     {
         context = dbContext;
     }
