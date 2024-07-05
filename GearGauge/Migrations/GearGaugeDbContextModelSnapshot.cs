@@ -22,6 +22,66 @@ namespace GearGauge.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
+            modelBuilder.Entity("GearGauge.Models.ContactUs", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ContactEmail")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("ContactUsId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MessageBody")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContactUsId");
+
+                    b.ToTable("ContactUs");
+                });
+
+            modelBuilder.Entity("GearGauge.Models.MusicItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CommentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("MarketValue")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MusicItemId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MusicItemId");
+
+                    b.ToTable("MusicItems");
+                });
+
             modelBuilder.Entity("GearGauge.Models.User", b =>
                 {
                     b.Property<string>("Id")
@@ -227,6 +287,20 @@ namespace GearGauge.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("GearGauge.Models.ContactUs", b =>
+                {
+                    b.HasOne("GearGauge.Models.ContactUs", null)
+                        .WithMany("contacts")
+                        .HasForeignKey("ContactUsId");
+                });
+
+            modelBuilder.Entity("GearGauge.Models.MusicItem", b =>
+                {
+                    b.HasOne("GearGauge.Models.MusicItem", null)
+                        .WithMany("MusicItems")
+                        .HasForeignKey("MusicItemId");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -276,6 +350,16 @@ namespace GearGauge.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("GearGauge.Models.ContactUs", b =>
+                {
+                    b.Navigation("contacts");
+                });
+
+            modelBuilder.Entity("GearGauge.Models.MusicItem", b =>
+                {
+                    b.Navigation("MusicItems");
                 });
 #pragma warning restore 612, 618
         }
