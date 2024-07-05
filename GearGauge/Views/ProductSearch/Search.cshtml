@@ -1,0 +1,17 @@
+<head>
+    <title>Product Search</title>
+</head>
+
+<body>
+    <h1>Search for a Product</h1>
+    <form asp-controller="ProductSearch" asp-action="PostSearch" method="POST">
+        <input type="text" class="search-box" name="searchTerm" placeholder="Start typing...">
+        <button type="submit">Search</button>
+    </form>
+    @if (ViewData.ContainsKey("ErrorMessage"))
+    {
+        <p style="color: red;">@ViewData["ErrorMessage"]</p>
+    }
+</body>
+
+</html>
