@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\dalla\\LaunchCode\\GearGauge\\Gear-Gauge-2\\GearGauge\\GearGauge.csproj": {}
+    "D:\\Coding\\Launchcode IA\\csharp\\treblemakers\\Gear-Gauge\\GearGauge\\GearGauge.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dalla\\LaunchCode\\GearGauge\\Gear-Gauge-2\\GearGauge\\GearGauge.csproj": {
+    "D:\\Coding\\Launchcode IA\\csharp\\treblemakers\\Gear-Gauge\\GearGauge\\GearGauge.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dalla\\LaunchCode\\GearGauge\\Gear-Gauge-2\\GearGauge\\GearGauge.csproj",
+        "projectUniqueName": "D:\\Coding\\Launchcode IA\\csharp\\treblemakers\\Gear-Gauge\\GearGauge\\GearGauge.csproj",
         "projectName": "GearGauge",
-        "projectPath": "C:\\Users\\dalla\\LaunchCode\\GearGauge\\Gear-Gauge-2\\GearGauge\\GearGauge.csproj",
-        "packagesPath": "C:\\Users\\dalla\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dalla\\LaunchCode\\GearGauge\\Gear-Gauge-2\\GearGauge\\obj\\",
+        "projectPath": "D:\\Coding\\Launchcode IA\\csharp\\treblemakers\\Gear-Gauge\\GearGauge\\GearGauge.csproj",
+        "packagesPath": "C:\\Users\\matth\\.nuget\\packages\\",
+        "outputPath": "D:\\Coding\\Launchcode IA\\csharp\\treblemakers\\Gear-Gauge\\GearGauge\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\dalla\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\matth\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,6 +42,52 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
+            "System.Net.Http": {
+              "target": "Package",
+              "version": "[4.3.4, )"
+            },
+            "System.Text.Json": {
+              "target": "Package",
+              "version": "[8.0.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -63,7 +107,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

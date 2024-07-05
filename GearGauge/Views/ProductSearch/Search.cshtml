@@ -1,11 +1,9 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+<head>
+    <title>Product Search</title>
+</head>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <body>
-    <h3>Search for a Product</h3>
+<body>
+    <h1>Search for a Product</h1>
     <form asp-controller="ProductSearch" asp-action="PostSearch" method="POST">
         <input type="text" class="search-box" name="searchTerm" placeholder="Start typing...">
         <button type="submit">Search</button>
@@ -15,4 +13,5 @@
         <p style="color: red;">@ViewData["ErrorMessage"]</p>
     }
 </body>
-</div>
+
+</html>

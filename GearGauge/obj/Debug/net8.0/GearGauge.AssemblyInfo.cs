@@ -10,10 +10,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("GearGauge")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+381912501f55bbfc765515651eb6e733b9c6d65d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2dbeb6e280a9a6953bf2f053604d7a0db64aa134")]
 [assembly: System.Reflection.AssemblyProductAttribute("GearGauge")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GearGauge")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
