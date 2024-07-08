@@ -2,9 +2,9 @@
 @model AddMusicItemViewModel
 
 
-<h1>Add Music Item</h1>
+<h1>Add Gear Inventory</h1>
 
-<form asp-controller="MusicItem" asp-action="Add" method="post">
+<form asp-controller="GearInventory" asp-action="Add" method="post">
     <div class="form-group">
         <label asp-for="Title"></label>
         <input asp-for="Title" class="form-control" />
@@ -21,5 +21,5 @@
         <span asp-validation-for="MarketValue" class="text-danger"></span>
     </div>
 
-    <input type="submit" value="Add Music Item" />
+    <input type="submit" value="Add Gear Inventory" />
 </form>
