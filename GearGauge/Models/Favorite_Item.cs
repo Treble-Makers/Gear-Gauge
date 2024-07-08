@@ -7,10 +7,13 @@ namespace GearGauge.Models;
 
 public class FavoriteItem
 {
-    public int Id { get; set; }
-    
     public int UserId { get; set; }
 
+    public int MusicItemId { get; set; }
+    public MusicItem MusicItem { get; set; } 
+   
     public string? UserName { get; set; }
+    //public User User { get; set; }
 
-}
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    }
