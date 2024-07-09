@@ -10,7 +10,7 @@ public class User : IdentityUser
     public string? Name { get; set; }
 
     public string? Address { get; set; }
-    public List<int>? MusicItemIds { get; set; }
+    public List<int>? Ids { get; set; }
 
     // public User() : base() { }
 
@@ -21,6 +21,6 @@ public class User : IdentityUser
         Email = email;
         Name = name;
         Address = address;
-        // MusicItemIds = musicItemIds;
+       
     }
 }

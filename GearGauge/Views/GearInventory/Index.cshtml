@@ -1,5 +1,5 @@
 ﻿@using GearGauge.Models
-@model List<MusicItem>
+@model List<GearInventory>
 
     <h1>Gear Gauge</h1>
 
@@ -29,7 +29,7 @@
             {
                 <tr>
                    
-                    <td><a asp-controller="MusicItem" asp-action="Detail" asp-route-id="@evt.Id">@evt.Title</a></td>
+                    <td><a asp-controller="GearInventory" asp-action="Detail" asp-route-id="@evt.Id">@evt.Title</a></td>
                     <td>@evt.Description</td>
                     <td>@evt.MarketValue</td>
                 </tr>

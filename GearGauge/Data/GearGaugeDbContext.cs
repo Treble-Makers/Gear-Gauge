@@ -15,7 +15,7 @@ public class GearGaugeDbContext : IdentityDbContext<User>
 
         public DbSet<Watchlist> Watchlists { get; set; }
 
-        public DbSet<MusicItem> MusicItems { get; set; }
+        public DbSet<GearInventory> GearInventories { get; set; }
 
           public GearGaugeDbContext(DbContextOptions<GearGaugeDbContext> options) : base(options)
         {

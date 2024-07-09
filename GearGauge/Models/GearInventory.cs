@@ -5,22 +5,18 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace GearGauge.Models;
 
-public class MusicItem
+public class GearInventory
 {
     public int Id { get; set; }
     public string? Title { get; set; }
     public string? Description { get; set; }
     public int MarketValue { get; set; }
-    
-    public int CategoryId { get; set; }
 
-    public int CommentId { get; set; }
+    public ICollection<GearInventory>? GearInventories { get; set; }
 
-    public ICollection<MusicItem>? MusicItems { get; set; }
+    public GearInventory() { }
 
-    public MusicItem() { }
-
-    public MusicItem(string title, string description)
+    public GearInventory(string title, string description)
     {
         Title = title;
         Description = description;
@@ -33,7 +29,7 @@ public class MusicItem
 
     public override bool Equals(object? obj)
     {
-        return obj is MusicItem @musicItem && Id == @musicItem.Id;
+        return obj is GearInventory @gearInventory && Id == @gearInventory.Id;
     }
 
     public override int GetHashCode()

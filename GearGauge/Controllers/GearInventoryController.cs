@@ -11,7 +11,7 @@ namespace GearGauge.Controllers;
 
 public class GearInventoryController : Controller
 {
-    private GearGaugeDbContext context;
+    private readonly GearGaugeDbContext context;
 
     public GearInventoryController(GearGaugeDbContext dbContext)
     {
@@ -20,7 +20,7 @@ public class GearInventoryController : Controller
 
     public IActionResult Index()
     {
-        List<GearInventory> gearInventories = context.GearInventory.ToList();
+        List<GearInventory> gearInventories = context.GearInventories.ToList();
 
         return View(gearInventories);
     }
@@ -47,7 +47,7 @@ public class GearInventoryController : Controller
                 
             };
 
-            context.MusicItems.Add(newGearInventory);
+            context.GearInventories.Add(newGearInventory);
             context.SaveChanges();
 
             return Redirect("/GearInventory");
@@ -61,21 +61,21 @@ public class GearInventoryController : Controller
         return View();
     }
     [HttpPost]
-    public IActionResult Delete(int[] musicItemIds)
+    public IActionResult Delete(int[] Ids)
     {
-        foreach (int musicItemId in musicItemIds)
+        foreach (int Id in Ids)
         {
-            MusicItem? theMusicItem = context.MusicItems.Find(musicItemId);
-            context.MusicItems.Remove(theMusicItem);
+            GearInventory? theGearInventory = context.GearInventories.Find(Id);
+            context.GearInventories.Remove(theGearInventory);
         }
         context.SaveChanges();
-        return Redirect("/GearInventory");
+        return Redirect("/GearInventories");
     }
 
     public IActionResult Detail(int id)
     {
         GearInventory theGearInventory = context.GearInventories
-            .Single(m => m.Id == id);
+            .Single(g => g.Id == id);
 
         GearInventoryViewModel viewModel = new GearInventoryViewModel(theGearInventory);
         return View(viewModel);

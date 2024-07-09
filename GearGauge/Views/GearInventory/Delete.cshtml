@@ -1,16 +1,16 @@
 ﻿@using GearGauge.ViewModels
-@model MusicItem
+@model GearInventory
 
 
 <h1>Delete Gear Inventory</h1>
 
 <form method="post">
-    @foreach (var evt in ViewBag.MusicItems)
+    @foreach (var evt in ViewBag.gearInventories)
     {
         <div class="form-group">
             <label>
                 <span>@evt.Title</span>
-                <input type="checkbox" name="musicItemIds" value="@evt.Id" />
+                <input type="checkbox" name="gearInventoryIds" value="@evt.Id" />
             </label>
         </div>
     }
