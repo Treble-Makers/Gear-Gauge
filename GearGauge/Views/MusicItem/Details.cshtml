@@ -22,12 +22,12 @@
     </div>
 </form>
 
-@* <ul class="list-group">
+<ul class="list-group">
     @foreach (var comment in Model.Comments)
     {
         <li class="list-group-item">
             <p>@comment.Content</p>
             <small>@comment.CreatedAt.ToString("g")</small>
-        </li> *@
+        </li>
     }
 </ul>

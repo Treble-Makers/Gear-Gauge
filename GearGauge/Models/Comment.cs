@@ -13,7 +13,7 @@ namespace GearGauge.Models
         public int Id { get; set; }
         public string Content { get; set; }
         public DateTime CreatedAt { get; set; }
-        public string? CommentText { get; set; }
+        //public string? CommentText { get; set; }
         public MusicItem MusicItem { get; set; }
 
         public Comment()

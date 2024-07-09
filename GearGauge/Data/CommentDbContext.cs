@@ -1,24 +1,24 @@
-using System;
-using GearGauge.Models;
-using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
-using GearGauge.ViewModels;
+// using System;
+// using GearGauge.Models;
+// using Microsoft.Extensions.Hosting;
+// using Microsoft.EntityFrameworkCore;
+// using GearGauge.ViewModels;
 
-namespace GearGauge.Data;
+// namespace GearGauge.Data;
 
-public class CommentDbContext : DbContext
-{
-    public DbSet<Comment> Comments { get; set; }
+// public class CommentDbContext : DbContext
+// {
+//     public DbSet<Comment> Comments { get; set; }
 
-    public CommentDbContext(DbContextOptions<CommentDbContext> options) : base(options)
-    {
+//     public CommentDbContext(DbContextOptions<CommentDbContext> options) : base(options)
+//     {
 
-    }
+//     }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<MusicItem>();
-    }
+//     protected override void OnModelCreating(ModelBuilder modelBuilder)
+//     {
+//         modelBuilder.Entity<MusicItem>();
+//     }
 
 
-}
+// }

@@ -14,7 +14,6 @@ public class GearGaugeDbContext : IdentityDbContext<User>
         public DbSet<ContactUs> ContactUs { get; set; }
 
         public DbSet<Watchlist> Watchlists { get; set; }
-        public DbSet<Comment> Comments { get; set; }
 
         public DbSet<MusicItem> MusicItems { get; set; }
 
