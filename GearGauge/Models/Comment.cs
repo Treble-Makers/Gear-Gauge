@@ -8,13 +8,13 @@ namespace GearGauge.Models
     {
         // so we need their username, the item's ID, the comment and when it was written... what else?
         [Required]
-        public string? UserName { get; set; } 
+        public string? UserName { get; set; } // should relate to a specific user -- should this be the email?
         [Required]
         public int Id { get; set; }
         public string Content { get; set; }
         public DateTime CreatedAt { get; set; }
         //public string? CommentText { get; set; }
-        public MusicItem MusicItem { get; set; }
+        public MusicItem MusicItem { get; set; } // attaching comment to a specific music item. Might need to be more specific, ie. attached to a specific music item id
 
         public Comment()
         {

@@ -2,9 +2,11 @@ using Microsoft.AspNetCore.Mvc;
 using GearGauge.ViewModels;
 using GearGauge.Models;
 using GearGauge.Data;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace GearGauge.Controllers;
-{
+
     [Authorize]
     public class CommentController : Controller
     {
@@ -13,7 +15,7 @@ namespace GearGauge.Controllers;
 
         public CommentController (MusicItemDbContext dbContext, UserManager<IdentityUser> userManager)
         {
-            context = dbContext;
+            _context = dbContext;
             _userManager = userManager;
         }
 
@@ -28,16 +30,17 @@ namespace GearGauge.Controllers;
 
             var comment = new Comment
             {
-                MusicItemId = musicItemId,
+                MusicItem = musicItemId, // MusicItem property is looking for MusicItem object, is receiving an int Id 
                 Content = content,
-                UserId = user.Id,
+                Id = user.Id, // somehow the user.ID is a string?? 
+
                 CreatedAt = DateTime.UtcNow 
             };
 
             _context.Comments.Add(comment);
             await _context.SaveChangesAsync();
-            }
+            
 
             return RedirectToAction("Details", "MusicItems", new { id = musicItemId });
         }
-}
+    }
