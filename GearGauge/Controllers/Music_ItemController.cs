@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GearGauge.ViewModels;
-using Microsoft.EntityFrameworkCore;
 using GearGauge.Data;
 
 namespace GearGauge.Controllers;
