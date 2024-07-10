@@ -12,6 +12,8 @@ namespace GearGauge.Models
 
         public virtual ICollection<Watchlist> Watchlists { get; set; }
 
+        public Comment Comment { get; set; }
+
     }
 }
 

@@ -12,17 +12,17 @@ namespace GearGauge.Controllers
     [Authorize]
     public class FavoritesController : Controller
     {
-        private readonly GearGaugeDbContext _context;
+        private readonly GearGaugeDbContext context;
         private readonly UserManager<User> _userManager;
 
-        public FavoritesController(GearGaugeDbContext context, UserManager<User> userManager)
+        public FavoritesController(GearGaugeDbContext dbContext, UserManager<User> userManager)
         {
-            _context = context;
+           context = dbContext;
             _userManager = userManager;
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddToFavorite(int musicItemId)
+        public async Task<IActionResult> AddToFavorite(Gear gear)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -30,16 +30,16 @@ namespace GearGauge.Controllers
                 return Unauthorized();
             }
 
-            var favorite = new FavoriteItem
+            var favoriteItem = new FavoriteItem
             {
-                GearInventory = gearInventory, //  MusicItemId = musicItemId,
+                GearId = gearId, //  MusicItemId = musicItemId,
                 UserId = user.Id
             };
 
-            _context.Favorites.Add(favoriteitem);
-            await _context.SaveChangesAsync();
+            context.Favorites.Add(favoriteItem);
+            await context.SaveChangesAsync();
 
-            return RedirectToAction("Detail", "MusicItem", new { id = musicItemId }); // need to switch id
+            return RedirectToAction("Detail", "MusicItem", new { id = gearId });
         }
 
         public async Task<IActionResult> List()
@@ -50,7 +50,7 @@ namespace GearGauge.Controllers
                 return Unauthorized();
             }
 
-            var favorites = await _context.Favorites
+            var favorites = await context.Favorites
                 .Where(f => f.UserId == user.Id)
                 .Include(f => f.GearInventory) //was MusicItem
                 .ToListAsync();

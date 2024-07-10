@@ -19,7 +19,7 @@ namespace GearGauge.Controllers;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(int musicItemId, string content)
+        public async Task<IActionResult> Create(GearInventory gearInventory, string content)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -29,10 +29,9 @@ namespace GearGauge.Controllers;
 
             var comment = new Comment
             {
-                GearInventory = gearInventory, // new name for MusicItemId
-                // MusicItem property is looking for MusicItem object, is receiving an int Id 
+                GearInventory = gearInventory,
                 Content = content,
-                Id = user.Id, // somehow the user.ID is a string?? 
+                // UserId = user.Id,
 
                 CreatedAt = DateTime.UtcNow 
             };

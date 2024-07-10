@@ -10,7 +10,9 @@ namespace GearGauge.Models
         [Required]
         public string? UserName { get; set; } // should relate to a specific user -- should this be the email?
         [Required]
+        public User User { get; set; }
         public int Id { get; set; }
+        public Gear Gear { get; set; }
         public string Content { get; set; }
         public DateTime CreatedAt { get; set; }
 

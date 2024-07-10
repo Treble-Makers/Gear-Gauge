@@ -11,7 +11,8 @@ public class GearInventory
 {
     public int Id { get; set; }
     public string? Title { get; set; }
-    public string? Description { get; set; }
+    public string? Description { get; set; } // this can be removed or replaced by Gear
+    public List<Gear> Gear { get; set; }
     public int MarketValue { get; set; }
     public byte[] Image { get; set; }
     [NotMapped]
@@ -20,7 +21,7 @@ public class GearInventory
     public int CommentId { get; set; }
     public ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
-    public ICollection<GearInventory>? GearInventories { get; set; }
+   // public ICollection<GearInventory>? GearInventories { get; set; }
 
     public GearInventory() { }
 
