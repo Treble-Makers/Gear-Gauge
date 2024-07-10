@@ -1,15 +1,15 @@
 ﻿@using GearGauge.Models
-@model List<MusicItem>
+@model List<GearInventory>
 
     <h1>Gear Gauge</h1>
 
     <p>
-        <a asp-controller="MusicItem" asp-action="Add">Add MusicItems</a>
+        <a asp-controller="GearInventory" asp-action="Add">Add Gear Inventory</a>
     </p>
 
     @if(Model.Count == 0)
     {
-        <p>No Music Items yet!</p>
+        <p>No Gear Inventory yet!</p>
     }
     else
     {
@@ -24,14 +24,18 @@
                 <th>
                     MarketValue
                 </th>
+                <th>
+                    Image
+                </th>
             </tr>
             @foreach (var evt in Model)
             {
                 <tr>
                    
-                    <td><a asp-controller="MusicItem" asp-action="Detail" asp-route-id="@evt.Id">@evt.Title</a></td>
+                    <td><a asp-controller="GearInventory" asp-action="Detail" asp-route-id="@evt.Id">@evt.Title</a></td>
                     <td>@evt.Description</td>
                     <td>@evt.MarketValue</td>
+                    <td>@evt.ImageFile</td>
                 </tr>
             }
         </table>

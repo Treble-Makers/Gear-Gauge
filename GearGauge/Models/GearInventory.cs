@@ -1,29 +1,33 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.Metrics;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 
 namespace GearGauge.Models;
 
-public class MusicItem
+public class GearInventory
 {
     public int Id { get; set; }
     public string? Title { get; set; }
     public string? Description { get; set; }
     public int MarketValue { get; set; }
-    
-    public int CategoryId { get; set; }
+    public byte[] Image { get; set; }
+    [NotMapped]
+    public IFormFile ImageFile { get; set; }
+  
 
-    public int CommentId { get; set; }
+    public ICollection<GearInventory>? GearInventories { get; set; }
 
-    public ICollection<MusicItem>? MusicItems { get; set; }
+    public GearInventory() { }
 
-    public MusicItem() { }
-
-    public MusicItem(string title, string description)
+    public GearInventory(string title, string description)
     {
         Title = title;
         Description = description;
+     
+
     }
 
     public override string? ToString()
@@ -33,7 +37,7 @@ public class MusicItem
 
     public override bool Equals(object? obj)
     {
-        return obj is MusicItem @musicItem && Id == @musicItem.Id;
+        return obj is GearInventory @gearInventory && Id == @gearInventory.Id;
     }
 
     public override int GetHashCode()

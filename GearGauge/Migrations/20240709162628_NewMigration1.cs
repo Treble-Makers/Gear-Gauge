@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GearGauge.Migrations
 {
     /// <inheritdoc />
-    public partial class NewMigration : Migration
+    public partial class NewMigration1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -44,7 +44,7 @@ namespace GearGauge.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Address = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    MusicItemIds = table.Column<string>(type: "longtext", nullable: true)
+                    Ids = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -101,7 +101,22 @@ namespace GearGauge.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "MusicItems",
+                name: "Gear",
+                columns: table => new
+                {
+                    GearId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Gear", x => x.GearId);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "GearInventories",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -111,17 +126,15 @@ namespace GearGauge.Migrations
                     Description = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     MarketValue = table.Column<int>(type: "int", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
-                    CommentId = table.Column<int>(type: "int", nullable: false),
-                    MusicItemId = table.Column<int>(type: "int", nullable: true)
+                    GearInventoryId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MusicItems", x => x.Id);
+                    table.PrimaryKey("PK_GearInventories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MusicItems_MusicItems_MusicItemId",
-                        column: x => x.MusicItemId,
-                        principalTable: "MusicItems",
+                        name: "FK_GearInventories_GearInventories_GearInventoryId",
+                        column: x => x.GearInventoryId,
+                        principalTable: "GearInventories",
                         principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -253,6 +266,43 @@ namespace GearGauge.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
+            migrationBuilder.CreateTable(
+                name: "Watchlists",
+                columns: table => new
+                {
+                    WatchlistId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    GearId = table.Column<int>(type: "int", nullable: false),
+                    DateAdded = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    FormField = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    NotificationField = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    LikedItems = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    RedExclamation = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    Tag = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    UserId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Watchlists", x => x.WatchlistId);
+                    table.ForeignKey(
+                        name: "FK_Watchlists_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Watchlists_Gear_GearId",
+                        column: x => x.GearId,
+                        principalTable: "Gear",
+                        principalColumn: "GearId",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -296,9 +346,19 @@ namespace GearGauge.Migrations
                 column: "ContactUsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MusicItems_MusicItemId",
-                table: "MusicItems",
-                column: "MusicItemId");
+                name: "IX_GearInventories_GearInventoryId",
+                table: "GearInventories",
+                column: "GearInventoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Watchlists_GearId",
+                table: "Watchlists",
+                column: "GearId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Watchlists_UserId",
+                table: "Watchlists",
+                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -323,13 +383,19 @@ namespace GearGauge.Migrations
                 name: "ContactUs");
 
             migrationBuilder.DropTable(
-                name: "MusicItems");
+                name: "GearInventories");
+
+            migrationBuilder.DropTable(
+                name: "Watchlists");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Gear");
         }
     }
 }

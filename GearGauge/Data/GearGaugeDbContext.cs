@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using GearGauge.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -15,7 +16,9 @@ public class GearGaugeDbContext : IdentityDbContext<User>
 
         public DbSet<Watchlist> Watchlists { get; set; }
 
-        public DbSet<MusicItem> MusicItems { get; set; }
+        public DbSet<GearInventory> GearInventories { get; set; }
+
+      
 
           public GearGaugeDbContext(DbContextOptions<GearGaugeDbContext> options) : base(options)
         {
@@ -23,7 +26,7 @@ public class GearGaugeDbContext : IdentityDbContext<User>
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-        //   builder.Entity<User>().HasMany(m => m.MusicItem).WithOne(i => i.UserName).HasForeignKey(n => n.IdentityUser.Id);
+       // builder.Entity<GearInventory>().HasOne(g => g.ImageId).WithOne(i => i.Im)
             base.OnModelCreating(builder);
         }
             // Must build out to establish one to many, many to many, etc. relationships
