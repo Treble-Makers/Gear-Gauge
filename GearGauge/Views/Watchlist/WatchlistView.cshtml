@@ -1,0 +1,29 @@
+@model List<GearGauge.Models.Watchlist>
+
+@{
+    ViewData["Title"] = "Watchlist";
+}
+
+<h1>Watchlist</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Gear</th>
+            <th>Date Added</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.User.UserName</td>
+                <td>@item.Gear.Name</td>
+                <td>@item.DateAdded.ToShortDateString()</td>
+                
+            </tr>
+        }
+    </tbody>
+</table>
