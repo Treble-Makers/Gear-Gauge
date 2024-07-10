@@ -12,6 +12,9 @@ namespace GearGauge.ViewModels
         public string? Title { get; set; }
         public string? Description { get; set; }
         public int MarketValue { get; set; }
+        public IFormFile ImageFile { get; set; }
+        
+    
         public List<SelectListItem>? GearInventories { get; set; }
 
         public AddGearInventoryViewModel()

@@ -6,6 +6,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using GearGauge.ViewModels;
 using GearGauge.Data;
+using Microsoft.AspNetCore.Hosting;
+using System.Net.Http.Headers;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.AspNetCore;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace GearGauge.Controllers;
 
@@ -31,6 +37,7 @@ public class GearInventoryController : Controller
         AddGearInventoryViewModel addGearInventoryViewModel  = new AddGearInventoryViewModel(context.GearInventories.ToList());
         return View(addGearInventoryViewModel);
     }
+   
 
     [HttpPost]
     [Route ("/GearInventory/Add")]
@@ -38,20 +45,47 @@ public class GearInventoryController : Controller
     {
         if (ModelState.IsValid)
         {
+            string uniqueFileName = null;
+
+        // Check if an image file is uploaded
+        if (addGearInventoryViewModel.ImageFile != null && addGearInventoryViewModel.ImageFile.Length > 0)
+        {
+            // Define the uploads directory and ensure it exists
+            string uploadsFolder = Path.Combine("images");
+            Directory.CreateDirectory(uploadsFolder);
+
+            // Generate a unique file name to avoid overwriting existing files
+            uniqueFileName = Guid.NewGuid().ToString() + "_" + addGearInventoryViewModel.ImageFile.FileName;
+
+            // Combine the uploads path with the unique file name
+            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+            // Save the uploaded file to the uploads folder
+            using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+            {
+                addGearInventoryViewModel.ImageFile.CopyTo(fileStream);
+            }
+        }
+        
             
             GearInventory newGearInventory = new GearInventory
             {
                 Title = addGearInventoryViewModel.Title,
                 Description = addGearInventoryViewModel.Description,
                 MarketValue = addGearInventoryViewModel.MarketValue,
+                ImageFile = addGearInventoryViewModel.ImageFile,
+                
+                
                 
             };
+        
 
             context.GearInventories.Add(newGearInventory);
             context.SaveChanges();
 
             return Redirect("/GearInventory");
         }
+        
         return View(addGearInventoryViewModel);
     }
     public IActionResult Delete()
@@ -60,6 +94,7 @@ public class GearInventoryController : Controller
 
         return View();
     }
+    
     [HttpPost]
     public IActionResult Delete(int[] Ids)
     {
@@ -78,6 +113,7 @@ public class GearInventoryController : Controller
             .Single(g => g.Id == id);
 
         GearInventoryViewModel viewModel = new GearInventoryViewModel(theGearInventory);
+
         return View(viewModel);
     }
 }

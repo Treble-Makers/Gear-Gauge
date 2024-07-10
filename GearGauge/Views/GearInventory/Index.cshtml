@@ -24,6 +24,9 @@
                 <th>
                     MarketValue
                 </th>
+                <th>
+                    Image
+                </th>
             </tr>
             @foreach (var evt in Model)
             {
@@ -32,6 +35,7 @@
                     <td><a asp-controller="GearInventory" asp-action="Detail" asp-route-id="@evt.Id">@evt.Title</a></td>
                     <td>@evt.Description</td>
                     <td>@evt.MarketValue</td>
+                    <td>@evt.ImageFile</td>
                 </tr>
             }
         </table>
