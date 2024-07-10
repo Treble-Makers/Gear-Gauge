@@ -1,0 +1,83 @@
+@model List<GearGauge.ViewModels.CanonicalSearchViewModel>
+@*
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Search Results</title>
+</head>
+
+<body>
+<h1>Search Results</h1>
+@if (Model.Any())
+{
+<form asp-controller="ProductSearch" asp-action="PostGetPriceGuide" method="post">
+<select id="searchResults">
+@foreach (var item in Model)
+{
+<option value="@item.CanonicalProductIds[0]">
+@if (item.Title != null)
+{
+@item.Title
+}
+</option>
+}
+</select>
+</form>
+}
+else
+{
+<p>No results found.</p>
+}
+</body>
+
+</html> *@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Search Results</title>
+</head>
+
+<body>
+    <h1>Search Results</h1>
+
+    @if (Model.Any())
+    {
+        <form asp-controller="ProductSearch" asp-action="PostTotalSearch" method="post">
+            <div class="card-container">
+                @foreach (var item in Model)
+                {
+                    <div class="search-card">
+                        @*<a asp-action="PostTotalSearch" asp-controller="ProductSearch" method="post"
+                asp-route-id="@item.CanonicalProductIds[0]"> *@
+                        @if (item.Image?.Source != null)
+                        {
+                            <img src="@item.Image.Source" alt="@item.Title image" />
+                        }
+                        @if (item.Title != null)
+                        {
+                            <button type="submit" name="searchTerm" value="@item.Title">@item.Title</button>
+                        }
+                        @if (item.Title != null)
+                        {
+                            @item.PriceMiddle
+                        }
+                        <input type="hidden" asp-controller="YouTubeApi" asp-action="GetProductVideo" method="get" value="@item.Title" name="searchTerm"/>
+                        <input type="hidden" asp-for="@item.CanonicalProductIds[0]" />
+                    </div>
+
+                }
+            </div>
+        </form>
+    }
+    else
+    {
+        <p>No results found.</p>
+    }
+</body>
+
+</html>
