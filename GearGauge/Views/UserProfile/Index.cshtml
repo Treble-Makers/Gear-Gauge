@@ -1,4 +1,4 @@
-@model GearGauge.ViewModels.UserProfileViewModel 
+ @* @model GearGauge.ViewModels.UpdateUserProfileViewModel 
 
     <h1>User Profile</h1>
 
@@ -10,9 +10,6 @@
             <span asp-asp-validation-for="UserName" class="text-muted"></span>
             // text-muted vs text- danger 
         </div>
-        // make changes from contact-us form 
-        // insert profile picture, self description, updated email address
-       
         <div class="form-group">
             <label asp-for="ContactEmail">Email</label>
             <input asp-for="ContactEmail" class="form-control" />
@@ -41,14 +38,17 @@
    </div>
    <div>
 
-        @* @if (ViewBag.MessageBody != null)
-        {
-            <div>@ViewBag.MessageBody</div>
-        } *@
-        // this last part of code is from contact-us form 
-  </div>
+   
+ </div>
 
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-}
+} 
+
+     @if (ViewBag.MessageBody != null)
+        {
+            <div>@ViewBag.MessageBody</div>
+        } 
+        // this last part of code is from contact-us form  *@
+         

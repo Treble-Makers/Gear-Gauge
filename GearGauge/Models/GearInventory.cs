@@ -16,7 +16,9 @@ public class GearInventory
     public byte[] Image { get; set; }
     [NotMapped]
     public IFormFile ImageFile { get; set; }
-  
+    public ICollection<FavoriteItem> Favorites { get; set; } = new List<FavoriteItem>();
+    public int CommentId { get; set; }
+    public ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
     public ICollection<GearInventory>? GearInventories { get; set; }
 
@@ -26,8 +28,6 @@ public class GearInventory
     {
         Title = title;
         Description = description;
-     
-
     }
 
     public override string? ToString()

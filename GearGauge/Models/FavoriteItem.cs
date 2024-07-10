@@ -9,9 +9,8 @@ public class FavoriteItem
 {
     public int UserId { get; set; }
 
-    public int MusicItemId { get; set; }
+    public int Id { get; set; } // was MusicItemId
     public GearInventory GearInventory { get; set; } // does this make sense?
-   // walk through code
     public string? UserName { get; set; }
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

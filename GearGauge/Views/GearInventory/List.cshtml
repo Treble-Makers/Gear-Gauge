@@ -1,0 +1,14 @@
+@model IEnumerable<GearGauge.Models.Favorite>
+
+<h2>Your Favorites</h2>
+
+<ul class="list-group">
+    @foreach (var favorite in Model)
+    {
+        <li class="list-group-item">
+            <h4>@favorite.MusicItem.Title</h4>
+            <p>@favorite.MusicItem.Description</p>
+            <small>@favorite.CreatedAt.ToString("g")</small>
+        </li>
+    }
+</ul>
