@@ -17,119 +17,151 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = GearGauge
 build_property.RootNamespace = GearGauge
-build_property.ProjectDir = D:\Coding\Launchcode IA\csharp\treblemakers\Gear-Gauge\GearGauge\
+build_property.ProjectDir = /Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\Coding\Launchcode IA\csharp\treblemakers\Gear-Gauge\GearGauge
+build_property.MSBuildProjectDirectory = /Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/Coding/Launchcode IA/csharp/treblemakers/Gear-Gauge/GearGauge/Areas/Identity/Pages/Account/Login.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Areas/Identity/Pages/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvQWNjb3VudC9Mb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Coding/Launchcode IA/csharp/treblemakers/Gear-Gauge/GearGauge/Areas/Identity/Pages/Account/Logout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dvdXQuY3NodG1s
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Areas/Identity/Pages/Account/Logout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvQWNjb3VudC9Mb2dvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Coding/Launchcode IA/csharp/treblemakers/Gear-Gauge/GearGauge/Areas/Identity/Pages/Account/Register.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Areas/Identity/Pages/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvQWNjb3VudC9SZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Coding/Launchcode IA/csharp/treblemakers/Gear-Gauge/GearGauge/Areas/Identity/Pages/Account/RegisterConfirmation.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3RlckNvbmZpcm1hdGlvbi5jc2h0bWw=
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Areas/Identity/Pages/Account/RegisterConfirmation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvQWNjb3VudC9SZWdpc3RlckNvbmZpcm1hdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Coding/Launchcode IA/csharp/treblemakers/Gear-Gauge/GearGauge/Areas/Identity/Pages/Account/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfVmlld0ltcG9ydHMuY3NodG1s
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Areas/Identity/Pages/Account/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvQWNjb3VudC9fVmlld0ltcG9ydHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Coding/Launchcode IA/csharp/treblemakers/Gear-Gauge/GearGauge/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Coding/Launchcode IA/csharp/treblemakers/Gear-Gauge/GearGauge/Areas/Identity/Pages/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Areas/Identity/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Coding/Launchcode IA/csharp/treblemakers/Gear-Gauge/GearGauge/Areas/Identity/Pages/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Areas/Identity/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Coding/Launchcode IA/csharp/treblemakers/Gear-Gauge/GearGauge/Views/Account/ConfirmRegister.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDb25maXJtUmVnaXN0ZXIuY3NodG1s
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Views/Account/ConfirmRegister.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9Db25maXJtUmVnaXN0ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Coding/Launchcode IA/csharp/treblemakers/Gear-Gauge/GearGauge/Views/Account/Login.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9Mb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Coding/Launchcode IA/csharp/treblemakers/Gear-Gauge/GearGauge/Views/Account/Register.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Views/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9SZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Coding/Launchcode IA/csharp/treblemakers/Gear-Gauge/GearGauge/Views/ContactUs/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFVzXEluZGV4LmNzaHRtbA==
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Views/Comment/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ29tbWVudC9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Coding/Launchcode IA/csharp/treblemakers/Gear-Gauge/GearGauge/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Views/ContactUs/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ29udGFjdFVzL0luZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Coding/Launchcode IA/csharp/treblemakers/Gear-Gauge/GearGauge/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Views/GearInventory/Add.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR2VhckludmVudG9yeS9BZGQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Coding/Launchcode IA/csharp/treblemakers/Gear-Gauge/GearGauge/Views/MusicItem/Add.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTXVzaWNJdGVtXEFkZC5jc2h0bWw=
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Views/GearInventory/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR2VhckludmVudG9yeS9EZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Coding/Launchcode IA/csharp/treblemakers/Gear-Gauge/GearGauge/Views/MusicItem/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTXVzaWNJdGVtXERlbGV0ZS5jc2h0bWw=
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Views/GearInventory/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR2VhckludmVudG9yeS9EZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Coding/Launchcode IA/csharp/treblemakers/Gear-Gauge/GearGauge/Views/MusicItem/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTXVzaWNJdGVtXEluZGV4LmNzaHRtbA==
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Views/GearInventory/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR2VhckludmVudG9yeS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Coding/Launchcode IA/csharp/treblemakers/Gear-Gauge/GearGauge/Views/ProductSearch/Search.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFNlYXJjaFxTZWFyY2guY3NodG1s
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Coding/Launchcode IA/csharp/treblemakers/Gear-Gauge/GearGauge/Views/ProductSearch/SearchResults.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFNlYXJjaFxTZWFyY2hSZXN1bHRzLmNzaHRtbA==
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Coding/Launchcode IA/csharp/treblemakers/Gear-Gauge/GearGauge/Views/Shared/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Views/ProductSearch/Search.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdFNlYXJjaC9TZWFyY2guY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Coding/Launchcode IA/csharp/treblemakers/Gear-Gauge/GearGauge/Views/Shared/Watchlist.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXFdhdGNobGlzdC5jc2h0bWw=
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Views/ProductSearch/SearchResults.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdFNlYXJjaC9TZWFyY2hSZXN1bHRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Coding/Launchcode IA/csharp/treblemakers/Gear-Gauge/GearGauge/Views/Shared/_LoginPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Coding/Launchcode IA/csharp/treblemakers/Gear-Gauge/GearGauge/Views/Shared/_ValidationScriptsPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Views/Shared/Watchlist.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL1dhdGNobGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Coding/Launchcode IA/csharp/treblemakers/Gear-Gauge/GearGauge/Views/ThankYouPage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhhbmtZb3VQYWdlLmNzaHRtbA==
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Views/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Coding/Launchcode IA/csharp/treblemakers/Gear-Gauge/GearGauge/Views/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Coding/Launchcode IA/csharp/treblemakers/Gear-Gauge/GearGauge/Views/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Views/ThankYouPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGhhbmtZb3VQYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Coding/Launchcode IA/csharp/treblemakers/Gear-Gauge/GearGauge/Views/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-7ehxtwtl99
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Views/ThankYouPage/ThankYouContactUs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGhhbmtZb3VQYWdlL1RoYW5rWW91Q29udGFjdFVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Views/ThankYouPage/ThankYouRegistration.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGhhbmtZb3VQYWdlL1RoYW5rWW91UmVnaXN0cmF0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Views/UserProfile/Add.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlclByb2ZpbGUvQWRkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Views/UserProfile/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlclByb2ZpbGUvRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Views/UserProfile/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlclByb2ZpbGUvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Views/Watchlist/WatchlistView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV2F0Y2hsaXN0L1dhdGNobGlzdFZpZXcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-q61h8ogrwz

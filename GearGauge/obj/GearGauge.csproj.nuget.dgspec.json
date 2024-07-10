@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Coding\\Launchcode IA\\csharp\\treblemakers\\Gear-Gauge\\GearGauge\\GearGauge.csproj": {}
+    "/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/GearGauge.csproj": {}
   },
   "projects": {
-    "D:\\Coding\\Launchcode IA\\csharp\\treblemakers\\Gear-Gauge\\GearGauge\\GearGauge.csproj": {
+    "/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/GearGauge.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Coding\\Launchcode IA\\csharp\\treblemakers\\Gear-Gauge\\GearGauge\\GearGauge.csproj",
+        "projectUniqueName": "/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/GearGauge.csproj",
         "projectName": "GearGauge",
-        "projectPath": "D:\\Coding\\Launchcode IA\\csharp\\treblemakers\\Gear-Gauge\\GearGauge\\GearGauge.csproj",
-        "packagesPath": "C:\\Users\\matth\\.nuget\\packages\\",
-        "outputPath": "D:\\Coding\\Launchcode IA\\csharp\\treblemakers\\Gear-Gauge\\GearGauge\\obj\\",
+        "projectPath": "/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/GearGauge.csproj",
+        "packagesPath": "/Users/StoppingBy/.nuget/packages/",
+        "outputPath": "/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\matth\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/StoppingBy/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -107,7 +107,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

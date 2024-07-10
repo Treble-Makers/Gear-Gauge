@@ -9,8 +9,10 @@ public class User : IdentityUser
     // public int Id { get; set; }
     public string? Name { get; set; }
 
-    public string? Address { get; set; }
-    public List<int>? Ids { get; set; }
+    public string? Address { get; set; }  // should this be ContactEmail instead? do we need address?
+    public List<int>? Ids { get; set; } 
+    public string? ProfilePictureUrl { get; set; } // TG added this for profile
+    public ICollection<FavoriteItem> Favorites { get; set; } = new List<FavoriteItem>(); // Favorite feature
 
     // public User() : base() { }
 
@@ -21,6 +23,7 @@ public class User : IdentityUser
         Email = email;
         Name = name;
         Address = address;
+        ProfilePictureUrl = ProfilePictureUrl; // TG added this too
        
     }
 }

@@ -1,0 +1,19 @@
+@using GearGauge.ViewModels
+@model UserProfile
+
+
+<h1>Delete Profile</h1>
+
+<form method="post">
+    @foreach (var evt in ViewBag.gearInventories)
+    {
+        <div class="form-group">
+            <label>
+                <span>@evt.Title</span>
+                <input type="checkbox" name="gearInventoryIds" value="@evt.Id" />
+            </label>
+        </div>
+    }
+
+        <input type="submit" value="Delete Selected Profile" class="btn btn-danger" />
+</form>

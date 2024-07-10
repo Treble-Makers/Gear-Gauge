@@ -17,6 +17,10 @@ public class GearGaugeDbContext : IdentityDbContext<User>
         public DbSet<Watchlist> Watchlists { get; set; }
 
         public DbSet<GearInventory> GearInventories { get; set; }
+        
+        public DbSet<Comment> Comments { get; set; }
+
+        public DbSet<FavoriteItem> Favorites { get; set; }
 
       
 
@@ -24,13 +28,28 @@ public class GearGaugeDbContext : IdentityDbContext<User>
         {
         }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder) // was builder
         {
+          
        // builder.Entity<GearInventory>().HasOne(g => g.ImageId).WithOne(i => i.Im)
-            base.OnModelCreating(builder);
-        }
-            // Must build out to establish one to many, many to many, etc. relationships
-        
-                
+            base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<GearInventory>() // was saved as MusicItem so is it GearId?
+              .HasMany(mi => mi.Comments)
+              .WithOne(c => c.MusicItem) // was saved as MusicItem so is it GearId?
+              .HasForeignKey(c => c.MusicItemId); // need to change
+
+       
+            modelBuilder.Entity<GearInventory>() // was saved as MusicItem so is it GearId?
+              .HasMany(mi => mi.Favorites)
+              .WithOne(f => f.GearInventory) /// was saved as MusicItem so is it GearId?
+              .HasForeignKey(f => f.MusicItemId); // need to change
+
+            modelBuilder.Entity<User>() //I think it's user?
+              .HasMany(u => u.Favorites)
+              .WithOne(f => f.User)
+              .HasForeignKey(f => f.UserId);
+        }
+        
+            // Must build out to establish one to many, many to many, etc. relationships
 }
