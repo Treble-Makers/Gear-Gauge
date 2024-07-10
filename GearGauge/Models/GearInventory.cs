@@ -1,47 +1,46 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics.Metrics;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
+using Microsoft.AspNetCore.Http;
 
-namespace GearGauge.Models;
-
-public class GearInventory
+namespace GearGauge.Models
 {
-    public int Id { get; set; }
-    public string? Title { get; set; }
-    public string? Description { get; set; }
-    public int MarketValue { get; set; }
-    public byte[] Image { get; set; }
-    [NotMapped]
-    public IFormFile ImageFile { get; set; }
-  
-
-    public ICollection<GearInventory>? GearInventories { get; set; }
-
-    public GearInventory() { }
-
-    public GearInventory(string title, string description)
+    public class GearInventory
     {
-        Title = title;
-        Description = description;
-     
+        public int Id { get; set; }
+        public string? Title { get; set; }
+        public string? Description { get; set; }
+        public int MarketValue { get; set; }
+        public byte[] Image { get; set; }
+        [NotMapped]
+        public IFormFile ImageFile { get; set; }
 
-    }
+        // Navigation property for tags
+        public ICollection<Tag> Tags { get; set; }
 
-    public override string? ToString()
-    {
-        return Title;
-    }
+        public GearInventory()
+        {
+            Tags = new List<Tag>();
+        }
 
-    public override bool Equals(object? obj)
-    {
-        return obj is GearInventory @gearInventory && Id == @gearInventory.Id;
-    }
+        public override string ToString()
+        {
+            return Title;
+        }
 
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(Id);
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            GearInventory other = (GearInventory)obj;
+            return Id == other.Id;
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
     }
 }
