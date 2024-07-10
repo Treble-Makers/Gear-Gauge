@@ -1,95 +1,92 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using GearGauge.Data;
 using GearGauge.Models;
 using GearGauge.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
-namespace GearGauge.Controllers;
-
-public class UserController : Controller
+namespace GearGauge.Controllers
 {
-    private readonly GearGaugeDbContext context;
-    private readonly SignInManager<User> signInManager;
-    private readonly UserManager<User> userManager;
+    public class UserController : Controller
+    {
+        private GearGaugeDbContext context;
+        private readonly UserManager<User> _userManager;
 
-}
-    public UserController(GearGaugeDbContext context, SignInManager<User> signInManager, UserManager<User> userManager)
+        public UserController(GearGaugeDbContext dbContext, UserManager<User> userManager)
         {
-            _context = context;
-            _signInManager = signInManager;
+            context = dbContext;
             _userManager = userManager;
         }
 
-    public IActionResult Login()
-    {
-        return View();
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> Login(LoginViewModel loginViewModel)
-    {
-        if (ModelState.IsValid)
+        [HttpGet]
+        public IActionResult Register()
         {
-            var result = await signInManager.PasswordSignInAsync(
-                loginViewModel.Email,
-                loginViewModel.Password,
-                loginViewModel.RememberMe,
-                false
-            );
-
-            if (result.Succeeded)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                ModelState.AddModelError("", "Invalid Login Attempt");
-                return View(loginViewModel);
-            }
+            return View(new User());
         }
-        return View(loginViewModel);
-    }
 
-    public IActionResult Register()
-    {
-        return View();
-    }
-
-    [HttpPost]
-    [AllowAnonymous]
-    public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
-    {
-        if (ModelState.IsValid)
+        [HttpPost]
+        public async Task<IActionResult> Register(User user)
         {
-            int Index = registerViewModel.Email.IndexOf("@");
-            string userName = registerViewModel.Email.Substring(0, Index);
-
-            var user = new User(
-                userName,
-                registerViewModel.Email,
-                registerViewModel.Name,
-            );
-
-            var createUserResult = await userManager.CreateAsync(user, registerViewModel.Password!);
-
-            if (createUserResult.Succeeded)
+            if (ModelState.IsValid)
             {
-                await signInManager.SignInAsync(user, isPersistent: false);
+                var createUserResult = await _userManager.CreateAsync(user);
+                if (createUserResult.Succeeded)
+                {
+                    return RedirectToAction("ThankYou", "Home");
+                }
+                else
+                {
+                    foreach (var error in createUserResult.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                }
+            }
 
-                return View("ConfirmRegistration");
-            }
-            foreach (var error in createUserResult.Errors)
-            {
-                ModelState.AddModelError("", error.Description);
-            }
+            return View(user);
         }
-        return View();
-    }
 
-    public async Task<IActionResult> Logout()
-    {
-        await signInManager.SignOutAsync();
-        return RedirectToAction("Index", "Home");
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel loginViewModel, string returnUrl = null)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(loginViewModel.Email);
+                if (user != null)
+                {
+                    var passwordSignInResult = await _userManager.PasswordSignInAsync(user, loginViewModel.Password, loginViewModel.RememberMe, false);
+                    if (passwordSignInResult.Succeeded)
+                    {
+                        if (returnUrl != null)
+                        {
+                            return LocalRedirect(returnUrl);
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                }
+            }
+
+            return View(loginViewModel);
+        }
     }
 }

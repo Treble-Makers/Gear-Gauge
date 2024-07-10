@@ -10,7 +10,7 @@ namespace GearGauge.Controllers;
     [Authorize]
     public class CommentController : Controller
     {
-        private readonly MusicItemDbContext _context;
+        private readonly GearGaugeDbContextDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
         public CommentController (MusicItemDbContext dbContext, UserManager<IdentityUser> userManager)
@@ -41,6 +41,6 @@ namespace GearGauge.Controllers;
             await _context.SaveChangesAsync();
             
 
-            return RedirectToAction("Details", "MusicItems", new { id = musicItemId });
+            return RedirectToAction("Details", "MusicItems", new { id = musicItemId }); // make it commentId
         }
     }
