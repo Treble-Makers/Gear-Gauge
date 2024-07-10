@@ -10,7 +10,7 @@ public class FavoriteItem
     public int UserId { get; set; }
 
     public int MusicItemId { get; set; }
-    public MusicItem MusicItem { get; set; } 
+    public MusicItem MusicItem { get; set; } // does this make sense?
    
     public string? UserName { get; set; }
     //public User User { get; set; }
