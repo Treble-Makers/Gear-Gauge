@@ -59,6 +59,10 @@ namespace GearGauge.Controllers
 
                     uniqueFileName = "/images/" + uniqueFileName;
                 }
+                else
+                {
+                    return View("index");
+                }
 
                 GearInventory newGearInventory = new()
                 {
@@ -81,6 +85,7 @@ namespace GearGauge.Controllers
                 }
 
                 context.GearInventories.Add(newGearInventory);
+                
                 context.SaveChanges();
 
                 return Redirect("/GearInventory");
@@ -114,13 +119,6 @@ namespace GearGauge.Controllers
             return Redirect("/GearInventory");
         }
 
-        // public IActionResult Detail(int id)
-        // {
-        //     GearInventory theGearInventory = context.GearInventories
-        //         .Include(g => g.Tags)
-        //       //  .Single(g => g.Id == id);
-
-        //     return View(theGearInventory);
-        // }
+     
     }
 }

@@ -2,7 +2,6 @@
 using GearGauge.Models;
 using Microsoft.Identity.Client;
 
-// add viewmodel to the name
 public class GearInventoryViewModel
 {
     public int Id {get; set;}
@@ -11,7 +10,7 @@ public class GearInventoryViewModel
     public int MarketValue { get; set; }
     public int GearInventoryId { get; set; }
     public List<GearInventory> GearInventories { get; set; }
-    public string ImagePath { get; set; } // Add this property
+    public string ImagePath { get; set; } 
     [NotMapped]
     public IFormFile ImageFile { get; set; }
 
@@ -28,20 +27,5 @@ public class GearInventoryViewModel
         return Title;
     }
 
-    // public override bool Equals(object? obj)
-    // {
-    //     if (obj == null || GetType() != obj.GetType())
-    //     {
-    //         return false;
-    //     }
-
-    //     GearInventory other = (GearInventory)obj;
-    //     return Id == other.Id;
-    // }
-
-    // public override int GetHashCode()
-    // {
-    //     return Id.GetHashCode();
-    // }
 }
 
