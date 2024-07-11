@@ -31,16 +31,11 @@ public class GearGaugeDbContext : IdentityDbContext<User>
        // builder.Entity<GearInventory>().HasOne(g => g.ImageId).WithOne(i => i.Im)
             base.OnModelCreating(modelBuilder);
 
-          modelBuilder.Entity<GearInventory>() // was saved as MusicItem so is it GearId?
-             .HasMany(mi => mi.Comments)
-             .WithOne(c => c.GearInventory) // was saved as MusicItem so is it GearId?
-             .HasForeignKey(c => c.Id); // need to change
-
-       
-            modelBuilder.Entity<GearInventory>() // was saved as MusicItem so is it GearId?
-              .HasMany(mi => mi.Favorites)
-              .WithOne(f => f.GearInventory) /// was saved as MusicItem so is it GearId?
-              .HasForeignKey(f => f.GearId); // need to change
+        
+            modelBuilder.Entity<Gear>() // was saved as MusicItem so is it GearId?
+              .HasOne(mi => mi.Comment)
+              .WithOne(f => f.Gear) /// was saved as MusicItem so is it GearId?
+               .HasForeignKey<Comment>(c => c.GearId);
 
               modelBuilder.Entity<Comment>()
               .HasKey(c => c.Id);
@@ -49,7 +44,7 @@ public class GearGaugeDbContext : IdentityDbContext<User>
             modelBuilder.Entity<User>() //I think it's user?
               .HasMany(u => u.Favorites)
               .WithOne(f => f.User)
-              .HasForeignKey(f => f.UserId);
+              .HasForeignKey(f => f.Id);
         }
         
             // Must build out to establish one to many, many to many, etc. relationships

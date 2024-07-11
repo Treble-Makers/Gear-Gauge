@@ -7,7 +7,7 @@ namespace GearGauge.Models;
 
 public class Favorite
 {
-    public int Id { get; set; }
+    public string Id { get; set; }
     public GearInventory GearInventory { get; set; } 
     
     public int UserId { get; set; }
@@ -19,8 +19,5 @@ public class Favorite
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
 }
-
-        // public int MusicItemId { get; set; }
-        // public MusicItem MusicItem { get; set; }
         
 

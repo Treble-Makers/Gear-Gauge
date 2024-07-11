@@ -19,7 +19,7 @@ namespace GearGauge.Controllers;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(GearInventory gearInventory, string content)
+        public async Task<IActionResult> Create(Gear gear, string content)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -29,7 +29,7 @@ namespace GearGauge.Controllers;
 
             var comment = new Comment
             {
-                GearInventory = gearInventory,
+                Gear = gear,
                 Content = content,
                 // UserId = user.Id,
 
@@ -40,7 +40,7 @@ namespace GearGauge.Controllers;
             await _context.SaveChangesAsync();
             
 
-            return RedirectToAction("Details", "MusicItems", new { id = gearInventory }); // make it commentId. 
+            return RedirectToAction("Details", "MusicItems", new { id = gear }); // make it commentId. 
             //It was musicItemId
         }
     }
