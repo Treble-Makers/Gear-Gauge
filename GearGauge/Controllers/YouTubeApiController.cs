@@ -42,8 +42,8 @@ public class YouTubeApiController : Controller
         string results
     )
     {
-        // var apiConnectionKey = _configuration["apiConnectionKey"]; // Access from user secrets
-        var apiConnectionKey = "AIzaSyAnZyjSKYIcEuXGh95lc5r1CCJEyQvOz_g";
+        var apiConnectionKey = _configuration["apiConnectionKey"]; // Access from user secrets
+        
         var youtubeService = new YouTubeService(
             new BaseClientService.Initializer
             {
