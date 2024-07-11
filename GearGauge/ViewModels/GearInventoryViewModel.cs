@@ -1,30 +1,45 @@
-﻿using System.ComponentModel.DataAnnotations;
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using GearGauge.Models;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace GearGauge.ViewModels;
-
-public class GearInventoryViewModel
+public class GearInventory
 {
-    
-    public int GearInventoryId { get; set; }
-
+    public int Id { get; set; }
     public string? Title { get; set; }
     public string? Description { get; set; }
     public int MarketValue { get; set; }
-    
-public GearInventoryViewModel (GearInventory theGearInventory) 
-{
-       GearInventoryId = theGearInventory.Id;
-       Title = theGearInventory.Title;
-       Description = theGearInventory.Description;
-       MarketValue = theGearInventory.MarketValue;
+    public int GearInventoryId { get; set; }
+    public List<GearInventory> GearInventories { get; set; }
+    public string ImagePath { get; set; } // Add this property
+    [NotMapped]
+    public IFormFile ImageFile { get; set; }
 
-        }
+    // Navigation property for tags
+    public ICollection<Tag> Tags { get; set; }
+
+    public GearInventory()
+    {
+        Tags = new List<Tag>();
     }
-  
+
+    public override string ToString()
+    {
+        return Title;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        if (obj == null || GetType() != obj.GetType())
+        {
+            return false;
+        }
+
+        GearInventory other = (GearInventory)obj;
+        return Id == other.Id;
+    }
+
+    public override int GetHashCode()
+    {
+        return Id.GetHashCode();
+    }
+}
 

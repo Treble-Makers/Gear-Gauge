@@ -1,19 +1,18 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics.Metrics;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
+using Microsoft.AspNetCore.Http;
 
 namespace GearGauge.Models;
 
-public class GearInventory
-{
+  public class GearInventory
+  { 
     public int Id { get; set; }
-    public string? Title { get; set; }
-    public string? Description { get; set; } // this can be removed or replaced by Gear
-    public List<Gear> Gear { get; set; }
+    public string Title { get; set; }
+    public string Description { get; set; }
     public int MarketValue { get; set; }
+    public string ImagePath { get; set; }
+    public List<GearInventory> GearInventories { get; set; }
+    public List<Gear> Gear { get; set; }
     public byte[] Image { get; set; }
     [NotMapped]
     public IFormFile ImageFile { get; set; }
@@ -42,7 +41,15 @@ public class GearInventory
     }
 
     public override int GetHashCode()
-    {
-        return HashCode.Combine(Id);
+
+        [NotMapped]
+        public IFormFile ImageFile { get; set; }
+
+        public ICollection<Tag> Tags { get; set; }
+
+        public GearInventory()
+        {
+            Tags = new List<Tag>();
+        }
     }
 }

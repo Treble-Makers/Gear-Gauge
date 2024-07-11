@@ -12,7 +12,10 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">GearGauge</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/images/logo.jpg" alt="Logo" style="height:30px; margin-right:10px;" />
+                    GearGauge
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -55,5 +58,16 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+     <script>
+        // Add animated class to navbar on scroll
+        $(window).scroll(function() {
+            var scroll = $(window).scrollTop();
+            if (scroll > 50) {
+                $(".navbar").addClass("animated");
+            } else {
+                $(".navbar").removeClass("animated");
+            }
+        });
+    </script>
 </body>
 </html>
