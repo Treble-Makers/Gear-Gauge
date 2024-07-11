@@ -22,7 +22,7 @@ public class ProductSearchController : Controller
 		{
 			_configuration = configuration;
 		}
-
+    [Authorize]
     [HttpPost]
 	[Route("SearchResults")]
     public async Task<IActionResult> PostSearch(ProductSearchViewModel productSearchViewModel)

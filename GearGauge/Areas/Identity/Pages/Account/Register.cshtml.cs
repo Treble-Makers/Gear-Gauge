@@ -80,8 +80,8 @@ namespace GearGauge.Areas.Identity.Pages.Account
             [Display(Name = "Email")]
             public string Email { get; set; }
             // [Required]
-            // [Display(Name = "Name")]
-            // public string Name { get; set; }
+            [Display(Name = "Name")]
+            public string Name { get; set; }
             
             [Display(Name = "Address")]
             public string Address { get; set; }
@@ -120,6 +120,10 @@ namespace GearGauge.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+
+                user.Name = Input.Name;
+                user.Address = Input.Address;
+                
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

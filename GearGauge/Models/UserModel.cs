@@ -14,13 +14,14 @@ public class User : IdentityUser
 
     public User() : base() { }
 
-    // public User(string email, string name, string address)
-    //     : base()
-    // {
-    //     // UserName = userName;
-    //     Email = email;
-    //     Name = name;
-    //     Address = address;
-    //     // MusicItemIds = musicItemIds;
-    // }
+    public User(string userName, string email, string name, string address)
+        : base()
+    {
+        // UserName = userName;
+        UserName = userName;
+        Email = email;
+        Name = name;
+        Address = address;
+        // MusicItemIds = musicItemIds;
+    }
 }
