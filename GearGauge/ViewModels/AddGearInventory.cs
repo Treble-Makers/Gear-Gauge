@@ -37,14 +37,14 @@ namespace GearGauge.ViewModels
         public AddGearInventoryViewModel(List<GearInventory> gearInventories, List<Tag> tags)
             : this()
         {
-            foreach (var gearInventory in gearInventories)
-            {
-                GearInventories.Add(new SelectListItem
-                {
-                    Value = gearInventory.Id.ToString(),
-                    Text = gearInventory.Title
-                });
-            }
+            // foreach (var gearInventory in gearInventories)
+            // {
+            //     GearInventories.Add(new SelectListItem
+            //     {
+            //         Value = gearInventory.Id.ToString(),
+            //         Text = gearInventory.Title
+            //     });
+            // }
 
             foreach (var tag in tags)
             {

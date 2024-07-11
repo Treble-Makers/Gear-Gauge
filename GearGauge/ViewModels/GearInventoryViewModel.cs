@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using GearGauge.Models;
+using Microsoft.Identity.Client;
 
-public class GearInventory
+// add viewmodel to the name
+public class GearInventoryViewModel
 {
-    public int Id { get; set; }
+    public int Id {get; set;}
     public string? Title { get; set; }
     public string? Description { get; set; }
     public int MarketValue { get; set; }
@@ -16,7 +18,7 @@ public class GearInventory
     // Navigation property for tags
     public ICollection<Tag> Tags { get; set; }
 
-    public GearInventory()
+    public GearInventoryViewModel()
     {
         Tags = new List<Tag>();
     }
@@ -26,20 +28,20 @@ public class GearInventory
         return Title;
     }
 
-    public override bool Equals(object? obj)
-    {
-        if (obj == null || GetType() != obj.GetType())
-        {
-            return false;
-        }
+    // public override bool Equals(object? obj)
+    // {
+    //     if (obj == null || GetType() != obj.GetType())
+    //     {
+    //         return false;
+    //     }
 
-        GearInventory other = (GearInventory)obj;
-        return Id == other.Id;
-    }
+    //     GearInventory other = (GearInventory)obj;
+    //     return Id == other.Id;
+    // }
 
-    public override int GetHashCode()
-    {
-        return Id.GetHashCode();
-    }
+    // public override int GetHashCode()
+    // {
+    //     return Id.GetHashCode();
+    // }
 }
 

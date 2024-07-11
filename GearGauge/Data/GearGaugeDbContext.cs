@@ -37,8 +37,8 @@ namespace GearGauge.Data;
               .WithOne(f => f.User)
               .HasForeignKey(f => f.Id);
  
-            base.OnModelCreating(builder);
-            builder.Entity<GearInventory>()
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<GearInventory>()
                 .HasMany(g => g.Tags);
                 //.WithMany(t => t.GearInventories)
                 //.UsingEntity(j => j.ToTable("GearInventoryTags"));

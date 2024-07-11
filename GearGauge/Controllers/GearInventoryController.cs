@@ -31,7 +31,7 @@ namespace GearGauge.Controllers
         {
             var gearInventories = context.GearInventories.ToList();
             //var tags = context.Tags.ToList();
-            AddGearInventoryViewModel viewModel = new AddGearInventoryViewModel();
+            GearInventory viewModel = new GearInventory();
             return View(viewModel);
         }
 
@@ -114,13 +114,13 @@ namespace GearGauge.Controllers
             return Redirect("/GearInventory");
         }
 
-        public IActionResult Detail(int id)
-        {
-            GearInventory theGearInventory = context.GearInventories
-                .Include(g => g.Tags)
-                .Single(g => g.Id == id);
+        // public IActionResult Detail(int id)
+        // {
+        //     GearInventory theGearInventory = context.GearInventories
+        //         .Include(g => g.Tags)
+        //       //  .Single(g => g.Id == id);
 
-            return View(theGearInventory);
-        }
+        //     return View(theGearInventory);
+        // }
     }
 }

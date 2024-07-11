@@ -151,7 +151,7 @@ public class AccountController : Controller
                 await model.ProfilePicture.CopyToAsync(stream);
             }
 
-            user.ProfilePictureUrl = $"/images/{model.ProfilePicture.FileName}";
+           // user.ProfilePictureUrl = $"/images/{model.ProfilePicture.FileName}";
         }
 
         var result = await userManager.UpdateAsync(user);
