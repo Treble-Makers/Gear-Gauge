@@ -16,7 +16,7 @@ namespace GearGauge.Models
         public string Content { get; set; }
         public DateTime CreatedAt { get; set; }
 
-        public GearInventory GearInventory { get; set; } // attaching comment to a specific music item. Might need to be more specific, ie. attached to a specific music item id
+       public GearInventory GearInventory { get; set; } // attaching comment to a specific music item. Might need to be more specific, ie. attached to a specific music item id
 
         public Comment()
         {

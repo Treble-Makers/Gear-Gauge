@@ -17,10 +17,10 @@ public class GearInventory
     public byte[] Image { get; set; }
     [NotMapped]
     public IFormFile ImageFile { get; set; }
-    public ICollection<FavoriteItem> Favorites { get; set; } = new List<FavoriteItem>();
+    public ICollection<Favorite> Favorites { get; set; } = new List<Favorite>();
     public int CommentId { get; set; }
     public ICollection<Comment> Comments { get; set; } = new List<Comment>();
-
+    public Comment Comment { get; set; }
    // public ICollection<GearInventory>? GearInventories { get; set; }
 
     public GearInventory() { }

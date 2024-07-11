@@ -14,6 +14,10 @@ namespace GearGauge.Models
 
         public Comment Comment { get; set; }
 
+        public static implicit operator Gear(int v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

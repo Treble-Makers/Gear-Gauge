@@ -1,21 +1,21 @@
-using System;
-using System.Diagnostics.Metrics;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
-using Microsoft.AspNetCore.Components.Web;
+// using System;
+// using System.Diagnostics.Metrics;
+// using Microsoft.AspNetCore.Authorization.Infrastructure;
+// using Microsoft.AspNetCore.Components.Web;
 
-namespace GearGauge.Models;
+// namespace GearGauge.Models;
 
-public class Favorites
-{
-    public User User { get; set; }
-    public FavoriteItem favoriteItemId { get; set; }
-    public int UserId { get; set; }
+// public class Favorites
+// {
+//     public User User { get; set; }
+//     public FavoriteItem favoriteItemId { get; set; }
+//     public int UserId { get; set; }
     
-    // public Gear GearId { get; set; } 
+//     // public Gear GearId { get; set; } 
 
-    // public int Id { get; set; } // was MusicItemId
-    // public GearInventory GearInventory { get; set; } // does this make sense?
-    // public string? UserName { get; set; }
+//     // public int Id { get; set; } // was MusicItemId
+//     // public GearInventory GearInventory { get; set; } // does this make sense?
+//     // public string? UserName { get; set; }
 
-    // public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    }
+//     // public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+//     }

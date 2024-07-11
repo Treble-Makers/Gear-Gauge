@@ -22,7 +22,7 @@ namespace GearGauge.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddToFavorite(Gear gear)
+        public async Task<IActionResult> AddToFavorite(int gearId) // was (nt musicItemId)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -30,13 +30,13 @@ namespace GearGauge.Controllers
                 return Unauthorized();
             }
 
-            var favoriteItem = new FavoriteItem
+            var favorite = new Favorite
             {
                 GearId = gearId, //  MusicItemId = musicItemId,
                 UserId = user.Id
             };
 
-            context.Favorites.Add(favoriteItem);
+            context.Favorites.Add(favorite);
             await context.SaveChangesAsync();
 
             return RedirectToAction("Detail", "MusicItem", new { id = gearId });

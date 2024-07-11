@@ -13,12 +13,15 @@ namespace GearGauge.Controllers
     public class UserController : Controller
     {
         private GearGaugeDbContext context;
-        private readonly UserManager<User> _userManager;
+        public UserManager<User> _userManager;
+        public SignInManager<User> signInManager;
+        
 
-        public UserController(GearGaugeDbContext dbContext, UserManager<User> userManager)
+        public UserController(GearGaugeDbContext dbContext, UserManager<User> userManager,SignInManager<User> signInManager)
         {
             context = dbContext;
             _userManager = userManager;
+            signInManager = signInManager;
         }
 
         [HttpGet]
@@ -63,7 +66,7 @@ namespace GearGauge.Controllers
                 var user = await _userManager.FindByEmailAsync(loginViewModel.Email);
                 if (user != null)
                 {
-                    var passwordSignInResult = await _userManager.PasswordSignInAsync(user, loginViewModel.Password, loginViewModel.RememberMe, false);
+                    var passwordSignInResult = await signInManager.PasswordSignInAsync(loginViewModel.Email, loginViewModel.Password, loginViewModel.RememberMe, false);
                     if (passwordSignInResult.Succeeded)
                     {
                         if (returnUrl != null)
