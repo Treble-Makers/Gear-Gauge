@@ -50,7 +50,7 @@ public class YouTubeApiController : Controller
             {
                 ApplicationName = "GearGauge-YouTube API",
                 ApiKey = apiConnectionKey
-            }
+            }  
         );
 
 
