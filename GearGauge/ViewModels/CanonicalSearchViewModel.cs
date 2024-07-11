@@ -27,8 +27,8 @@ public class CanonicalSearchViewModel
 
     public PriceGuideResponse? PriceGuideResponse { get; set; }
 
-    public PriceRecommendationsResponse? PriceMiddle { get; set; }
-    public PriceRecommendationsResponse? PriceMiddleThirtyDaysAgo { get; set; }
+    public string? PriceMiddle { get; set; }
+    public string? PriceMiddleThirtyDaysAgo { get; set; }
 
     public VideoDetails? Videos { get; set;}
     // public Video? VideoTitle { get; set; }

@@ -10,14 +10,14 @@ public class User : IdentityUser
     public string? Name { get; set; }
 
     public string? Address { get; set; }
-    public List<int>? MusicItemIds { get; set; }
+    public List<int>? GearId { get; set; }
 
     // public User() : base() { }
 
-    public User(string userName, string email, string name, string address)
+    public User(string email, string name, string address)
         : base()
     {
-        UserName = userName;
+        // UserName = userName;
         Email = email;
         Name = name;
         Address = address;

@@ -47,7 +47,7 @@ else
 
     @if (Model.Any())
     {
-        <form asp-controller="ProductSearch" asp-action="PostTotalSearch" method="post">
+        <form asp-controller="ProductSearch" asp-action="PostSearch" method="post">
             <div class="card-container">
                 @foreach (var item in Model)
                 {
@@ -60,13 +60,24 @@ else
                         }
                         @if (item.Title != null)
                         {
-                            <button type="submit" name="searchTerm" value="@item.Title">@item.Title</button>
+                            <p>@item.Title</p>
                         }
-                        @if (item.Title != null)
+                        @if (item.PriceMiddle != null)
                         {
-                            @item.PriceMiddle
+                            <p>Fair Market Value: @item.PriceMiddle</p>
                         }
-                        <input type="hidden" asp-controller="YouTubeApi" asp-action="GetProductVideo" method="get" value="@item.Title" name="searchTerm"/>
+                        @if (item.PriceMiddleThirtyDaysAgo != null)
+                        {
+                            <p>Fair Market Value (30 days ago): @item.PriceMiddleThirtyDaysAgo</p>
+                        }
+                        @*Add buttons to allow user to add item to inventory or watchlist. And link appropriately with asp.*@
+                        @if (item.Videos.Link != null)
+                        {
+                            <a href="@item.Videos.Link">@item.Videos.Thumbnail</a>
+                        }
+                        
+                
+                    
                         <input type="hidden" asp-for="@item.CanonicalProductIds[0]" />
                     </div>
 

@@ -17,10 +17,10 @@
 
 //         protected override void OnModelCreating(ModelBuilder modelBuilder)
 //         {
-//             modelBuilder.Entity<Watchlist>()
-//                 .HasOne(w => w.User)
-//                 .WithMany(u => u.Watchlists)
-//                 .HasForeignKey(w => w.UserId);
+            // modelBuilder.Entity<Watchlist>()
+            //     .HasOne(w => w.User)
+            //     .WithMany(u => u.Watchlists)
+            //     .HasForeignKey(w => w.UserId);
 
 //             modelBuilder.Entity<Watchlist>()
 //                 .HasOne(w => w.Gear)

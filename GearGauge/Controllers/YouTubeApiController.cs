@@ -20,24 +20,26 @@ namespace GearGauge.Controllers;
 
 //For some reason, enclosing squig bracket won't work
 
-// [Route("api/[controller]")]
-// [ApiController]
+[Route("api/[controller]")]
+[ApiController]
 public class YouTubeApiController : Controller
 {
+    private readonly HttpClient _httpClient;
     private readonly IConfiguration _configuration;
 
     public YouTubeApiController()
     {
     }
 
-    public YouTubeApiController(IConfiguration configuration)
+    public YouTubeApiController(IConfiguration configuration, HttpClient httpClient)
     {
+        _httpClient = httpClient;
         _configuration = configuration;
     }
 
     [HttpGet]
-    public static async Task<IActionResult> GetProductVideo(
-        CanonicalSearchViewModel canonicalSearchViewModel
+    public async Task<VideoDetails> GetProductVideo(
+        string results
     )
     {
         // var apiConnectionKey = _configuration["apiConnectionKey"]; // Access from user secrets
@@ -50,12 +52,14 @@ public class YouTubeApiController : Controller
             }
         );
 
-        using (var client = new HttpClient())
-        {
-        var contentType = new MediaTypeWithQualityHeaderValue("application/json");
+
+
+        // using (var client = new HttpClient())
+        // {
+        // var contentType = new MediaTypeWithQualityHeaderValue("application/json");
         var searchRequest = youtubeService.Search.List("snippet");
-        searchRequest.Q = canonicalSearchViewModel.Title.ToString();
-        searchRequest.Order = SearchResource.ListRequest.OrderEnum.Date;
+        searchRequest.Q = results;
+        // searchRequest.Order = SearchResource.ListRequest.OrderEnum.Date;
         searchRequest.MaxResults = 1;
 
         var searchResponse = await searchRequest.ExecuteAsync();
@@ -85,8 +89,7 @@ public class YouTubeApiController : Controller
         {
             Videos = videoList
         };
-        var controller = new YouTubeApiController();
-        return controller.View("PriceResults", response);
+        return videoList.FirstOrDefault();
         }
 
 
@@ -95,5 +98,5 @@ public class YouTubeApiController : Controller
 
         // // return Ok(new {videos = videoDetails});
         // return Ok(response);
-    }
+    // }
 }

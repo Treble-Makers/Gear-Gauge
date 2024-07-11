@@ -15,7 +15,7 @@
     {
         @* <form asp-controller="ProductSearch" asp-action="PostGetPriceGuide" method="GET"> *@
         @* @foreach (var item in Model) *@
-        {
+        
             <div class="price-card">
                 <h2>@Model.Title</h2> <img src="@Model.Image?.Source" alt="@Model.Title image" />
                 <hr />
@@ -54,30 +54,37 @@
         {
         <p>No related videos found.</p>
         } *@
-            <div>
+            <div asp-controller="ProductSearch" asp-action="PostGetPriceGuide" method="get" style="display: flex;">
                 <h2>Related Videos</h2>
-                <form asp-controller="YouTubeApi" asp-action="GetProductVideo" method="get" style="display: flex;">
                 @if (ViewBag.Videos != null)
                 {
-                    <ul class="video-list">
+                    @* <ul class="video-list"> *@
                         @* @foreach (var video in ViewBag.Videos) *@
-                        {
+                        @* { *@
                             <li>
-                                <p>@Model.Videos</p>
-                                <p>helpmepleaseplase</p>
+                                <p>@Model.Videos</p> 
+                                @* <p>helpmepleaseplase</p> *@
+                                @* <iframe width="50vw" height="35vh" src="https://www.youtube.com/watch?v=zUALHw-kWkg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> *@
+                                @* @if (Model.Title = "Chase Bliss") *@
+                                @* { *@
+                                @* <iframe width="560" height="315" src="https://www.youtube.com/embed/zUALHw-kWkg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> *@
+                                @* } *@
                             </li>
-                        }
-                    </ul>
-                }
+                            }
+                        @* } *@
+                    @* </ul> *@
+                @* <form asp-controller="YouTubeApi" asp-action="GetProductVideo" method="get" style="display: flex;"> *@
+                @* { *@
+                @* } *@
                 else
                 {
                     <p>No related videos found.</p>
                 }
 
                     @* <input type="hidden" value="@Model.Title" /> *@
-                </form>
+                @* </form> *@
             </div>
-        }
+        
         @* </form> *@
     }
 

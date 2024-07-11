@@ -4,6 +4,7 @@ using GearGauge.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using GearGauge.Areas.Identity.Pages.Account;
 
 namespace GearGauge.Controllers;
 
@@ -34,16 +35,16 @@ public class AccountController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Login(LoginViewModel loginViewModel)
+    public async Task<IActionResult> Login(LoginModel loginModel)
     {
         if (ModelState.IsValid)
         {
             //login
             var result = await signInManager.PasswordSignInAsync(
-                loginViewModel.Email,
-                loginViewModel.Password,
-                loginViewModel.RememberMe,
-                false
+                loginModel.Input.Email,
+                loginModel.Input.Password,
+                loginModel.Input.RememberMe,
+                true
             );
 
             if (result.Succeeded)
@@ -53,10 +54,10 @@ public class AccountController : Controller
             else
             {
                 ModelState.AddModelError("", "Invalid Login Attempt");
-                return View(loginViewModel);
+                return View(loginModel);
             }
         }
-        return View(loginViewModel);
+        return View(loginModel);
     }
 
     public IActionResult Register()
@@ -65,8 +66,7 @@ public class AccountController : Controller
     }
 
     [HttpPost]
-    [AllowAnonymous]
-    public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
+    public async Task<IActionResult> Register(RegisterModel registerModel)
     {
         if (ModelState.IsValid)
         {
@@ -74,13 +74,14 @@ public class AccountController : Controller
             // string userName = registerViewModel.Email.Substring(0, Index);
 
             var user = new User(
-                registerViewModel.UserName,
-                registerViewModel.Email,
-                registerViewModel.Name,
-                registerViewModel.Address
+                // registerModel.UserName,
+                registerModel.Input.Email,
+                registerModel.Input.Name,
+                registerModel.Input.Address
+
             );
 
-            var createUserResult = await userManager.CreateAsync(user, registerViewModel.Password!);
+            var createUserResult = await userManager.CreateAsync(user, registerModel.Input.Password!);
 
             if (createUserResult.Succeeded)
             {

@@ -70,6 +70,10 @@ namespace GearGauge.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
+            [Required]
+            [Display(Name="Name")]
+            public string Name { get; set; }
+            
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -97,6 +101,11 @@ namespace GearGauge.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [EmailAddress]
+            [Display(Name = "Address")]
+            public string Address { get; set; }
         }
 
 
@@ -113,6 +122,9 @@ namespace GearGauge.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+                
+                user.UserName = Input.Name;
+                // user.Address = Input.Address;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
