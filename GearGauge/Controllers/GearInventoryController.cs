@@ -1,119 +1,124 @@
-﻿// using System;
-// using GearGauge.Models;
-// using Microsoft.AspNetCore.Mvc;
-// using System.Collections.Generic;
-// using System.Linq;
-// using System.Threading.Tasks;
-// using GearGauge.ViewModels;
-// using GearGauge.Data;
-// using Microsoft.AspNetCore.Hosting;
-// using System.Net.Http.Headers;
-// using Microsoft.EntityFrameworkCore.Metadata.Internal;
-// using Microsoft.AspNetCore;
-// using System.IO;
-// using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using GearGauge.Data;
+using GearGauge.Models;
+using GearGauge.ViewModels;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
-// namespace GearGauge.Controllers;
+namespace GearGauge.Controllers
+{
+    public class GearInventoryController : Controller
+    {
+        private readonly GearGaugeDbContext context;
 
-// public class GearInventoryController : Controller
-// {
-//     private readonly GearGaugeDbContext context;
+        public GearInventoryController(GearGaugeDbContext dbContext)
+        {
+            context = dbContext;
+        }
 
-//     public GearInventoryController(GearGaugeDbContext dbContext)
-//     {
-//         context = dbContext;
-//     }
+        public IActionResult Index()
+        {
+            List<GearInventory> gearInventoryList = context.GearInventories.Include(g => g.Tags).ToList();
+            return View(gearInventoryList);
+        }
 
-//     public IActionResult Index()
-//     {
-//         List<GearInventory> gearInventories = context.GearInventories.ToList();
+        [HttpGet]
+        public IActionResult Add()
+        {
+            var gearInventories = context.GearInventories.ToList();
+            //var tags = context.Tags.ToList();
+            GearInventory viewModel = new GearInventory();
+            return View(viewModel);
+        }
 
-//         return View(gearInventories);
-//     }
+        [HttpPost]
+        [Route("/GearInventory/Add")]
+        public IActionResult Add(AddGearInventoryViewModel addGearInventoryViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                string uniqueFileName = null;
 
-//     [HttpGet]
-//     public IActionResult Add()
-//     {
-//         AddGearInventoryViewModel addGearInventoryViewModel  = new AddGearInventoryViewModel(context.GearInventories.ToList());
-//         return View(addGearInventoryViewModel);
-//     }
-   
+                if (addGearInventoryViewModel.ImageFile != null && addGearInventoryViewModel.ImageFile.Length > 0)
+                {
+                    string uploadsFolder = Path.Combine("wwwroot", "images");
+                    Directory.CreateDirectory(uploadsFolder);
 
-//     [HttpPost]
-//     [Route ("/GearInventory/Add")]
-//     public IActionResult Add(AddGearInventoryViewModel addGearInventoryViewModel)
-//     {
-//         if (ModelState.IsValid)
-//         {
-//             string uniqueFileName = null;
+                    uniqueFileName = Guid.NewGuid().ToString() + "_" + addGearInventoryViewModel.ImageFile.FileName;
 
-//         // Check if an image file is uploaded
-//         if (addGearInventoryViewModel.ImageFile != null && addGearInventoryViewModel.ImageFile.Length > 0)
-//         {
-//             // Define the uploads directory and ensure it exists
-//             string uploadsFolder = Path.Combine("images");
-//             Directory.CreateDirectory(uploadsFolder);
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-//             // Generate a unique file name to avoid overwriting existing files
-//             uniqueFileName = Guid.NewGuid().ToString() + "_" + addGearInventoryViewModel.ImageFile.FileName;
+                    using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+                    {
+                        addGearInventoryViewModel.ImageFile.CopyTo(fileStream);
+                    }
 
-//             // Combine the uploads path with the unique file name
-//             string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    uniqueFileName = "/images/" + uniqueFileName;
+                }
+                else
+                {
+                    return View("index");
+                }
 
-//             // Save the uploaded file to the uploads folder
-//             using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
-//             {
-//                 addGearInventoryViewModel.ImageFile.CopyTo(fileStream);
-//             }
-//         }
-        
-            
-//             GearInventory newGearInventory = new GearInventory
-//             {
-//                 Title = addGearInventoryViewModel.Title,
-//                 Description = addGearInventoryViewModel.Description,
-//                 MarketValue = addGearInventoryViewModel.MarketValue,
-//                 ImageFile = addGearInventoryViewModel.ImageFile,
+                GearInventory newGearInventory = new()
+                {
+                    Title = addGearInventoryViewModel.Title,
+                    Description = addGearInventoryViewModel.Description,
+                    MarketValue = addGearInventoryViewModel.MarketValue,
+                    ImagePath = uniqueFileName
+                };
+
+                if (addGearInventoryViewModel.SelectedTagIds != null)
+                {
+                    foreach (var tagId in addGearInventoryViewModel.SelectedTagIds)
+                    {
+                        var tag = context.Tags.Find(tagId);
+                        if (tag != null)
+                        {
+                            //newGearInventory.Tags.Add(tagId);
+                        }
+                    }
+                }
+
+                context.GearInventories.Add(newGearInventory);
                 
-                
-                
-//             };
-        
+                context.SaveChanges();
 
-//             context.GearInventories.Add(newGearInventory);
-//             context.SaveChanges();
+                return Redirect("/GearInventory");
+            }
 
-//             return Redirect("/GearInventory");
-//         }
-        
-//         return View(addGearInventoryViewModel);
-//     }
-//     public IActionResult Delete()
-//     {
-//         ViewBag.gearInventories = context.GearInventories.ToList();
+            addGearInventoryViewModel.AvailableTags = context.Tags.ToList()
+                .Select(t => new SelectListItem
+                {
+                    Value = t.Id.ToString(),
+                    Text = t.Name
+                }).ToList();
 
-//         return View();
-//     }
-    
-//     [HttpPost]
-//     public IActionResult Delete(int[] Ids)
-//     {
-//         foreach (int Id in Ids)
-//         {
-//             GearInventory? theGearInventory = context.GearInventories.Find(Id);
-//             context.GearInventories.Remove(theGearInventory);
-//         }
-//         context.SaveChanges();
-//         return Redirect("/GearInventories");
-//     }
+            return View(addGearInventoryViewModel);
+        }
 
-//     public IActionResult Detail(int id)
-//     {
-//         GearInventory theGearInventory = context.GearInventories
-//             .Single(g => g.Id == id);
+        public IActionResult Delete()
+        {
+            ViewBag.gearInventories = context.GearInventories.ToList();
+            return View();
+        }
 
-//         GearInventoryViewModel viewModel = new GearInventoryViewModel(theGearInventory);
+        [HttpPost]
+        public IActionResult Delete(int[] Ids)
+        {
+            foreach (int Id in Ids)
+            {
+                GearInventory theGearInventory = context.GearInventories.Find(Id);
+                context.GearInventories.Remove(theGearInventory);
+            }
+            context.SaveChanges();
+            return Redirect("/GearInventory");
+        }
 
-//         return View(viewModel);
-//     }
-// }
+     
+    }
+}

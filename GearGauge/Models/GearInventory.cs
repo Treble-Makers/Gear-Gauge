@@ -1,24 +1,26 @@
-using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics.Metrics;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
+using Microsoft.AspNetCore.Http;
 
 namespace GearGauge.Models;
 
-public class GearInventory
-{
+  public class GearInventory
+  { 
     public int Id { get; set; }
-    public string? Title { get; set; }
-    public string? Description { get; set; }
+    public string Title { get; set; }
+    public string Description { get; set; }
     public int MarketValue { get; set; }
+    public string ImagePath { get; set; }
+    public List<GearInventory> GearInventories { get; set; }
+    public List<Gear> Gear { get; set; }
     public byte[] Image { get; set; }
     [NotMapped]
     public IFormFile ImageFile { get; set; }
-  
-
-    public ICollection<GearInventory>? GearInventories { get; set; }
+    public ICollection<Favorite> Favorites { get; set; } = new List<Favorite>();
+    public int CommentId { get; set; }
+    public ICollection<Comment> Comments { get; set; } = new List<Comment>();
+    public Comment Comment { get; set; }
+   // public ICollection<GearInventory>? GearInventories { get; set; }
 
     public GearInventory() { }
 
@@ -26,8 +28,6 @@ public class GearInventory
     {
         Title = title;
         Description = description;
-     
-
     }
 
     public override string? ToString()
@@ -40,8 +40,15 @@ public class GearInventory
         return obj is GearInventory @gearInventory && Id == @gearInventory.Id;
     }
 
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(Id);
+    // public override int GetHashCode()
+
+    
+
+        public ICollection<Tag> Tags { get; set; }
+
+        // public GearInventory()
+        // {
+        //     Tags = new List<Tag>();
+        // }
     }
-}
+

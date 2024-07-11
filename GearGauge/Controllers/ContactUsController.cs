@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using GearGauge.Data;
 using System.Net.Mail;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace GearGauge.Controllers;
-
 public class ContactUsController : Controller
 {
     private GearGaugeDbContext context;
@@ -19,6 +19,7 @@ public class ContactUsController : Controller
         context = dbContext;
     }
     [HttpGet]
+
     public IActionResult Index()
     {
         return View();

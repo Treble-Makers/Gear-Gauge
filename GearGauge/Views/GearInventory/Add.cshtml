@@ -1,9 +1,9 @@
-﻿@using GearGauge.ViewModels
-@model AddGearInventoryViewModel
+﻿@using GearGauge.Models;
+@model GearInventory;
 
-<h1>Add Gear Inventory</h1>
+<h1>Add New Gear</h1>
 
-<form asp-controller="GearInventory" enctype ="multipart/form-data" asp-action="Add" method="post">
+<form asp-controller="GearInventory" asp-action="Add" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label asp-for="Title"></label>
         <input asp-for="Title" class="form-control" />
@@ -20,13 +20,22 @@
         <span asp-validation-for="MarketValue" class="text-danger"></span>
     </div>
     <div class="form-group">
-       <label asp-for="ImageFile">Image</label>
-       <div class="custom-file">
-       <input asp-for="ImageFile" class="custom-file-input" id="FLImageFile">
-       <label class="custom-file-label" for="FLImageFile">Choose File</label>
+        <label asp-for="ImageFile">Upload Image</label>
+        <input asp-for="ImageFile" class="form-control-file" type="file" />
+        <span asp-validation-for="ImageFile" class="text-danger"></span>
     </div>
-    <span asp-validation-for="ImageFile" class="text-danger"></span>
-    </div>
-
-    <input type="submit" value="Add Gear Inventory" />
+   @** <div class="form-group">
+        <label asp-for="SelectedTagIds">Select Tags</label>
+        <select asp-for="SelectedTagIds" class="form-control" asp-items="Model.AvailableTags" multiple></select>
+    </div>*@
+    <button type="submit" class="btn btn-primary">Add Gear</button>
 </form>
+@if (Model.ImagePath != null)
+{
+    <h3>Image Preview</h3>
+    <img src="@Model.ImagePath" alt="@Model.Title" style="width: 200px; height: auto;" />
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

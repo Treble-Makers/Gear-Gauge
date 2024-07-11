@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GearGauge.Migrations
 {
     /// <inheritdoc />
-    public partial class NewMigration1 : Migration
+    public partial class CommentMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -45,6 +45,8 @@ namespace GearGauge.Migrations
                     Address = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Ids = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ProfilePictureUrl = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -101,21 +103,6 @@ namespace GearGauge.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Gear",
-                columns: table => new
-                {
-                    GearId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Gear", x => x.GearId);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "GearInventories",
                 columns: table => new
                 {
@@ -126,7 +113,9 @@ namespace GearGauge.Migrations
                     Description = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     MarketValue = table.Column<int>(type: "int", nullable: false),
-                    GearInventoryId = table.Column<int>(type: "int", nullable: true)
+                    GearInventoryId = table.Column<int>(type: "int", nullable: false),
+                    ImagePath = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -135,7 +124,8 @@ namespace GearGauge.Migrations
                         name: "FK_GearInventories_GearInventories_GearInventoryId",
                         column: x => x.GearInventoryId,
                         principalTable: "GearInventories",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -267,6 +257,170 @@ namespace GearGauge.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Tags",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    GearInventoryId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tags", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Tags_GearInventories_GearInventoryId",
+                        column: x => x.GearInventoryId,
+                        principalTable: "GearInventories",
+                        principalColumn: "Id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    UserName = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    UserId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    GearId = table.Column<int>(type: "int", nullable: false),
+                    Content = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    GearInventoryId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comments_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "GearInventory",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Title = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Description = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    MarketValue = table.Column<int>(type: "int", nullable: false),
+                    ImagePath = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Image = table.Column<byte[]>(type: "longblob", nullable: false),
+                    CommentId = table.Column<int>(type: "int", nullable: false),
+                    GearInventoryId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GearInventory", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_GearInventory_Comments_CommentId",
+                        column: x => x.CommentId,
+                        principalTable: "Comments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_GearInventory_GearInventory_GearInventoryId",
+                        column: x => x.GearInventoryId,
+                        principalTable: "GearInventory",
+                        principalColumn: "Id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Gear",
+                columns: table => new
+                {
+                    GearId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    GearInventoryId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Gear", x => x.GearId);
+                    table.ForeignKey(
+                        name: "FK_Gear_GearInventory_GearInventoryId",
+                        column: x => x.GearInventoryId,
+                        principalTable: "GearInventory",
+                        principalColumn: "Id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "GearInventoryTag",
+                columns: table => new
+                {
+                    GearInventoriesId = table.Column<int>(type: "int", nullable: false),
+                    TagsId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GearInventoryTag", x => new { x.GearInventoriesId, x.TagsId });
+                    table.ForeignKey(
+                        name: "FK_GearInventoryTag_GearInventory_GearInventoriesId",
+                        column: x => x.GearInventoriesId,
+                        principalTable: "GearInventory",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_GearInventoryTag_Tags_TagsId",
+                        column: x => x.TagsId,
+                        principalTable: "Tags",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Favorites",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    GearInventoryId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    GearId = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Favorites", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Favorites_AspNetUsers_Id",
+                        column: x => x.Id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Favorites_GearInventory_GearInventoryId",
+                        column: x => x.GearInventoryId,
+                        principalTable: "GearInventory",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Favorites_Gear_GearId",
+                        column: x => x.GearId,
+                        principalTable: "Gear",
+                        principalColumn: "GearId",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Watchlists",
                 columns: table => new
                 {
@@ -341,13 +495,64 @@ namespace GearGauge.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comments_GearId",
+                table: "Comments",
+                column: "GearId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_GearInventoryId",
+                table: "Comments",
+                column: "GearInventoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_UserId",
+                table: "Comments",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ContactUs_ContactUsId",
                 table: "ContactUs",
                 column: "ContactUsId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Favorites_GearId",
+                table: "Favorites",
+                column: "GearId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Favorites_GearInventoryId",
+                table: "Favorites",
+                column: "GearInventoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Gear_GearInventoryId",
+                table: "Gear",
+                column: "GearInventoryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_GearInventories_GearInventoryId",
                 table: "GearInventories",
+                column: "GearInventoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GearInventory_CommentId",
+                table: "GearInventory",
+                column: "CommentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GearInventory_GearInventoryId",
+                table: "GearInventory",
+                column: "GearInventoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GearInventoryTag_TagsId",
+                table: "GearInventoryTag",
+                column: "TagsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tags_GearInventoryId",
+                table: "Tags",
                 column: "GearInventoryId");
 
             migrationBuilder.CreateIndex(
@@ -359,11 +564,38 @@ namespace GearGauge.Migrations
                 name: "IX_Watchlists_UserId",
                 table: "Watchlists",
                 column: "UserId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Comments_GearInventory_GearInventoryId",
+                table: "Comments",
+                column: "GearInventoryId",
+                principalTable: "GearInventory",
+                principalColumn: "Id");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Comments_Gear_GearId",
+                table: "Comments",
+                column: "GearId",
+                principalTable: "Gear",
+                principalColumn: "GearId",
+                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Comments_AspNetUsers_UserId",
+                table: "Comments");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Comments_GearInventory_GearInventoryId",
+                table: "Comments");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Gear_GearInventory_GearInventoryId",
+                table: "Gear");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -383,7 +615,10 @@ namespace GearGauge.Migrations
                 name: "ContactUs");
 
             migrationBuilder.DropTable(
-                name: "GearInventories");
+                name: "Favorites");
+
+            migrationBuilder.DropTable(
+                name: "GearInventoryTag");
 
             migrationBuilder.DropTable(
                 name: "Watchlists");
@@ -392,7 +627,19 @@ namespace GearGauge.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "Tags");
+
+            migrationBuilder.DropTable(
+                name: "GearInventories");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "GearInventory");
+
+            migrationBuilder.DropTable(
+                name: "Comments");
 
             migrationBuilder.DropTable(
                 name: "Gear");
