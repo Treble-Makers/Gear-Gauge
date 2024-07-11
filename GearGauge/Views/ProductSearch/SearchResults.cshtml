@@ -1,100 +1,97 @@
 @model List<GearGauge.ViewModels.CanonicalSearchViewModel>
+@*
 
-@* <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html>
+
 <head>
-    <title>Search Results</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<title>Search Results</title>
 </head>
+
 <body>
-    <h1>Search Results</h1>
-    @if (Model.Any())
-    {
-        <select id="searchResults">
-            @foreach (var item in Model)
-            {
-                <option value="@item.CanonicalProductId">@item.Title</option>
-            }
-        </select>
-
-        <div id="priceData">
-            </div>
-
-        <script>
-            $(document).ready(function () {
-                $("#searchResults").change(function () {
-                    var selectedProductId = $(this).val();
-                    getPriceData(selectedProductId);
-                });
-            });
-
-            function getPriceData(productId) {
-                $.ajax({
-                    url: '/ProductSearch/PostGetPriceGuide', // Update URL as needed
-                    dataType: 'json',
-                    data: { canonicalProductId: productId },
-                    success: function (data) {
-                        if (data.Count > 0) {
-                            var price = data[0].PriceRecommendation.PriceMiddle; // Assuming first element
-                            $("#priceData").html("Price (Middle): $" + price.Amount);
-                        } else {
-                            $("#priceData").html("No price information found.");
-                        }
-                    },
-                    error: function () {
-                        $("#priceData").html("Error fetching price data.");
-                    }
-                });
-            }
-        </script>
-    }
-    else
-    {
-        <p>No results found.</p>
-    }
+<h1>Search Results</h1>
+@if (Model.Any())
+{
+<form asp-controller="ProductSearch" asp-action="PostGetPriceGuide" method="post">
+<select id="searchResults">
+@foreach (var item in Model)
+{
+<option value="@item.CanonicalProductIds[0]">
+@if (item.Title != null)
+{
+@item.Title
+}
+</option>
+}
+</select>
+</form>
+}
+else
+{
+<p>No results found.</p>
+}
 </body>
+
 </html> *@
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Search Results</title>
 </head>
+
 <body>
     <h1>Search Results</h1>
+
     @if (Model.Any())
     {
-        <select id="searchResults">
-            @foreach (var item in Model)
-            {
-                <option value="@item.CanonicalProductIds[0]">
-                    @if (item.Title != null)
-                    {
-                        @item.Title
-                    }
-                </option>
-            }
-        </select>
-        <div id="productDetails"></div>
+        <form asp-controller="ProductSearch" asp-action="PostSearch" method="post">
+            <div class="card-container">
+                @foreach (var item in Model)
+                {
+                    <div class="search-card">
+                        @*<a asp-action="PostTotalSearch" asp-controller="ProductSearch" method="post"
+                asp-route-id="@item.CanonicalProductIds[0]"> *@
+                        @if (item.Image?.Source != null)
+                        {
+                            <img src="@item.Image.Source" alt="@item.Title image" />
+                        }
+                        @if (item.Title != null)
+                        {
+                            <p>@item.Title</p>
+                        }
+                        @if (item.PriceMiddle != null)
+                        {
+                            <p>Fair Market Value: @item.PriceMiddle</p>
+                        }
+                        @if (item.PriceMiddleThirtyDaysAgo != null)
+                        {
+                            <p>Fair Market Value (30 days ago): @item.PriceMiddleThirtyDaysAgo</p>
+                        }
+                        @*Add buttons to allow user to add item to inventory or watchlist. And link appropriately with asp.*@
+                        @if (item.Videos.Link != null)
+                        {
+                            <p>
+                                <a href="@item.Videos.Link"><img src="@item.Videos.Thumbnail" alt=""></a>
+                                
+                            </p>
+                        }
+                        
+                
+                    
+                        <input type="hidden" asp-for="@item.CanonicalProductIds[0]" />
+                    </div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $("#searchResults").change(function () {
-                    var selectedProductId = $(this).val();
-                    // Call a function to handle selection and update product details
-                    getProductDetails(selectedProductId);
-                });
-            });
-
-            function getProductDetails(productId) {
-                // Implement logic to retrieve and display product details based on productId
-            }
-        </script>
+                }
+            </div>
+        </form>
     }
     else
     {
         <p>No results found.</p>
     }
 </body>
+
 </html>

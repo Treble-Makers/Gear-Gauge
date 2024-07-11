@@ -4,8 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using GearGauge.Data;
 using System.Configuration;
 using GearGauge.Models;
+using GearGauge.ViewModels;
 
 var builder = WebApplication.CreateBuilder(args);
+var apiConnectionKey = builder.Configuration["apiConnectionKey"];
+// var apiConnectionKey = Configuration.GetSection(apiConnectionKey
+// ).Get<YouTubeSearchViewModel>();
+// _apiConnectionKey = apiConnectionKeyConfig.ServiceApiKey;
 
 
 
@@ -34,19 +39,34 @@ builder.Services.AddHttpClient();
 // working with the .NET 6 (specifically the lack of a Startup.cs)
 //https://learn.microsoft.com/en-us/aspnet/core/migration/50-to-60-samples?view=aspnetcore-6.0#add-configuration-providers
 
-var connectionString = builder.Configuration.GetConnectionString("geargauge");
+// var connectionString = builder.Configuration.GetConnectionString("geargauge");
+var connectionString = "server=localhost;user=geargauge;password=geargauge;database=geargauge";
 var serverVersion = new MySqlServerVersion(new Version(8, 4, 0));
 builder.Services.AddDbContext<GearGaugeDbContext>(dbContextOptions => dbContextOptions.UseMySql(connectionString, serverVersion));
-builder.Services.AddIdentity<User, IdentityRole>(
+builder.Services.AddDefaultIdentity<User>
+(
     options =>
     {
-    options.SignIn.RequireConfirmedAccount = true;
+    options.SignIn.RequireConfirmedAccount = false;
     options.Password.RequireDigit = false;
     options.Password.RequiredLength = 8;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;
     options.Password.RequireLowercase = false;}
 ).AddEntityFrameworkStores<GearGaugeDbContext>().AddDefaultTokenProviders();
+
+// builder.Services.AddDbContext<GearGaugeDbContext>(dbContextOptions => dbContextOptions.UseMySql(connectionString, serverVersion));
+// builder.Services.AddIdentity<User, IdentityRole>
+// (
+//     options =>
+//     {
+//     options.SignIn.RequireConfirmedAccount = false;
+//     options.Password.RequireDigit = false;
+//     options.Password.RequiredLength = 8;
+//     options.Password.RequireNonAlphanumeric = false;
+//     options.Password.RequireUppercase = false;
+//     options.Password.RequireLowercase = false;}
+// ).AddEntityFrameworkStores<GearGaugeDbContext>().AddDefaultTokenProviders();
 
 
 // public void ConfigureServices(IServiceCollection services)
@@ -74,8 +94,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
 app.MapRazorPages();
 app.MapControllers();
 

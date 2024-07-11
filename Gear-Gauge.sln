@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GearGauge", "GearGauge\GearGauge.csproj", "{15B37B28-E5AF-489B-B3FC-D76488DBF2C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GearGauge", "GearGauge\GearGauge.csproj", "{59F260B3-5A29-4512-9413-35AAD4F8E822}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{15B37B28-E5AF-489B-B3FC-D76488DBF2C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{15B37B28-E5AF-489B-B3FC-D76488DBF2C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{15B37B28-E5AF-489B-B3FC-D76488DBF2C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{15B37B28-E5AF-489B-B3FC-D76488DBF2C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59F260B3-5A29-4512-9413-35AAD4F8E822}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59F260B3-5A29-4512-9413-35AAD4F8E822}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59F260B3-5A29-4512-9413-35AAD4F8E822}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59F260B3-5A29-4512-9413-35AAD4F8E822}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {5A87A324-B1C0-4A74-AA3D-5839F0554B7D}
+		SolutionGuid = {481948CE-0688-43D9-812E-7D1758D90C8C}
 	EndGlobalSection
 EndGlobal

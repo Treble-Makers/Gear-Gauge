@@ -7,9 +7,9 @@ namespace GearGauge.Models;
 
 	public class PriceRecommendationQuery
 	{
-		public string canonicalProductId { get; set; }
-		public string conditionUuid { get; set; }
-		public string countryCode { get; set; }
+		public string? canonicalProductId { get; set; }
+		public string? conditionUuid { get; set; }
+		public string? countryCode { get; set; }
 	}
 
 	//public class Money
@@ -30,9 +30,9 @@ namespace GearGauge.Models;
 
 	public class PriceGuideRequestObject
 	{
-		public string operationName { get; set; }
-		public PriceGuideRequestVariables variables { get; set; }
-		public string query { get; set; }
+		public string? operationName { get; set; }
+		public PriceGuideRequestVariables? variables { get; set; }
+		public string? query { get; set; }
 	}
 
 	public class PriceGuideRequestVariables

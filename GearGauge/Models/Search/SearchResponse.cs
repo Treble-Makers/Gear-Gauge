@@ -12,7 +12,9 @@ public class SearchResponse
 
 	public class SearchData 
 	{
-		public Cspsearch cspSearch { get; set; }
+    internal readonly object PriceRecommendationsResponse;
+
+    public Cspsearch cspSearch { get; set; }
 	}
 
 	public class Cspsearch
