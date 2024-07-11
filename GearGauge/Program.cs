@@ -94,8 +94,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-// app.UseAuthorization();
-// app.UseAuthentication();
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapRazorPages();
 app.MapControllers();
 
