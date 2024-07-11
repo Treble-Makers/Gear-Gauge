@@ -73,7 +73,10 @@ else
                         @*Add buttons to allow user to add item to inventory or watchlist. And link appropriately with asp.*@
                         @if (item.Videos.Link != null)
                         {
-                            <a href="@item.Videos.Link">@item.Videos.Thumbnail</a>
+                            <p>
+                                <a href="@item.Videos.Link"><img src="@item.Videos.Thumbnail" alt=""></a>
+                                
+                            </p>
                         }
                         
                 

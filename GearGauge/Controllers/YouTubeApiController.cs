@@ -42,7 +42,8 @@ public class YouTubeApiController : Controller
         string results
     )
     {
-        var apiConnectionKey = _configuration["apiConnectionKey"]; // Access from user secrets
+        // var apiConnectionKey = _configuration["apiConnectionKey"]; // Access from user secrets
+        var apiConnectionKey = "AIzaSyAnZyjSKYIcEuXGh95lc5r1CCJEyQvOz_g";
         
         var youtubeService = new YouTubeService(
             new BaseClientService.Initializer
@@ -79,7 +80,7 @@ public class YouTubeApiController : Controller
             .Items.Select(item => new VideoDetails
             {
                 Title = item.Snippet.Title,
-                Link = $"https//www.youtube.com/watch?v={item.Id.VideoId}",
+                Link = "https//www.youtube.com/watch?v={@item.Id.VideoId}",
                 Thumbnail = item.Snippet.Thumbnails.Medium.Url,
                 PublishedAt = item.Snippet.PublishedAt
             })

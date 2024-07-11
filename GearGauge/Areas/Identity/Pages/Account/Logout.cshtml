@@ -1,8 +1,11 @@
 ﻿@page
 @model LogoutModel
+@{
+    ViewData["Title"] = "Log out";
+}
 
 <header>
-    <h1>Logout</h1>
+    <h1>@ViewData["Title"]</h1>
     @{
         if (User.Identity?.IsAuthenticated ?? false)
         {

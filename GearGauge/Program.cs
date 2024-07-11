@@ -22,16 +22,7 @@ builder.Services.AddHttpClient();
 // builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
 //     .AddEntityFrameworkStores<GearGaugeDbContext>();
 
-// builder.Services.AddDefaultIdentity<User>
-// (options =>
-// {
-//    options.SignIn.RequireConfirmedAccount = true;
-//    options.Password.RequireDigit = false;
-//    options.Password.RequiredLength = 8;
-//    options.Password.RequireNonAlphanumeric = false;
-//    options.Password.RequireUppercase = false;
-//    options.Password.RequireLowercase = false;
-// }).AddEntityFrameworkStores<GearGaugeDbContext>();
+
 
 //--- MySql connection
 
@@ -78,8 +69,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
-app.UseAuthentication();
+// app.UseAuthorization();
+// app.UseAuthentication();
 app.MapRazorPages();
 app.MapControllers();
 

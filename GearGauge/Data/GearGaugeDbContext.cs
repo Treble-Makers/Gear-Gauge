@@ -34,7 +34,7 @@ public class GearGaugeDbContext : IdentityDbContext<User>
         {
         //   builder.Entity<User>().HasMany(m => m.MusicItem).WithOne(i => i.UserName).HasForeignKey(n => n.IdentityUser.Id);
             base.OnModelCreating(builder);
-            builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
+            // builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
         }
         
             // Must build out to establish one to many, many to many, etc. relationships
@@ -43,12 +43,12 @@ public class GearGaugeDbContext : IdentityDbContext<User>
 
 }
 
-internal class ApplicationUserEntityConfiguration : IEntityTypeConfiguration<User>
-{
-  public void Configure(EntityTypeBuilder<User> builder)
-  {
-    builder.Property(x => x.Name).HasMaxLength(50);
-    builder.Property(x => x.GearId).HasMaxLength(10000);
-    builder.Property(x => x.Address).HasMaxLength(100);
-  }
-}
+// internal class ApplicationUserEntityConfiguration : IEntityTypeConfiguration<User>
+// {
+//   public void Configure(EntityTypeBuilder<User> builder)
+//   {
+//     builder.Property(x => x.Name).HasMaxLength(50);
+//     builder.Property(x => x.GearId).HasMaxLength(10000);
+//     builder.Property(x => x.Address).HasMaxLength(100);
+//   }
+// }
