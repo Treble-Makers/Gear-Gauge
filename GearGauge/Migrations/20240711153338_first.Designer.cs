@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GearGauge.Migrations
 {
     [DbContext(typeof(GearGaugeDbContext))]
-    [Migration("20240710005447_ImageMigration")]
-    partial class ImageMigration
+    [Migration("20240711153338_first")]
+    partial class first
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,47 @@ namespace GearGauge.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
+
+            modelBuilder.Entity("GearGauge.Models.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("GearId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("GearInventoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GearId")
+                        .IsUnique();
+
+                    b.HasIndex("GearInventoryId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comments");
+                });
 
             modelBuilder.Entity("GearGauge.Models.ContactUs", b =>
                 {
@@ -52,6 +93,32 @@ namespace GearGauge.Migrations
                     b.ToTable("ContactUs");
                 });
 
+            modelBuilder.Entity("GearGauge.Models.Favorite", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("GearId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GearInventoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GearId");
+
+                    b.HasIndex("GearInventoryId");
+
+                    b.ToTable("Favorites");
+                });
+
             modelBuilder.Entity("GearGauge.Models.Gear", b =>
                 {
                     b.Property<int>("GearId")
@@ -60,11 +127,16 @@ namespace GearGauge.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("GearId"));
 
+                    b.Property<int?>("GearInventoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("GearId");
+
+                    b.HasIndex("GearInventoryId");
 
                     b.ToTable("Gear");
                 });
@@ -77,11 +149,11 @@ namespace GearGauge.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CommentId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("longtext");
-
-                    b.Property<int?>("GearInventoryId")
-                        .HasColumnType("int");
 
                     b.Property<byte[]>("Image")
                         .IsRequired()
@@ -95,7 +167,7 @@ namespace GearGauge.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GearInventoryId");
+                    b.HasIndex("CommentId");
 
                     b.ToTable("GearInventories");
                 });
@@ -150,6 +222,9 @@ namespace GearGauge.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("ProfilePictureUrl")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("longtext");
@@ -350,6 +425,29 @@ namespace GearGauge.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("GearGauge.Models.Comment", b =>
+                {
+                    b.HasOne("GearGauge.Models.Gear", "Gear")
+                        .WithOne("Comment")
+                        .HasForeignKey("GearGauge.Models.Comment", "GearId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GearGauge.Models.GearInventory", null)
+                        .WithMany("Comments")
+                        .HasForeignKey("GearInventoryId");
+
+                    b.HasOne("GearGauge.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Gear");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("GearGauge.Models.ContactUs", b =>
                 {
                     b.HasOne("GearGauge.Models.ContactUs", null)
@@ -357,11 +455,49 @@ namespace GearGauge.Migrations
                         .HasForeignKey("ContactUsId");
                 });
 
-            modelBuilder.Entity("GearGauge.Models.GearInventory", b =>
+            modelBuilder.Entity("GearGauge.Models.Favorite", b =>
+                {
+                    b.HasOne("GearGauge.Models.Gear", "Gear")
+                        .WithMany()
+                        .HasForeignKey("GearId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GearGauge.Models.GearInventory", "GearInventory")
+                        .WithMany("Favorites")
+                        .HasForeignKey("GearInventoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GearGauge.Models.User", "User")
+                        .WithMany("Favorites")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Gear");
+
+                    b.Navigation("GearInventory");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("GearGauge.Models.Gear", b =>
                 {
                     b.HasOne("GearGauge.Models.GearInventory", null)
-                        .WithMany("GearInventories")
+                        .WithMany("Gear")
                         .HasForeignKey("GearInventoryId");
+                });
+
+            modelBuilder.Entity("GearGauge.Models.GearInventory", b =>
+                {
+                    b.HasOne("GearGauge.Models.Comment", "Comment")
+                        .WithMany()
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Comment");
                 });
 
             modelBuilder.Entity("GearGauge.Models.Watchlist", b =>
@@ -441,12 +577,24 @@ namespace GearGauge.Migrations
 
             modelBuilder.Entity("GearGauge.Models.Gear", b =>
                 {
+                    b.Navigation("Comment")
+                        .IsRequired();
+
                     b.Navigation("Watchlists");
                 });
 
             modelBuilder.Entity("GearGauge.Models.GearInventory", b =>
                 {
-                    b.Navigation("GearInventories");
+                    b.Navigation("Comments");
+
+                    b.Navigation("Favorites");
+
+                    b.Navigation("Gear");
+                });
+
+            modelBuilder.Entity("GearGauge.Models.User", b =>
+                {
+                    b.Navigation("Favorites");
                 });
 #pragma warning restore 612, 618
         }

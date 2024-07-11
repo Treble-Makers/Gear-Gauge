@@ -12,6 +12,12 @@ namespace GearGauge.Models
 
         public virtual ICollection<Watchlist> Watchlists { get; set; }
 
+          public virtual Comment Comment { get; set; }
+
+        public static implicit operator Gear(int v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

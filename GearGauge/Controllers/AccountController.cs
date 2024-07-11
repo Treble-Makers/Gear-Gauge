@@ -103,4 +103,68 @@ public class AccountController : Controller
         await signInManager.SignOutAsync();
         return RedirectToAction("Index", "Home");
     }
+
+    [HttpGet]
+    public async Task<IActionResult> UpdateProfile()
+    {
+        var user = await userManager.GetUserAsync(User);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        var model = new UserProfileUpdateViewModel
+        {
+            UserName = user.UserName,
+            Email = user.Email,
+            Name = user.Name,
+            Address = user.Address
+        };
+
+        return View(model);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> UpdateProfile(UserProfileUpdateViewModel model)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(model);
+        }
+
+        var user = await userManager.GetUserAsync(User);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        user.UserName = model.UserName;
+        user.Email = model.Email;
+        user.Name = model.Name;
+        user.Address = model.Address;
+
+        if (model.ProfilePicture != null)
+        {
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", model.ProfilePicture.FileName);
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await model.ProfilePicture.CopyToAsync(stream);
+            }
+
+            user.ProfilePictureUrl = $"/images/{model.ProfilePicture.FileName}";
+        }
+
+        var result = await userManager.UpdateAsync(user);
+        if (!result.Succeeded)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+            return View(model);
+        }
+
+        await signInManager.RefreshSignInAsync(user);
+        return RedirectToAction(nameof(UpdateProfile));
+    }
 }
