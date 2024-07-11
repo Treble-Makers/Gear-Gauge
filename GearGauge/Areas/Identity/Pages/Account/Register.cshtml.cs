@@ -79,9 +79,9 @@ namespace GearGauge.Areas.Identity.Pages.Account
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
-            [Required]
-            [Display(Name = "Name")]
-            public string Name { get; set; }
+            // [Required]
+            // [Display(Name = "Name")]
+            // public string Name { get; set; }
             
             [Display(Name = "Address")]
             public string Address { get; set; }

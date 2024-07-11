@@ -32,7 +32,7 @@ public class GearGaugeDbContext : IdentityDbContext<User>
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-        //   builder.Entity<User>().HasMany(m => m.MusicItem).WithOne(i => i.UserName).HasForeignKey(n => n.IdentityUser.Id);
+          // builder.Entity<User>().HasMany(m => m.MusicItem).WithOne(i => i.UserName).HasForeignKey(n => n.IdentityUser.Id);
             base.OnModelCreating(builder);
             // builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
         }
