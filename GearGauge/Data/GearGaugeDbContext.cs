@@ -21,9 +21,9 @@ namespace GearGauge.Data
             base.OnModelCreating(builder);
 
             builder.Entity<GearInventory>()
-                .HasMany(g => g.Tags)
-                .WithMany(t => t.GearInventories)
-                .UsingEntity(j => j.ToTable("GearInventoryTags"));
+                .HasMany(g => g.Tags);
+                //.WithMany(t => t.GearInventories)
+                //.UsingEntity(j => j.ToTable("GearInventoryTags"));
         }
     }
 }

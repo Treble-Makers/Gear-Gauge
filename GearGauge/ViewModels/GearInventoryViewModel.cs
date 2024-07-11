@@ -1,4 +1,7 @@
-﻿public class GearInventory
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using GearGauge.Models;
+
+public class GearInventory
 {
     public int Id { get; set; }
     public string? Title { get; set; }

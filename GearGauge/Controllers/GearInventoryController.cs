@@ -75,7 +75,7 @@ namespace GearGauge.Controllers
                         var tag = context.Tags.Find(tagId);
                         if (tag != null)
                         {
-                            newGearInventory.Tags.Add(tag);
+                            //newGearInventory.Tags.Add(tagId);
                         }
                     }
                 }
