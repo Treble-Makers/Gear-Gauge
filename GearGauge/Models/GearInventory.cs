@@ -11,6 +11,7 @@ namespace GearGauge.Models
         public string Description { get; set; }
         public int MarketValue { get; set; }
         public string ImagePath { get; set; }
+        public List<GearInventory> GearInventories { get; set; }
 
         [NotMapped]
         public IFormFile ImageFile { get; set; }

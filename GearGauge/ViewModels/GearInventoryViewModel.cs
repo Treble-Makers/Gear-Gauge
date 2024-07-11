@@ -7,6 +7,8 @@ public class GearInventory
     public string? Title { get; set; }
     public string? Description { get; set; }
     public int MarketValue { get; set; }
+    public int GearInventoryId { get; set; }
+    public List<GearInventory> GearInventories { get; set; }
     public string ImagePath { get; set; } // Add this property
     [NotMapped]
     public IFormFile ImageFile { get; set; }

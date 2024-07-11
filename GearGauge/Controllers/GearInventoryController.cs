@@ -22,16 +22,16 @@ namespace GearGauge.Controllers
 
         public IActionResult Index()
         {
-            List<GearInventory> gearInventories = context.GearInventories.Include(g => g.Tags).ToList();
-            return View(gearInventories);
+            List<GearInventory> gearInventoryList = context.GearInventories.Include(g => g.Tags).ToList();
+            return View(gearInventoryList);
         }
 
         [HttpGet]
         public IActionResult Add()
         {
             var gearInventories = context.GearInventories.ToList();
-            var tags = context.Tags.ToList();
-            AddGearInventoryViewModel viewModel = new AddGearInventoryViewModel(gearInventories, tags);
+            //var tags = context.Tags.ToList();
+            AddGearInventoryViewModel viewModel = new AddGearInventoryViewModel();
             return View(viewModel);
         }
 
