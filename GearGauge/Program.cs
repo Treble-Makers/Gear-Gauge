@@ -12,8 +12,10 @@ builder.Services.AddRazorPages();
 builder.Services.AddHttpClient();
 
 // Get the connection string from appsettings.json
-var connectionString = builder.Configuration.GetConnectionString("geargauge");
-var serverVersion = new MySqlServerVersion(new Version(8, 0, 23));
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var serverVersion = new MySqlServerVersion(new Version(8, 0, 36));
+
 
 
 // Configure DbContext with MySQL
