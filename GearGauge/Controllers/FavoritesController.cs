@@ -51,8 +51,8 @@ namespace GearGauge.Controllers
             }
 
             var favorites = await context.Favorites
-                .Where(f => f.UserId == user.Id)
-                .Include(f => f.GearInventory) //was MusicItem
+                .Where (f => f.UserId == user.Id)
+                .Include(f => f.Gear) //was MusicItem or GearInventory
                 .ToListAsync();
 
             return View(favorites);

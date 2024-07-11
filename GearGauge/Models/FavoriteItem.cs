@@ -12,8 +12,8 @@ public class FavoriteItem
     public Gear GearId { get; set; } 
 
     public int Id { get; set; } // was MusicItemId
-    public GearInventory GearInventory { get; set; } // does this make sense?
-    public string? UserName { get; set; }
+   // public GearInventory GearInventory { get; set; } // does this make sense?
+    //public string? UserName { get; set; }
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
