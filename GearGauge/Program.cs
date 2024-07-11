@@ -22,7 +22,16 @@ builder.Services.AddHttpClient();
 // builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
 //     .AddEntityFrameworkStores<GearGaugeDbContext>();
 
-
+// builder.Services.AddDefaultIdentity<User>
+// (options =>
+// {
+//    options.SignIn.RequireConfirmedAccount = true;
+//    options.Password.RequireDigit = false;
+//    options.Password.RequiredLength = 8;
+//    options.Password.RequireNonAlphanumeric = false;
+//    options.Password.RequireUppercase = false;
+//    options.Password.RequireLowercase = false;
+// }).AddEntityFrameworkStores<GearGaugeDbContext>();
 
 //--- MySql connection
 
@@ -32,16 +41,18 @@ builder.Services.AddHttpClient();
 var connectionString = builder.Configuration.GetConnectionString("geargauge");
 var serverVersion = new MySqlServerVersion(new Version(8, 4, 0));
 builder.Services.AddDbContext<GearGaugeDbContext>(dbContextOptions => dbContextOptions.UseMySql(connectionString, serverVersion));
-builder.Services.AddIdentity<User, IdentityRole>(
+builder.Services.AddDefaultIdentity<User>
+(
     options =>
     {
-    options.SignIn.RequireConfirmedAccount = true;
+    options.SignIn.RequireConfirmedAccount = false;
     options.Password.RequireDigit = false;
     options.Password.RequiredLength = 8;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;
     options.Password.RequireLowercase = false;}
-).AddEntityFrameworkStores<GearGaugeDbContext>().AddDefaultTokenProviders();
+).AddEntityFrameworkStores<GearGaugeDbContext>();
+// .AddDefaultTokenProviders();
 
 
 // public void ConfigureServices(IServiceCollection services)
