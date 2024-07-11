@@ -1,12 +1,12 @@
-using GearGauge.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using GearGauge.Models;
 
 namespace GearGauge.Data
 {
     public class GearGaugeDbContext : IdentityDbContext<User>
     {
-        public DbSet<User> Users { get; set; }
+        public DbSet<User> User { get; set; }
         public DbSet<ContactUs> ContactUs { get; set; }
         public DbSet<Watchlist> Watchlists { get; set; }
         public DbSet<GearInventory> GearInventories { get; set; }
@@ -16,13 +16,12 @@ namespace GearGauge.Data
         {
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(builder);
 
-            // Configure many-to-many relationship between GearInventory and Tag
-            modelBuilder.Entity<GearInventory>()
-                .HasMany(gi => gi.Tags)
+            builder.Entity<GearInventory>()
+                .HasMany(g => g.Tags)
                 .WithMany(t => t.GearInventories)
                 .UsingEntity(j => j.ToTable("GearInventoryTags"));
         }

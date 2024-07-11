@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using GearGauge.Data;
 using GearGauge.Models;
 using GearGauge.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc.Rendering;  // Add this line
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GearGauge.Controllers
 {
@@ -44,38 +43,31 @@ namespace GearGauge.Controllers
             {
                 string uniqueFileName = null;
 
-                // Check if an image file is uploaded
                 if (addGearInventoryViewModel.ImageFile != null && addGearInventoryViewModel.ImageFile.Length > 0)
                 {
-                    // Define the uploads directory and ensure it exists
-                    string uploadsFolder = Path.Combine("images");
+                    string uploadsFolder = Path.Combine("wwwroot", "images");
                     Directory.CreateDirectory(uploadsFolder);
 
-                    // Generate a unique file name to avoid overwriting existing files
                     uniqueFileName = Guid.NewGuid().ToString() + "_" + addGearInventoryViewModel.ImageFile.FileName;
 
-                    // Combine the uploads path with the unique file name
                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-                    // Save the uploaded file to the uploads folder
                     using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
                     {
                         addGearInventoryViewModel.ImageFile.CopyTo(fileStream);
                     }
-                }
-                    Console.Write(uniqueFileName, "\n\n\n");
-                    
 
-                GearInventory newGearInventory = new GearInventory
+                    uniqueFileName = "/images/" + uniqueFileName;
+                }
+
+                GearInventory newGearInventory = new()
                 {
                     Title = addGearInventoryViewModel.Title,
                     Description = addGearInventoryViewModel.Description,
                     MarketValue = addGearInventoryViewModel.MarketValue,
-                    // Store the unique file name instead of the IFormFile
-                    Image = System.IO.File.ReadAllBytes(uniqueFileName),
+                    ImagePath = uniqueFileName
                 };
 
-                // Add tags to the new gear inventory
                 if (addGearInventoryViewModel.SelectedTagIds != null)
                 {
                     foreach (var tagId in addGearInventoryViewModel.SelectedTagIds)
