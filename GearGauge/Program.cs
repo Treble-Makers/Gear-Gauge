@@ -12,12 +12,12 @@ builder.Services.AddRazorPages();
 builder.Services.AddHttpClient();
 
 // Get the connection string from appsettings.json
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = builder.Configuration.GetConnectionString("geargauge");
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 23));
 
+
 // Configure DbContext with MySQL
-builder.Services.AddDbContext<GearGaugeDbContext>(options =>
-    options.UseMySql(connectionString, serverVersion));
+builder.Services.AddDbContext<GearGaugeDbContext>(options => options.UseMySql(connectionString, serverVersion));
 
 // Configure Identity services
 builder.Services.AddIdentity<User, IdentityRole>(options =>
