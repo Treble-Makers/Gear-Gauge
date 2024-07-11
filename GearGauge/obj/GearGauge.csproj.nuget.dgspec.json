@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Coding\\Launchcode IA\\csharp\\treblemakers\\Gear-Gauge\\GearGauge\\GearGauge.csproj": {}
+    "/Users/matthewcreek/Desktop/LaunchCode/csharp/geargauge/Gear-Gauge/GearGauge/GearGauge.csproj": {}
   },
   "projects": {
-    "D:\\Coding\\Launchcode IA\\csharp\\treblemakers\\Gear-Gauge\\GearGauge\\GearGauge.csproj": {
+    "/Users/matthewcreek/Desktop/LaunchCode/csharp/geargauge/Gear-Gauge/GearGauge/GearGauge.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Coding\\Launchcode IA\\csharp\\treblemakers\\Gear-Gauge\\GearGauge\\GearGauge.csproj",
+        "projectUniqueName": "/Users/matthewcreek/Desktop/LaunchCode/csharp/geargauge/Gear-Gauge/GearGauge/GearGauge.csproj",
         "projectName": "GearGauge",
-        "projectPath": "D:\\Coding\\Launchcode IA\\csharp\\treblemakers\\Gear-Gauge\\GearGauge\\GearGauge.csproj",
-        "packagesPath": "C:\\Users\\matth\\.nuget\\packages\\",
-        "outputPath": "D:\\Coding\\Launchcode IA\\csharp\\treblemakers\\Gear-Gauge\\GearGauge\\obj\\",
+        "projectPath": "/Users/matthewcreek/Desktop/LaunchCode/csharp/geargauge/Gear-Gauge/GearGauge/GearGauge.csproj",
+        "packagesPath": "/Users/matthewcreek/.nuget/packages/",
+        "outputPath": "/Users/matthewcreek/Desktop/LaunchCode/csharp/geargauge/Gear-Gauge/GearGauge/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\matth\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/matthewcreek/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -43,13 +43,17 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Google.Apis.YouTube.v3": {
+              "target": "Package",
+              "version": "[1.8.1.970, )"
+            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.6, )"
+              "version": "[8.0.7, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[8.0.6, )"
+              "version": "[8.0.7, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -69,7 +73,7 @@
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[8.0.2, )"
+              "version": "[8.0.0, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -78,6 +82,10 @@
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
               "version": "[8.0.2, )"
+            },
+            "Swashbuckle.AspNetCore.Swagger": {
+              "target": "Package",
+              "version": "[6.6.2, )"
             },
             "System.Net.Http": {
               "target": "Package",
@@ -107,7 +115,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
