@@ -63,6 +63,8 @@ namespace GearGauge.Controllers
                         addGearInventoryViewModel.ImageFile.CopyTo(fileStream);
                     }
                 }
+                    Console.Write(uniqueFileName, "\n\n\n");
+                    
 
                 GearInventory newGearInventory = new GearInventory
                 {
