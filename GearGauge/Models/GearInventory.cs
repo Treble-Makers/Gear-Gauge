@@ -40,16 +40,15 @@ namespace GearGauge.Models;
         return obj is GearInventory @gearInventory && Id == @gearInventory.Id;
     }
 
-    public override int GetHashCode()
+    // public override int GetHashCode()
 
-        [NotMapped]
-        public IFormFile ImageFile { get; set; }
+    
 
         public ICollection<Tag> Tags { get; set; }
 
-        public GearInventory()
-        {
-            Tags = new List<Tag>();
-        }
+        // public GearInventory()
+        // {
+        //     Tags = new List<Tag>();
+        // }
     }
-}
+

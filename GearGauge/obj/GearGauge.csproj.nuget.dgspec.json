@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/GearGauge.csproj": {}
+    "C:\\Users\\16362\\Gear-Gauge\\GearGauge\\GearGauge.csproj": {}
   },
   "projects": {
-    "/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/GearGauge.csproj": {
+    "C:\\Users\\16362\\Gear-Gauge\\GearGauge\\GearGauge.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/GearGauge.csproj",
+        "projectUniqueName": "C:\\Users\\16362\\Gear-Gauge\\GearGauge\\GearGauge.csproj",
         "projectName": "GearGauge",
-        "projectPath": "/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/GearGauge.csproj",
-        "packagesPath": "/Users/StoppingBy/.nuget/packages/",
-        "outputPath": "/Users/StoppingBy/Documents/Project-GearGauge/Gear-Gauge/GearGauge/obj/",
+        "projectPath": "C:\\Users\\16362\\Gear-Gauge\\GearGauge\\GearGauge.csproj",
+        "packagesPath": "C:\\Users\\16362\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\16362\\Gear-Gauge\\GearGauge\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/StoppingBy/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\16362\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -45,27 +45,27 @@
           "dependencies": {
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.6, )"
+              "version": "[8.0.7, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[8.0.6, )"
+              "version": "[8.0.7, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.6, )"
+              "version": "[8.0.7, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[8.0.6, )"
+              "version": "[8.0.7, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.6, )"
+              "version": "[8.0.7, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
@@ -85,7 +85,7 @@
             },
             "System.Text.Json": {
               "target": "Package",
-              "version": "[8.0.3, )"
+              "version": "[8.0.4, )"
             }
           },
           "imports": [
@@ -107,7 +107,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
