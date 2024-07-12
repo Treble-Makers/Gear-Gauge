@@ -15,7 +15,7 @@ namespace GearGauge.Data;
         public DbSet<ContactUs> ContactUs { get; set; }
         public DbSet<Watchlist> Watchlists { get; set; }
         public DbSet<Gear> Gear { get; set; }
-        // public DbSet<GearInventory> GearInventory { get; set; }
+        public DbSet<GearInventory> GearInventories { get; set; }
 
         // public DbSet<Profile> UserProfile { get; set; }
         public DbSet<Comment> Comments { get; set; }
@@ -50,7 +50,7 @@ namespace GearGauge.Data;
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<GearInventory>()
                 .HasMany(g => g.Tags);
-                //.WithMany(t => t.GearInventories)
-                //.UsingEntity(j => j.ToTable("GearInventoryTags"));
+                // .WithMany(t => t.GearInventories)
+                // .UsingEntity(j => j.ToTable("GearInventoryTags"));
         }
     }

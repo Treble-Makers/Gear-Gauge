@@ -6,7 +6,7 @@ namespace GearGauge.Models;
 
 public class User : IdentityUser
 {
-    public int Id { get; set; }
+    // public int Id { get; set; }
     public string? Name { get; set; }
 
     public string? Address { get; set; }  // should this be ContactEmail instead? do we need address?
@@ -25,9 +25,5 @@ public class User : IdentityUser
         Name = name;
         Address = address;
        
-    }
-
-    public User()
-    {
     }
 }
