@@ -8,6 +8,7 @@ using GearGauge.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using GearGauge.Controllers;
 
 namespace GearGauge.Controllers
 {
@@ -22,6 +23,7 @@ namespace GearGauge.Controllers
 
         public IActionResult Index()
         {
+            List<CanonicalSearchViewModel> canonicalSearchViewModel;
             List<GearInventory> gearInventoryList = context.GearInventories.Include(g => g.Tags).ToList();
             return View(gearInventoryList);
         }
@@ -29,7 +31,11 @@ namespace GearGauge.Controllers
         [HttpGet]
         public IActionResult Add()
         {
+            var canonicalItems = context.GearInventories // Adjust this query to get the canonical items you need
+                .Select(g => new CanonicalSearchViewModel { Title = g.Title })
+                .ToList();
             var gearInventories = context.GearInventories.ToList();
+           
             //var tags = context.Tags.ToList();
             GearInventory viewModel = new GearInventory();
             return View(viewModel);
@@ -41,7 +47,9 @@ namespace GearGauge.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 string uniqueFileName = null;
+               
 
                 if (addGearInventoryViewModel.ImageFile != null && addGearInventoryViewModel.ImageFile.Length > 0)
                 {
@@ -56,8 +64,9 @@ namespace GearGauge.Controllers
                     {
                         addGearInventoryViewModel.ImageFile.CopyTo(fileStream);
                     }
+                   // canonicalSearchViewModel = responseObject.data.cspSearch.csps;
 
-                    uniqueFileName = "/images/" + uniqueFileName;
+                    //return View("SearchResults", CanonicalSearchViewModel);*/
                 }
                 else
                 {

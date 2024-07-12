@@ -177,7 +177,7 @@ namespace GearGauge.Migrations
 
                     b.HasIndex("GearInventoryId");
 
-                    b.ToTable("GearInventory");
+                    b.ToTable("GearInventories");
                 });
 
             modelBuilder.Entity("GearGauge.Models.Tag", b =>

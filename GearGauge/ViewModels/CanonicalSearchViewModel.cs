@@ -31,6 +31,17 @@ public class CanonicalSearchViewModel
     public string? PriceMiddleThirtyDaysAgo { get; set; }
 
     public VideoDetails? Videos { get; set;}
+    
+    public class AddGearInventoryViewModel
+    {
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public decimal MarketValue { get; set; }
+        public List<int> SelectedTagIds { get; set; }
+        public List<CanonicalSearchViewModel> CanonicalSearchItems { get; set; }
+        public List<SelectListItem> AvailableTags { get; set; }
+        public IFormFile ImageFile { get; set; } // If you are handling file uploads
+    }
     // public Video? VideoTitle { get; set; }
     // public Video? VideoId { get; set; }
 }

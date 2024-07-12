@@ -13,6 +13,9 @@ a.navbar-brand {
 .navbar.animated {
   top: -60px;
 }
+a.nav-link dropdown{
+  position: right;
+}
 
 a {
   color: #0077cc;

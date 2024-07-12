@@ -15,27 +15,25 @@ namespace GearGauge.Data;
         public DbSet<ContactUs> ContactUs { get; set; }
         public DbSet<Watchlist> Watchlists { get; set; }
         public DbSet<Gear> Gear { get; set; }
-        // public DbSet<GearInventory> GearInventory { get; set; }
-
-        // public DbSet<Profile> UserProfile { get; set; }
+      
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
-        // public DbSet<Comment> Comments { get; set; }
-  public DbSet<Tag> Tags { get; set; }
-        // public DbSet<FavoriteItem> Favorites { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<GearInventory> GearInventories { get; set; }
+    
 
         public GearGaugeDbContext(DbContextOptions<GearGaugeDbContext> options) : base(options)
         {
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder) // was builder
+        protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {
        // builder.Entity<GearInventory>().HasOne(g => g.ImageId).WithOne(i => i.Im)
             base.OnModelCreating(modelBuilder);
         
-            modelBuilder.Entity<Gear>() // was saved as MusicItem so is it GearId?
+            modelBuilder.Entity<Gear>() 
               .HasOne(mi => mi.Comment)
-              .WithOne(f => f.Gear) /// was saved as MusicItem so is it GearId?
+              .WithOne(f => f.Gear) 
                .HasForeignKey<Comment>(c => c.GearId);
 
               modelBuilder.Entity<Comment>()
