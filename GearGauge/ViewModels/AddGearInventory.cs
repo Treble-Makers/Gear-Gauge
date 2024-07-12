@@ -15,10 +15,10 @@ namespace GearGauge.ViewModels
 
         [Range(0, int.MaxValue, ErrorMessage = "Market value must be a positive number.")]
         public int MarketValue { get; set; }
-        public string? ImagePath { get; set; }
+      //  public string? ImagePath { get; set; }
         public int GearInventoryId { get; set; }
 
-        public IFormFile ImageFile { get; set; }
+      //  public IFormFile ImageFile { get; set; }
 
         public List<SelectListItem> GearInventories { get; set; }
 

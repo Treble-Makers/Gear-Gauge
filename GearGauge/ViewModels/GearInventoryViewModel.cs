@@ -10,9 +10,9 @@ public class GearInventoryViewModel
     public int MarketValue { get; set; }
     public int GearInventoryId { get; set; }
     public List<GearInventory> GearInventories { get; set; }
-    public string ImagePath { get; set; } 
+  //  public string ImagePath { get; set; } 
     [NotMapped]
-    public IFormFile ImageFile { get; set; }
+   // public IFormFile ImageFile { get; set; }
 
     // Navigation property for tags
     public ICollection<Tag> Tags { get; set; }

@@ -502,7 +502,7 @@ namespace GearGauge.Migrations
                         .IsRequired();
 
                     b.HasOne("GearGauge.Models.GearInventory", "GearInventory")
-                        .WithMany("Favorites")
+                        .WithMany()
                         .HasForeignKey("GearInventoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -643,8 +643,6 @@ namespace GearGauge.Migrations
             modelBuilder.Entity("GearGauge.Models.GearInventory", b =>
                 {
                     b.Navigation("Comments");
-
-                    b.Navigation("Favorites");
 
                     b.Navigation("Gear");
 

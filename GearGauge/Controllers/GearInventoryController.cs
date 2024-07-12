@@ -23,17 +23,15 @@ namespace GearGauge.Controllers
 
         public IActionResult Index()
         {
-            List<CanonicalSearchViewModel> canonicalSearchViewModel;
-            List<GearInventory> gearInventoryList = context.GearInventories.Include(g => g.Tags).ToList();
+            
+            List<GearInventory> gearInventoryList = context.GearInventories.ToList();
             return View(gearInventoryList);
         }
 
         [HttpGet]
         public IActionResult Add()
         {
-            var canonicalItems = context.GearInventories // Adjust this query to get the canonical items you need
-                .Select(g => new CanonicalSearchViewModel { Title = g.Title })
-                .ToList();
+            
             var gearInventories = context.GearInventories.ToList();
            
             //var tags = context.Tags.ToList();
@@ -48,37 +46,35 @@ namespace GearGauge.Controllers
             if (ModelState.IsValid)
             {
                 
-                string uniqueFileName = null;
+                // string uniqueFileName = null;
                
 
-                if (addGearInventoryViewModel.ImageFile != null && addGearInventoryViewModel.ImageFile.Length > 0)
-                {
-                    string uploadsFolder = Path.Combine("wwwroot", "images");
-                    Directory.CreateDirectory(uploadsFolder);
+                // if (addGearInventoryViewModel.ImageFile != null && addGearInventoryViewModel.ImageFile.Length > 0)
+                // {
+                //     string uploadsFolder = Path.Combine("wwwroot", "images");
+                //     Directory.CreateDirectory(uploadsFolder);
 
-                    uniqueFileName = Guid.NewGuid().ToString() + "_" + addGearInventoryViewModel.ImageFile.FileName;
+                //     uniqueFileName = Guid.NewGuid().ToString() + "_" + addGearInventoryViewModel.ImageFile.FileName;
 
-                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                //     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-                    using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
-                    {
-                        addGearInventoryViewModel.ImageFile.CopyTo(fileStream);
-                    }
-                   // canonicalSearchViewModel = responseObject.data.cspSearch.csps;
-
-                    //return View("SearchResults", CanonicalSearchViewModel);*/
-                }
-                else
-                {
-                    return View("index");
-                }
+                //     using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+                //     {
+                //         addGearInventoryViewModel.ImageFile.CopyTo(fileStream);
+                //     }
+                 
+                // }
+                // else
+                // {
+                //     return View("index");
+                // }
 
                 GearInventory newGearInventory = new()
                 {
                     Title = addGearInventoryViewModel.Title,
                     Description = addGearInventoryViewModel.Description,
                     MarketValue = addGearInventoryViewModel.MarketValue,
-                    ImagePath = uniqueFileName
+                   // ImagePath = uniqueFileName
                 };
 
                 if (addGearInventoryViewModel.SelectedTagIds != null)

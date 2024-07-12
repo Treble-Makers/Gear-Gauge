@@ -37,7 +37,7 @@ namespace GearGauge.Controllers;
             };
 
             _context.Comments.Add(comment);
-            await _context.SaveChangesAsync();
+          //  await _context.SaveChangesAsync();
             
 
             return RedirectToAction("Details", "MusicItems", new { id = gear }); // make it commentId. 

@@ -31,10 +31,10 @@ namespace GearGauge.Data;
        // builder.Entity<GearInventory>().HasOne(g => g.ImageId).WithOne(i => i.Im)
             base.OnModelCreating(modelBuilder);
         
-            modelBuilder.Entity<Gear>() 
-              .HasOne(mi => mi.Comment)
-              .WithOne(f => f.Gear) 
-               .HasForeignKey<Comment>(c => c.GearId);
+            // modelBuilder.Entity<Gear>() 
+            //   .HasOne(mi => mi.Comment)
+            //   .WithOne(f => f.Gear),
+               //.HasForeignKey<Comment>(c => c.GearId);
 
               modelBuilder.Entity<Comment>()
               .HasKey(c => c.Id);

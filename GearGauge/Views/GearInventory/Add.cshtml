@@ -19,11 +19,11 @@
         <input asp-for="MarketValue" class="form-control" />
         <span asp-validation-for="MarketValue" class="text-danger"></span>
     </div>
-    <div class="form-group">
+    @*<div class="form-group">
         <label asp-for="ImageFile">Upload Image</label>
         <input asp-for="ImageFile" class="form-control-file" type="file" />
         <span asp-validation-for="ImageFile" class="text-danger"></span>
-    </div>
+    </div>*@
    @** <div class="form-group">
         <label asp-for="SelectedTagIds">Select Tags</label>
         <select asp-for="SelectedTagIds" class="form-control" asp-items="Model.AvailableTags" multiple></select>
