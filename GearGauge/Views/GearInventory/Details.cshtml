@@ -1,6 +1,6 @@
 @model GearGauge.Models.GearInventory
 
-<h2>@Model.Title</h2>
+@*<h2>@Model.Title</h2>
 <p>@Model.Description</p>
 
 <h3>Favorites</h3>
@@ -11,7 +11,7 @@
 </form>
 
 <h3>Comments</h3> 
-@*created comments here *@
+@*created comments here *
 <form asp-action="Create" asp-controller="Comments" method="post">
     <input type="hidden" name="musicItemId" value="@Model.Id" />
     <div class="form-group">
@@ -23,7 +23,7 @@
     </div>
 </form>
 
-<ul class="list-group"> @*display list of comments here *@
+<ul class="list-group"> @*display list of comments here *
     @foreach (var comment in Model.Comments)
     {
         <li class="list-group-item">
@@ -31,4 +31,4 @@
             <small>@comment.CreatedAt.ToString("g")</small>
         </li>
     }
-</ul>
+</ul>*@

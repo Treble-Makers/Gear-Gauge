@@ -30,11 +30,11 @@
     </div>*@
     <button type="submit" class="btn btn-primary">Add Gear</button>
 </form>
-@if (Model.ImagePath != null)
+@*@if (Model.ImagePath != null)
 {
     <h3>Image Preview</h3>
     <img src="@Model.ImagePath" alt="@Model.Title" style="width: 200px; height: auto;" />
-}
+}*@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

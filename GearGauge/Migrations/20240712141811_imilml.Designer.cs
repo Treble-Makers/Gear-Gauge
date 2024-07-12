@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GearGauge.Migrations
 {
     [DbContext(typeof(GearGaugeDbContext))]
-    [Migration("20240712140208_anotherMigration2")]
-    partial class anotherMigration2
+    [Migration("20240712141811_imilml")]
+    partial class imilml
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,9 +43,6 @@ namespace GearGauge.Migrations
                     b.Property<int>("GearId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("GearInventoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
@@ -58,8 +55,6 @@ namespace GearGauge.Migrations
 
                     b.HasIndex("GearId")
                         .IsUnique();
-
-                    b.HasIndex("GearInventoryId");
 
                     b.HasIndex("UserId");
 
@@ -149,23 +144,12 @@ namespace GearGauge.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CommentId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int?>("GearInventoryId")
                         .HasColumnType("int");
-
-                    b.Property<byte[]>("Image")
-                        .IsRequired()
-                        .HasColumnType("longblob");
-
-                    b.Property<string>("ImagePath")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.Property<int>("MarketValue")
                         .HasColumnType("int");
@@ -175,8 +159,6 @@ namespace GearGauge.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CommentId");
 
                     b.HasIndex("GearInventoryId");
 
@@ -474,10 +456,6 @@ namespace GearGauge.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GearGauge.Models.GearInventory", null)
-                        .WithMany("Comments")
-                        .HasForeignKey("GearInventoryId");
-
                     b.HasOne("GearGauge.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -505,7 +483,7 @@ namespace GearGauge.Migrations
                         .IsRequired();
 
                     b.HasOne("GearGauge.Models.GearInventory", "GearInventory")
-                        .WithMany("Favorites")
+                        .WithMany()
                         .HasForeignKey("GearInventoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -532,17 +510,9 @@ namespace GearGauge.Migrations
 
             modelBuilder.Entity("GearGauge.Models.GearInventory", b =>
                 {
-                    b.HasOne("GearGauge.Models.Comment", "Comment")
-                        .WithMany()
-                        .HasForeignKey("CommentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("GearGauge.Models.GearInventory", null)
                         .WithMany("GearInventories")
                         .HasForeignKey("GearInventoryId");
-
-                    b.Navigation("Comment");
                 });
 
             modelBuilder.Entity("GearGauge.Models.Watchlist", b =>
@@ -645,10 +615,6 @@ namespace GearGauge.Migrations
 
             modelBuilder.Entity("GearGauge.Models.GearInventory", b =>
                 {
-                    b.Navigation("Comments");
-
-                    b.Navigation("Favorites");
-
                     b.Navigation("Gear");
 
                     b.Navigation("GearInventories");
