@@ -21,6 +21,7 @@ namespace GearGauge.ViewModels;
     
     [EmailAddress]
     public string? ContactEmail { get; set; }
+   // public User? User { get; set; }
    
    
 }

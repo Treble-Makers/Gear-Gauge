@@ -8,6 +8,7 @@ using GearGauge.Data;
 using System.Net.Mail;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using GearGauge.Models;
 
 
 namespace GearGauge.Controllers;
@@ -34,14 +35,29 @@ public class ContactUsController : Controller
             {
                 MailMessage msz = new MailMessage();
                 msz.From = new MailAddress(contactUsViewModel.ContactEmail);
-                msz.To.Add("geargauge@hotmail.com");
+                msz.To.Add("ketchersidekatie@gmail.com");
                 msz.Body = contactUsViewModel.MessageBody;
                 SmtpClient smtp = new SmtpClient();
                 smtp.Host = "smtp.gmail.com";
                 smtp.Port = 587;
-                smtp.Credentials = new System.Net.NetworkCredential("geargauge@hotmail.com", "geargauge");
+                smtp.Credentials = new System.Net.NetworkCredential("ketchersidekatie@gmail.com", "12345678");
                 smtp.EnableSsl = true;
                 smtp.Send(msz);
+
+                ContactUs contactUs = new ContactUs
+                {
+                    UserName = contactUsViewModel.UserName,
+                    ContactEmail = contactUsViewModel.ContactEmail,
+                    MessageBody = contactUsViewModel.MessageBody
+
+                };
+             
+            
+
+
+              context.ContactUs.Add(contactUs);
+                
+                context.SaveChanges();
 
             }
             catch{

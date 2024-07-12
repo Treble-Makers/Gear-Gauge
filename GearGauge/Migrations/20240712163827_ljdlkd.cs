@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GearGauge.Migrations
 {
     /// <inheritdoc />
-    public partial class imilml : Migration
+    public partial class ljdlkd : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
