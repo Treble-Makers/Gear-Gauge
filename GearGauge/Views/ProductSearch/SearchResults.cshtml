@@ -1,39 +1,4 @@
 @model List<GearGauge.ViewModels.CanonicalSearchViewModel>
-@*
-
-
-<!DOCTYPE html>
-<html>
-
-<head>
-<title>Search Results</title>
-</head>
-
-<body>
-<h1>Search Results</h1>
-@if (Model.Any())
-{
-<form asp-controller="ProductSearch" asp-action="PostGetPriceGuide" method="post">
-<select id="searchResults">
-@foreach (var item in Model)
-{
-<option value="@item.CanonicalProductIds[0]">
-@if (item.Title != null)
-{
-@item.Title
-}
-</option>
-}
-</select>
-</form>
-}
-else
-{
-<p>No results found.</p>
-}
-</body>
-
-</html> *@
 
 <!DOCTYPE html>
 <html>
@@ -47,6 +12,7 @@ else
 
     @if (Model.Any())
     {
+        
         <form asp-controller="ProductSearch" asp-action="PostSearch" method="post">
             <div class="card-container">
                 @foreach (var item in Model)
@@ -70,20 +36,21 @@ else
                         {
                             <p>Fair Market Value (30 days ago): @item.PriceMiddleThirtyDaysAgo</p>
                         }
-                        @*Add buttons to allow user to add item to inventory or watchlist. And link appropriately with asp.*@
+                        
+                        @*Add buttons to allow user to add item to inventory or watchlist. And link appropriately with asp. STRETCH GOAL!*@
                         @if (item.Videos.Link != null)
                         {
-                            <p>
-                                <a href="@item.Videos.Link"><img src="@item.Videos.Thumbnail" alt=""></a>
-                                
-                            </p>
-                            <p>
-    <a asp-controller="GearInventory" asp-action="Add">Add New Gear</a>
-</p>
+                            <div>
+                                <a href="@item.Videos.Link" target="_blank"><img src="@item.Videos.Thumbnail"></a>
+                            </div>
+                            <div>
+                            <a asp-controller="GearInventory" asp-action="Add">Add New Gear</a>
+                            </div>
                         }
-                        
-                
-                    
+                            <button>Don't have one? Find one to purchase!
+                                <a href="https://reverb.com/marketplace?query=@item.Title"><img src="GearGauge/images/LogoPhoto.jpg" /></a>
+                            </button>
+
                         <input type="hidden" asp-for="@item.CanonicalProductIds[0]" />
                     </div>
 
