@@ -33,17 +33,6 @@ public class ContactUsController : Controller
         {
             try
             {
-                MailMessage msz = new MailMessage();
-                msz.From = new MailAddress(contactUsViewModel.ContactEmail);
-                msz.To.Add("ketchersidekatie@gmail.com");
-                msz.Body = contactUsViewModel.MessageBody;
-                SmtpClient smtp = new SmtpClient();
-                smtp.Host = "smtp.gmail.com";
-                smtp.Port = 587;
-                smtp.Credentials = new System.Net.NetworkCredential("ketchersidekatie@gmail.com", "12345678");
-                smtp.EnableSsl = true;
-                smtp.Send(msz);
-
                 ContactUs contactUs = new ContactUs
                 {
                     UserName = contactUsViewModel.UserName,
@@ -58,20 +47,30 @@ public class ContactUsController : Controller
               context.ContactUs.Add(contactUs);
                 
                 context.SaveChanges();
+                MailMessage msz = new MailMessage();
+                msz.From = new MailAddress(contactUsViewModel.ContactEmail);
+                msz.To.Add("ketchersidekatie@gmail.com");
+                msz.Body = contactUsViewModel.MessageBody;
+                SmtpClient smtp = new SmtpClient
+                {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                Credentials = new System.Net.NetworkCredential("ketchersidekatie@gmail.com", "12345678"),
+                EnableSsl = true
+                };
+                smtp.Send(msz);
+
 
             }
             catch{
                 ModelState.Clear();
             }
         
-         //  string messageBody = $"Name: {this.ContactUs.UserName}\nEmail: {ContactUs.ContactEmail}\nMessage: {ContactUs.MessageBody}";
-
-          // ViewBag.SuccessMessage = "Thank you for contacting us! We will get back to you soon.";
-             //return View("Contact", ContactUs); // Re-render Contact view with success message
+   
            
         }
 
-        // If form data is invalid, re-render Contact view with errors
+    
         return View();
     }
 
