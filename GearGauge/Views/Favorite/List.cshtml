@@ -1,0 +1,10 @@
+@* @model IEnumerable<GearGauge.Models.Favorite>
+
+<h1>Favorite Gear</h1>
+
+<ul>
+@foreach (var item in Model)
+{
+    <li>@item.Gear.Favorite</li>
+}
+</ul> *@

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GearGauge.Migrations
 {
     [DbContext(typeof(GearGaugeDbContext))]
-    [Migration("20240712163827_ljdlkd")]
-    partial class ljdlkd
+    [Migration("20240718162824_new")]
+    partial class @new
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -78,12 +78,18 @@ namespace GearGauge.Migrations
                     b.Property<string>("MessageBody")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
                     b.Property<string>("UserName")
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ContactUsId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("ContactUs");
                 });
@@ -106,8 +112,6 @@ namespace GearGauge.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("GearId");
 
                     b.HasIndex("GearInventoryId");
 
@@ -204,6 +208,9 @@ namespace GearGauge.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<string>("GearId")
+                        .HasColumnType("longtext");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("tinyint(1)");
 
@@ -229,6 +236,9 @@ namespace GearGauge.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("ProfilePictureUrl")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("longtext");
@@ -472,16 +482,18 @@ namespace GearGauge.Migrations
                     b.HasOne("GearGauge.Models.ContactUs", null)
                         .WithMany("contacts")
                         .HasForeignKey("ContactUsId");
+
+                    b.HasOne("GearGauge.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("GearGauge.Models.Favorite", b =>
                 {
-                    b.HasOne("GearGauge.Models.Gear", "Gear")
-                        .WithMany()
-                        .HasForeignKey("GearId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("GearGauge.Models.GearInventory", "GearInventory")
                         .WithMany()
                         .HasForeignKey("GearInventoryId")
@@ -493,8 +505,6 @@ namespace GearGauge.Migrations
                         .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Gear");
 
                     b.Navigation("GearInventory");
 

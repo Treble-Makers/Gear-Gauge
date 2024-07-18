@@ -110,8 +110,6 @@ namespace GearGauge.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GearId");
-
                     b.HasIndex("GearInventoryId");
 
                     b.ToTable("Favorites");
@@ -207,6 +205,9 @@ namespace GearGauge.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<string>("GearId")
+                        .HasColumnType("longtext");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("tinyint(1)");
 
@@ -232,6 +233,9 @@ namespace GearGauge.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("ProfilePictureUrl")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("longtext");
@@ -487,12 +491,6 @@ namespace GearGauge.Migrations
 
             modelBuilder.Entity("GearGauge.Models.Favorite", b =>
                 {
-                    b.HasOne("GearGauge.Models.Gear", "Gear")
-                        .WithMany()
-                        .HasForeignKey("GearId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("GearGauge.Models.GearInventory", "GearInventory")
                         .WithMany()
                         .HasForeignKey("GearInventoryId")
@@ -504,8 +502,6 @@ namespace GearGauge.Migrations
                         .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Gear");
 
                     b.Navigation("GearInventory");
 

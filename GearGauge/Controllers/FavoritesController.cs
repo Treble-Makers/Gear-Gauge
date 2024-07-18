@@ -30,6 +30,15 @@ namespace GearGauge.Controllers
                 return Unauthorized();
             }
 
+            var existingFavorite = await context.Favorites
+            .FirstOrDefaultAsync(f => f.GearId == gearId && f.UserId == user.Id);
+            
+            if (existingFavorite != null)
+            {
+                return RedirectToAction("Detail", new { id = gearId }); 
+            }
+
+
             var favorite = new Favorite
             {
                 GearId = gearId, //  MusicItemId = musicItemId,
@@ -39,12 +48,12 @@ namespace GearGauge.Controllers
             context.Favorites.Add(favorite);
             await context.SaveChangesAsync();
 
-            return RedirectToAction("Detail", "MusicItem", new { id = gearId });
+            return RedirectToAction("Detail", new { id = gearId });
         }
 
         public async Task<IActionResult> List()
         {
-            var user = await _userManager.GetUserAsync(User);
+            var user = await _userManager.GetUserAsync(User); // may need _signinManager.IsSignedIn(User);
             if (user == null)
             {
                 return Unauthorized();
@@ -52,10 +61,10 @@ namespace GearGauge.Controllers
 
             var favorites = await context.Favorites
                 .Where (f => f.UserId == user.Id)
-                .Include(f => f.Gear) //was MusicItem or GearInventory
+                .Include(f => f.GearId) //was MusicItem or GearInventory
                 .ToListAsync();
 
-            return View(favorites);
+            return View("Details", favorites);
         }
 
         public async Task<IActionResult> GetFavoriteGearSummary()
@@ -68,7 +77,7 @@ namespace GearGauge.Controllers
 
             var favoriteItems = await context.Favorites
                 .Where(f => f.UserId == user.Id)
-                .Include(f => f.Gear) // Assuming Gear is the navigation property for the favorited item
+                .Include(f => f.GearId) // Assuming Gear is the navigation property for the favorited item
                 .ToListAsync();
 
             return PartialView("_FavoriteGearSummary", favoriteItems);
