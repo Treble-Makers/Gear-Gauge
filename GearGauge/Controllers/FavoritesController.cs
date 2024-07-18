@@ -57,5 +57,22 @@ namespace GearGauge.Controllers
 
             return View(favorites);
         }
+
+        public async Task<IActionResult> GetFavoriteGearSummary()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            var favoriteItems = await context.Favorites
+                .Where(f => f.UserId == user.Id)
+                .Include(f => f.Gear) // Assuming Gear is the navigation property for the favorited item
+                .ToListAsync();
+
+            return PartialView("_FavoriteGearSummary", favoriteItems);
+        }
+
     }
 }
