@@ -64,21 +64,30 @@ else
                         }
                         @if (item.PriceMiddle != null)
                         {
-                            <p>Fair Market Value: @item.PriceMiddle</p>
+                            <p>Fair Market Value: $@item.PriceMiddle</p>
                         }
                         @if (item.PriceMiddleThirtyDaysAgo != null)
                         {
-                            <p>Fair Market Value (30 days ago): @item.PriceMiddleThirtyDaysAgo</p>
+                            <p>Fair Market Value (30 days ago): $@item.PriceMiddleThirtyDaysAgo</p>
                         }
-                        @*Add buttons to allow user to add item to inventory or watchlist. And link appropriately with asp.*@
+                        @*Add buttons to allow user to add Model to inventory or watchlist. And link appropriately with asp.*@
                         @if (item.Videos.Link != null)
                         {
-                            <p>
-                                <a href="@item.Videos.Link"><img src="@item.Videos.Thumbnail" alt=""></a>
+                            <h2>Demo of Product:</h2> 
+                                <iframe width='560' height='315' href="@item.Videos.Link" src="@item.Videos.Link" frameborder='0' allow='autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>
+                                @* <iframe src="@Model.Videos.Link" width="600" height="400"></iframe> *@
+                                @* <a href="@Model.Videos.Link"><img src="@Model.Videos.Thumbnail" alt=""></a> *@
+                                
+                            
+                        }
+                        @if (item.Title != null)
+                        {
+                            <p>Want to buy one?
+                                <a href="https://reverb.com/marketplace?query=@item.Title" target="_blank" class="btn btn-primary">Click here!</a>
+                                <a href="https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2510209.m570.l1313&_nkw=@item.Title&_sacat=619" target="_blank" class="btn btn-primary">Or here!</a>
                                 
                             </p>
                         }
-                        
                 
                     
                         <input type="hidden" asp-for="@item.CanonicalProductIds[0]" />
