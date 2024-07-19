@@ -1,6 +1,17 @@
 @model GearGauge.Models.GearInventory
 
-@*<h2>@Model.Title</h2>
+<h1>@Model.Title</h1>
+
+<!-- Display gear details here -->
+
+@if (User.Identity.IsAuthenticated)
+{
+    <partial name="_AddToFavoritePartial" model="@Model.Id" />
+}
+
+@*@model GearGauge.Models.GearInventory
+
+<h2>@Model.Title</h2>
 <p>@Model.Description</p>
 
 <h3>Favorites</h3>

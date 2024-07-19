@@ -13,7 +13,7 @@ namespace GearGauge.Models
         [Required]
         public User User { get; set; }
         public int Id { get; set; }
-public int GearId { get; set; }
+        public int GearId { get; set; }
 
         // Navigation property for the one-to-one relationship with Gear
         [ForeignKey("GearId")]

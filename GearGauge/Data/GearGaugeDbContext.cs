@@ -14,7 +14,8 @@ namespace GearGauge.Data;
         public DbSet<User> User { get; set; }
         public DbSet<ContactUs> ContactUs { get; set; }
         public DbSet<Watchlist> Watchlists { get; set; }
-        public DbSet<Gear> Gear { get; set; }
+        //public DbSet<Gear> Gear { get; set; } // trying to fix favorites
+        public DbSet<Gear> Gears { get; set; }
       
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
@@ -36,19 +37,30 @@ namespace GearGauge.Data;
             //   .WithOne(f => f.Gear),
                //.HasForeignKey<Comment>(c => c.GearId);
 
-              modelBuilder.Entity<Comment>()
-              .HasKey(c => c.Id);
+              // modelBuilder.Entity<Comment>()
+              // .HasKey(c => c.Id);
+             
+              modelBuilder.Entity<Favorite>()
+                .HasOne(f => f.User)
+                .WithMany(u => u.Favorites)
+                .HasForeignKey(f => f.UserId);
 
+              modelBuilder.Entity<Favorite>()
+                .HasOne(f => f.Gear)
+                .WithMany()
+                .HasForeignKey(f => f.GearId);
+    }
     
-            modelBuilder.Entity<User>() //I think it's user?
-              .HasMany(u => u.Favorites)
-              .WithOne(f => f.User)
-              .HasForeignKey(f => f.Id);
+            // modelBuilder.Entity<User>() //I think it's user?
+            //   .HasMany(u => u.Favorites)
+            //   .WithOne(f => f.User)
+            //   .HasForeignKey(f => f.Id);
  
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<GearInventory>()
-                .HasMany(g => g.Tags);
+            // base.OnModelCreating(modelBuilder);
+            // modelBuilder.Entity<GearInventory>()
+            //     .HasMany(g => g.Tags);
                 //.WithMany(t => t.GearInventories)
                 //.UsingEntity(j => j.ToTable("GearInventoryTags"));
         }
-    }
+    
+    

@@ -22,7 +22,7 @@ namespace GearGauge.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddToFavorite(int gearId) // was (nt musicItemId)
+        public async Task<IActionResult> AddToFavorite(int gearId)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -35,20 +35,20 @@ namespace GearGauge.Controllers
             
             if (existingFavorite != null)
             {
-                return RedirectToAction("Detail", new { id = gearId }); 
+                return RedirectToAction("Detail", "GearInventory", new { id = gearId }); 
             }
 
 
             var favorite = new Favorite
             {
-                GearId = gearId, //  MusicItemId = musicItemId,
+                GearId = gearId,
                 UserId = user.Id
             };
 
             context.Favorites.Add(favorite);
             await context.SaveChangesAsync();
 
-            return RedirectToAction("Detail", new { id = gearId });
+            return RedirectToAction("Detail", "GearInventory", new { id = gearId });
         }
 
         public async Task<IActionResult> List()
@@ -61,13 +61,13 @@ namespace GearGauge.Controllers
 
             var favorites = await context.Favorites
                 .Where (f => f.UserId == user.Id)
-                .Include(f => f.GearId) //was MusicItem or GearInventory
+                .Include(f => f.Gear)
                 .ToListAsync();
 
-            return View("Details", favorites);
+            return View("Details", favorites); // remove details?
         }
-
-        public async Task<IActionResult> GetFavoriteGearSummary()
+         [HttpPost]
+        public async Task<IActionResult> RemoveFromFavorite(int gearId)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -75,13 +75,33 @@ namespace GearGauge.Controllers
                 return Unauthorized();
             }
 
-            var favoriteItems = await context.Favorites
-                .Where(f => f.UserId == user.Id)
-                .Include(f => f.GearId) // Assuming Gear is the navigation property for the favorited item
-                .ToListAsync();
+            var favorite = await context.Favorites
+                .FirstOrDefaultAsync(f => f.GearId == gearId && f.UserId == user.Id);
 
-            return PartialView("_FavoriteGearSummary", favoriteItems);
+            if (favorite != null)
+            {
+                context.Favorites.Remove(favorite);
+                await context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("List");
         }
-
     }
+
+        // public async Task<IActionResult> GetFavoriteGearSummary()
+        // {
+        //     var user = await _userManager.GetUserAsync(User);
+        //     if (user == null)
+        //     {
+        //         return Unauthorized();
+        //     }
+
+            // var favoriteItems = await context.Favorites
+            //     .Where(f => f.UserId == user.Id)
+            //     .Include(f => f.GearId) // Assuming Gear is the navigation property for the favorited item
+            //     .ToListAsync();
+
+            // return PartialView("_FavoriteGearSummary", favoriteItems);
+        //}
 }
+
