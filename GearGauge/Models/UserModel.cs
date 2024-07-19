@@ -13,9 +13,7 @@ public class User : IdentityUser
     //public string? Bio { get; set; } 
     public List<int>? GearId { get; set; } 
     public string? ProfilePictureUrl { get; set; } // TG added this for profile
-   // public ICollection<Favorite> Favorites { get; set; } = new List<Favorite>(); // Favorite feature
-    public ICollection<Favorite> Favorites { get; set; }
-
+    public ICollection<Favorite> Favorites { get; set; } = new List<Favorite>(); // Favorite feature
 
     public User(string userName, string email, string name, string address)
         : base()

@@ -20,7 +20,37 @@ namespace GearGauge.Controllers
            context = dbContext;
             _userManager = userManager;
         }
+    [HttpPost]
+        public async Task<IActionResult> ToggleFavorite(int gearId)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
 
+            var favorite = await context.Favorites
+                .FirstOrDefaultAsync(f => f.GearId == gearId && f.UserId == user.Id);
+
+            if (favorite == null)
+            {
+                favorite = new Favorite
+                {
+                    GearId = gearId,
+                    UserId = user.Id
+                };
+                context.Favorites.Add(favorite);
+            }
+            else
+            {
+                context.Favorites.Remove(favorite);
+            }
+
+            await context.SaveChangesAsync();
+
+            return Json(new { isFavorited = favorite != null });
+        }
+        
         [HttpPost]
         public async Task<IActionResult> AddToFavorite(int gearId)
         {
@@ -64,7 +94,7 @@ namespace GearGauge.Controllers
                 .Include(f => f.Gear)
                 .ToListAsync();
 
-            return View("Details", favorites); // remove details?
+            return View(favorites); // remove "Dtails"?
         }
          [HttpPost]
         public async Task<IActionResult> RemoveFromFavorite(int gearId)

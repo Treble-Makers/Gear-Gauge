@@ -2,7 +2,9 @@
 
 <h1>@Model.Title</h1>
 
-<!-- Display gear details here -->
+<form asp-controller="Favorites" asp-action="AddToFavorite" asp-route-gearId="@Model" method="post">
+    <button type="submit" class="btn btn-primary">Add to Favorites</button>
+</form>
 
 @if (User.Identity.IsAuthenticated)
 {
