@@ -39,7 +39,9 @@ namespace GearGauge.Data;
               modelBuilder.Entity<Comment>()
               .HasKey(c => c.Id);
 
-    
+        modelBuilder.Entity<ContactUs>()
+            .HasKey(c => c.Id);
+
             modelBuilder.Entity<User>() //I think it's user?
               .HasMany(u => u.Favorites)
               .WithOne(f => f.User)
@@ -47,7 +49,7 @@ namespace GearGauge.Data;
  
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<GearInventory>()
-                .HasMany(g => g.Tags);
+                .HasKey(g => g.Id);
                 //.WithMany(t => t.GearInventories)
                 //.UsingEntity(j => j.ToTable("GearInventoryTags"));
         }

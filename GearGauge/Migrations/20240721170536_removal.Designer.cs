@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GearGauge.Migrations
 {
     [DbContext(typeof(GearGaugeDbContext))]
-    [Migration("20240712163827_ljdlkd")]
-    partial class ljdlkd
+    [Migration("20240721170536_removal")]
+    partial class removal
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -72,9 +72,6 @@ namespace GearGauge.Migrations
                     b.Property<string>("ContactEmail")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("ContactUsId")
-                        .HasColumnType("int");
-
                     b.Property<string>("MessageBody")
                         .HasColumnType("longtext");
 
@@ -82,8 +79,6 @@ namespace GearGauge.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ContactUsId");
 
                     b.ToTable("ContactUs");
                 });
@@ -467,13 +462,6 @@ namespace GearGauge.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("GearGauge.Models.ContactUs", b =>
-                {
-                    b.HasOne("GearGauge.Models.ContactUs", null)
-                        .WithMany("contacts")
-                        .HasForeignKey("ContactUsId");
-                });
-
             modelBuilder.Entity("GearGauge.Models.Favorite", b =>
                 {
                     b.HasOne("GearGauge.Models.Gear", "Gear")
@@ -483,7 +471,7 @@ namespace GearGauge.Migrations
                         .IsRequired();
 
                     b.HasOne("GearGauge.Models.GearInventory", "GearInventory")
-                        .WithMany()
+                        .WithMany("Favorites")
                         .HasForeignKey("GearInventoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -600,11 +588,6 @@ namespace GearGauge.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("GearGauge.Models.ContactUs", b =>
-                {
-                    b.Navigation("contacts");
-                });
-
             modelBuilder.Entity("GearGauge.Models.Gear", b =>
                 {
                     b.Navigation("Comment")
@@ -615,6 +598,8 @@ namespace GearGauge.Migrations
 
             modelBuilder.Entity("GearGauge.Models.GearInventory", b =>
                 {
+                    b.Navigation("Favorites");
+
                     b.Navigation("Gear");
 
                     b.Navigation("GearInventories");

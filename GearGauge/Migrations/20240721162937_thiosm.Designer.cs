@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GearGauge.Migrations
 {
     [DbContext(typeof(GearGaugeDbContext))]
-    [Migration("20240712172928_contact")]
-    partial class contact
+    [Migration("20240721162937_thiosm")]
+    partial class thiosm
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -497,7 +497,7 @@ namespace GearGauge.Migrations
                         .IsRequired();
 
                     b.HasOne("GearGauge.Models.GearInventory", "GearInventory")
-                        .WithMany()
+                        .WithMany("Favorites")
                         .HasForeignKey("GearInventoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -629,6 +629,8 @@ namespace GearGauge.Migrations
 
             modelBuilder.Entity("GearGauge.Models.GearInventory", b =>
                 {
+                    b.Navigation("Favorites");
+
                     b.Navigation("Gear");
 
                     b.Navigation("GearInventories");

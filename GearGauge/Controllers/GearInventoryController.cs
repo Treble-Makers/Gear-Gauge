@@ -46,35 +46,14 @@ namespace GearGauge.Controllers
             if (ModelState.IsValid)
             {
                 
-                // string uniqueFileName = null;
-               
-
-                // if (addGearInventoryViewModel.ImageFile != null && addGearInventoryViewModel.ImageFile.Length > 0)
-                // {
-                //     string uploadsFolder = Path.Combine("wwwroot", "images");
-                //     Directory.CreateDirectory(uploadsFolder);
-
-                //     uniqueFileName = Guid.NewGuid().ToString() + "_" + addGearInventoryViewModel.ImageFile.FileName;
-
-                //     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-                //     using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
-                //     {
-                //         addGearInventoryViewModel.ImageFile.CopyTo(fileStream);
-                //     }
-                 
-                // }
-                // else
-                // {
-                //     return View("index");
-                // }
+             
 
                 GearInventory newGearInventory = new()
                 {
                     Title = addGearInventoryViewModel.Title,
                     Description = addGearInventoryViewModel.Description,
                     MarketValue = addGearInventoryViewModel.MarketValue,
-                   // ImagePath = uniqueFileName
+                
                 };
 
                 if (addGearInventoryViewModel.SelectedTagIds != null)
@@ -113,12 +92,15 @@ namespace GearGauge.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(int[] Ids)
+        public IActionResult Delete(int id, List<int> Ids)
         {
             foreach (int Id in Ids)
             {
                 GearInventory theGearInventory = context.GearInventories.Find(Id);
-                context.GearInventories.Remove(theGearInventory);
+                if (theGearInventory != null)
+                {
+                    context.GearInventories.Remove(theGearInventory);
+                }
             }
             context.SaveChanges();
             return Redirect("/GearInventory");
