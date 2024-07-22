@@ -32,22 +32,25 @@ namespace GearGauge.Data;
        // builder.Entity<GearInventory>().HasOne(g => g.ImageId).WithOne(i => i.Im)
             base.OnModelCreating(modelBuilder);
         
-            // modelBuilder.Entity<Gear>() 
-            //   .HasOne(mi => mi.Comment)
-            //   .WithOne(f => f.Gear),
+              // modelBuilder.Entity<Gear>() 
+              //   .HasOne(mi => mi.Comment)
+              //   .WithOne(f => f.Gear),
                //.HasForeignKey<Comment>(c => c.GearId);
 
               // modelBuilder.Entity<Comment>()
               // .HasKey(c => c.Id);
+              
+              modelBuilder.Entity<Favorites>()
+                .HasKey(f => new { f.UserId, f.GearId });
              
               modelBuilder.Entity<Favorites>()
                 .HasOne(f => f.User)
-                .WithMany(u => u.Favorites)
+                .WithMany(u => u.FavoriteGears)
                 .HasForeignKey(f => f.UserId);
 
               modelBuilder.Entity<Favorites>()
-                .HasOne(f => f.Gear)
-                .WithMany()
+                .HasOne(f => f.GearInventory)
+                .WithMany(g => g.FavoriteGears)
                 .HasForeignKey(f => f.GearId);
     }
     

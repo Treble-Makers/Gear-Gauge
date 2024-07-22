@@ -16,7 +16,7 @@ namespace GearGauge.Models
         public int GearId { get; set; }
 
         // Navigation property for the one-to-one relationship with Gear
-        [ForeignKey("GearId")]
+        // [ForeignKey("GearId")]
         public virtual Gear Gear { get; set; }
         public string Content { get; set; }
         public DateTime CreatedAt { get; set; }

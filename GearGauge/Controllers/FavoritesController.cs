@@ -22,7 +22,7 @@ namespace GearGauge.Controllers
             _userManager = userManager;
         }
     [HttpGet]
-     public async Task<IActionResult> List(string userId)// was it list?
+     public async Task<IActionResult> List(int userId)// was it list?
     {
           var favorites = await context.Favorites
                 .FirstOrDefaultAsync(f => f.IsFavorite == false && f.UserId == userId);
