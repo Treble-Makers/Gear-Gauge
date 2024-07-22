@@ -51,6 +51,20 @@
                                 <a href="https://reverb.com/marketplace?query=@item.Title"><img src="GearGauge/images/LogoPhoto.jpg" /></a>
                             </button>
 
+                        @if (item.Title != null)
+                        {
+                            <div>
+                                Favorite Button
+                            </div>
+                        }
+@* {
+                        <div class="search-card">
+        
+                        <button class="btn btn-outline-primary favorite-btn" data-gear-id="@item.CanonicalProductIds[0]">
+                             <i class="fas fa-heart"></i> Favorite
+                        </button>
+                         </div>
+} *@
                         <input type="hidden" asp-for="@item.CanonicalProductIds[0]" />
                     </div>
 

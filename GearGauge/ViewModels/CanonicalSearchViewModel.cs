@@ -19,6 +19,7 @@ public class CanonicalSearchViewModel
     //public string Slug { get; set; }
     // public Brand? Brand { get; set; }
     //public string __typename { get; set; }
+    public int Id { get; set; }
     public string? Title { get; set; }
 
     public List<string>? CanonicalProductIds { get; set; }

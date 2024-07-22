@@ -6,8 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using GearGauge.Data;
 using GearGauge.Models;
 using Microsoft.AspNetCore.Authorization;
+using GearGauge.ViewModels;
 
-namespace GearGauge.Controllers
+namespace GearGauge.Controllers 
 {
     [Authorize]
     public class FavoritesController : Controller
@@ -21,36 +22,39 @@ namespace GearGauge.Controllers
             _userManager = userManager;
         }
     [HttpPost]
-        public async Task<IActionResult> ToggleFavorite(int gearId)
+        public async Task<IActionResult> ToggleFavorites(CanonicalSearchViewModel canonicalSearchViewModel)
         {
             var user = await _userManager.GetUserAsync(User);
-            if (user == null)
+            if (user == null) //might want to utilize signinmanager or usermanager for validation
             {
                 return Unauthorized();
             }
 
-            var favorite = await context.Favorites
-                .FirstOrDefaultAsync(f => f.GearId == gearId && f.UserId == user.Id);
+            var favorites = await context.Favorites
+                .FirstOrDefaultAsync(f => f.IsFavorite == false && f.UserId == user.Id);
 
-            if (favorite == null)
+            if (favorites == null) //isfav = false
             {
-                favorite = new Favorite
+                favorites = new Favorites
                 {
-                    GearId = gearId,
+                    IsFavorite = true,
                     UserId = user.Id
                 };
-                context.Favorites.Add(favorite);
+                context.Favorites.Add(favorites);
             }
-            else
-            {
-                context.Favorites.Remove(favorite);
-            }
+            // else 
+            // {
+            //     favorite = new Favorite
+            //     {
+            //         IsFavorite = false
+            //     };
+            //     context.Favorites.Add(favorite);
+            // }
 
             await context.SaveChangesAsync();
 
-            return Json(new { isFavorited = favorite != null });
-        }
-        
+            return View("List", favoritesListViewModel);
+
         [HttpPost]
         public async Task<IActionResult> AddToFavorite(int gearId)
         {
@@ -60,28 +64,28 @@ namespace GearGauge.Controllers
                 return Unauthorized();
             }
 
-            var existingFavorite = await context.Favorites
+            var existingFavorites = await context.Favorites
             .FirstOrDefaultAsync(f => f.GearId == gearId && f.UserId == user.Id);
             
-            if (existingFavorite != null)
+            if (existingFavorites != null)
             {
                 return RedirectToAction("Detail", "GearInventory", new { id = gearId }); 
             }
 
 
-            var favorite = new Favorite
+            var favorite = new Favorites
             {
                 GearId = gearId,
                 UserId = user.Id
             };
 
-            context.Favorites.Add(favorite);
+            context.Favorites.Add(favorites); // changed from existingFavorites
             await context.SaveChangesAsync();
 
             return RedirectToAction("Detail", "GearInventory", new { id = gearId });
         }
 
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> List(FavoritesListViewModel favoritesListViewModel)
         {
             var user = await _userManager.GetUserAsync(User); // may need _signinManager.IsSignedIn(User);
             if (user == null)
@@ -94,10 +98,10 @@ namespace GearGauge.Controllers
                 .Include(f => f.Gear)
                 .ToListAsync();
 
-            return View(favorites); // remove "Dtails"?
+            return View("Details", favoritesListViewModel); // switched it from List to Details
         }
          [HttpPost]
-        public async Task<IActionResult> RemoveFromFavorite(int gearId)
+        public async Task<IActionResult> RemoveFromFavorites(int gearId)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -133,5 +137,5 @@ namespace GearGauge.Controllers
 
             // return PartialView("_FavoriteGearSummary", favoriteItems);
         //}
+    }
 }
-
