@@ -17,7 +17,11 @@ namespace GearGauge.Controllers;
             _context = dbContext;
             _userManager = userManager;
         }
-
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View(); // Returns a view where user can input comment
+        }
         [HttpPost]
         public async Task<IActionResult> Create(Gear gear, string content)
         {
@@ -32,7 +36,6 @@ namespace GearGauge.Controllers;
                 Gear = gear,
                 Content = content,
                 // UserId = user.Id,
-
                 CreatedAt = DateTime.UtcNow 
             };
 
@@ -43,4 +46,18 @@ namespace GearGauge.Controllers;
             return RedirectToAction("Details", "MusicItems", new { id = gear }); // make it commentId. 
             //It was musicItemId
         }
-    }
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var gear = await _context.Gear
+            .Include(g => g.Comments)
+            .FirstOrDefaultAsync(g => g.Id == id);
+
+            if (gear == null)
+            {
+                return NotFound();
+            }
+
+            return View(gear);
+        }
+}
