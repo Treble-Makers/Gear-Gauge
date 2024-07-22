@@ -91,17 +91,17 @@ namespace GearGauge.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult Delete(int id, List<int> Ids)
+        [HttpPost("GearInventory/Delete")]
+        public IActionResult Delete(GearInventoryViewModel gearInventoryViewModel)
+       
         {
-            foreach (int Id in Ids)
-            {
-                GearInventory theGearInventory = context.GearInventories.Find(Id);
+                GearInventory theGearInventory = context.GearInventories.Find(gearInventoryViewModel.Id);
+                Console.WriteLine("Found");
                 if (theGearInventory != null)
                 {
                     context.GearInventories.Remove(theGearInventory);
                 }
-            }
+            
             context.SaveChanges();
             return Redirect("/GearInventory");
         }

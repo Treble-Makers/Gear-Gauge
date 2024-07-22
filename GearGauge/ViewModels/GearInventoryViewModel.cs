@@ -8,7 +8,7 @@ public class GearInventoryViewModel
     public string? Title { get; set; }
     public string? Description { get; set; }
     public int MarketValue { get; set; }
-    public int GearInventoryId { get; set; }
+
     public List<GearInventory> GearInventories { get; set; }
  
 
