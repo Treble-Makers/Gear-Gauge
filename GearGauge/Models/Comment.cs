@@ -7,7 +7,6 @@ namespace GearGauge.Models
 {
     public class Comment
     {
-        // so we need their username, the item's ID, the comment and when it was written... what else?
         [Required]
         public string? UserName { get; set; } // should relate to a specific user -- should this be the email?
         [Required]

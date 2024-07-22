@@ -49,9 +49,10 @@ namespace GearGauge.Data;
                 .HasForeignKey(f => f.UserId);
 
               modelBuilder.Entity<Favorites>()
-                .HasOne(f => f.GearInventory)
+                .HasOne(f => f.Gear)
                 .WithMany(g => g.FavoriteGears)
                 .HasForeignKey(f => f.GearId);
+
     }
     
             // modelBuilder.Entity<User>() //I think it's user?
