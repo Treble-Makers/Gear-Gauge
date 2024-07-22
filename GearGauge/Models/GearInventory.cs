@@ -13,7 +13,7 @@ namespace GearGauge.Models;
     public List<GearInventory> GearInventories { get; set; }
     public List<Gear> Gear { get; set; }
 
-    public ICollection<Favorite> Favorites { get; set; } = new List<Favorite>();
+    public List<Favorite> Favorites { get; set; }
    // public int CommentId { get; set; }
    // public ICollection<Comment> Comments { get; set; } = new List<Comment>();
    // public Comment Comment { get; set; }

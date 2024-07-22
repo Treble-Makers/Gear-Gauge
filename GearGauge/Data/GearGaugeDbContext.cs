@@ -28,13 +28,8 @@ namespace GearGauge.Data;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {
-       // builder.Entity<GearInventory>().HasOne(g => g.ImageId).WithOne(i => i.Im)
             base.OnModelCreating(modelBuilder);
-        
-            // modelBuilder.Entity<Gear>() 
-            //   .HasOne(mi => mi.Comment)
-            //   .WithOne(f => f.Gear),
-               //.HasForeignKey<Comment>(c => c.GearId);
+    
 
               modelBuilder.Entity<Comment>()
               .HasKey(c => c.Id);
@@ -49,8 +44,12 @@ namespace GearGauge.Data;
  
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<GearInventory>()
+                //.HasMany(g =>g.GearInventories)
+                //.WithMany(f =>f.Favorites)
                 .HasKey(g => g.Id);
-                //.WithMany(t => t.GearInventories)
-                //.UsingEntity(j => j.ToTable("GearInventoryTags"));
+
+              modelBuilder.Entity<Favorite>()
+              .HasKey(f => f.Id);
+
         }
     }
