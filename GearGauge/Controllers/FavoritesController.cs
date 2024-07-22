@@ -21,69 +21,80 @@ namespace GearGauge.Controllers
            context = dbContext;
             _userManager = userManager;
         }
-    [HttpPost]
-        public async Task<IActionResult> ToggleFavorites(CanonicalSearchViewModel canonicalSearchViewModel)
-        {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null) //might want to utilize signinmanager or usermanager for validation
-            {
-                return Unauthorized();
-            }
+    [HttpGet]
+     public async Task<IActionResult> List(string userId)// was it list?
+    {
+          var favorites = await context.Favorites
+                .FirstOrDefaultAsync(f => f.IsFavorite == false && f.UserId == userId);
 
-            var favorites = await context.Favorites
-                .FirstOrDefaultAsync(f => f.IsFavorite == false && f.UserId == user.Id);
+        return View("List", favorites);
+    }
 
-            if (favorites == null) //isfav = false
-            {
-                favorites = new Favorites
-                {
-                    IsFavorite = true,
-                    UserId = user.Id
-                };
-                context.Favorites.Add(favorites);
-            }
-            // else 
-            // {
-            //     favorite = new Favorite
-            //     {
-            //         IsFavorite = false
-            //     };
-            //     context.Favorites.Add(favorite);
-            // }
+    // [HttpPost]
+    //     public async Task<IActionResult> ToggleFavorites(FavoritesListViewModel favoritesListViewModel)
+    //     {
+    //         var user = await _userManager.GetUserAsync(User);
+    //         if (user == null) //might want to utilize signinmanager or usermanager for validation
+    //         {
+    //             return Unauthorized();
+    //         }
 
-            await context.SaveChangesAsync();
+    //         var favorites = await context.Favorites
+    //             .FirstOrDefaultAsync(f => f.IsFavorite == false && f.UserId == user.Id);
 
-            return View("List", favoritesListViewModel);
+    //         if (favorites == null) //isfav = false
+    //         {
+    //             favorites = new Favorites
+    //             {
+    //                 IsFavorite = true,
+    //                 UserId = user.Id
+                    
+    //             };
+    //             context.Favorites.Add(favorites);
+    //         }
+    //         // else 
+    //         // {
+    //         //     favorite = new Favorite
+    //         //     {
+    //         //         IsFavorite = false
+    //         //     };
+    //         //     context.Favorites.Add(favorite);
+    //         // }
 
-        [HttpPost]
-        public async Task<IActionResult> AddToFavorite(int gearId)
-        {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return Unauthorized();
-            }
+    //         await context.SaveChangesAsync();
 
-            var existingFavorites = await context.Favorites
-            .FirstOrDefaultAsync(f => f.GearId == gearId && f.UserId == user.Id);
+    //         return View("List", favoritesListViewModel);
+    //     }
+        
+    //     [HttpPost]
+    //     public async Task<IActionResult> AddToFavorite(int gearId)
+    //     {
+    //         var user = await _userManager.GetUserAsync(User);
+    //         if (user == null)
+    //         {
+    //             return Unauthorized();
+    //         }
+
+    //         var existingFavorites = await context.Favorites
+    //         .FirstOrDefaultAsync(f => f.GearId == gearId && f.UserId == user.Id);
             
-            if (existingFavorites != null)
-            {
-                return RedirectToAction("Detail", "GearInventory", new { id = gearId }); 
-            }
+    //         if (existingFavorites != null)
+    //         {
+    //             return RedirectToAction("Detail", "GearInventory", new { id = gearId }); 
+    //         }
 
 
-            var favorite = new Favorites
-            {
-                GearId = gearId,
-                UserId = user.Id
-            };
+    //         var favorite = new Favorites
+    //         {
+    //             GearId = gearId,
+    //             UserId = user.Id
+    //         };
 
-            context.Favorites.Add(favorites); // changed from existingFavorites
-            await context.SaveChangesAsync();
+    //         context.Favorites.Add(favorites); // changed from existingFavorites
+    //         await context.SaveChangesAsync();
 
-            return RedirectToAction("Detail", "GearInventory", new { id = gearId });
-        }
+    //         return RedirectToAction("Detail", "GearInventory", new { id = gearId });
+    //     }
 
         public async Task<IActionResult> List(FavoritesListViewModel favoritesListViewModel)
         {
@@ -138,4 +149,3 @@ namespace GearGauge.Controllers
             // return PartialView("_FavoriteGearSummary", favoriteItems);
         //}
     }
-}

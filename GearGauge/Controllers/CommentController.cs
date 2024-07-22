@@ -46,18 +46,18 @@ namespace GearGauge.Controllers;
             return RedirectToAction("Details", "MusicItems", new { id = gear }); // make it commentId. 
             //It was musicItemId
         }
-        [HttpGet]
-        public async Task<IActionResult> Details(int id)
-        {
-            var gear = await _context.Gear
-            .Include(g => g.Comments)
-            .FirstOrDefaultAsync(g => g.Id == id);
+//         [HttpGet]
+//         public async Task<IActionResult> Details(int id)
+//         {
+//             var gear = await _context.Gear
+//             .Include(g => g.Comments)
+//             .FirstOrDefaultAsync(g => g.Id == id);
 
-            if (gear == null)
-            {
-                return NotFound();
-            }
+//             if (gear == null)
+//             {
+//                 return NotFound();
+//             }
 
-            return View(gear);
-        }
-}
+//             return View(gear);
+//         }
+    }

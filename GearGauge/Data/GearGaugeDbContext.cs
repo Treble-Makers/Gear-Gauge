@@ -15,10 +15,10 @@ namespace GearGauge.Data;
         public DbSet<ContactUs> ContactUs { get; set; }
         public DbSet<Watchlist> Watchlists { get; set; }
         //public DbSet<Gear> Gear { get; set; } // trying to fix favorites
-        public DbSet<Gear> Gears { get; set; }
+       // public DbSet<Gear> Gears { get; set; }
       
         public DbSet<Comment> Comments { get; set; }
-        public DbSet<Favorite> Favorites { get; set; }
+        public DbSet<Favorites> Favorites { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<GearInventory> GearInventories { get; set; }
     
@@ -40,12 +40,12 @@ namespace GearGauge.Data;
               // modelBuilder.Entity<Comment>()
               // .HasKey(c => c.Id);
              
-              modelBuilder.Entity<Favorite>()
+              modelBuilder.Entity<Favorites>()
                 .HasOne(f => f.User)
                 .WithMany(u => u.Favorites)
                 .HasForeignKey(f => f.UserId);
 
-              modelBuilder.Entity<Favorite>()
+              modelBuilder.Entity<Favorites>()
                 .HasOne(f => f.Gear)
                 .WithMany()
                 .HasForeignKey(f => f.GearId);
