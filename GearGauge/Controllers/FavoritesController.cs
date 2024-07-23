@@ -51,7 +51,7 @@ namespace GearGauge.Controllers
             }
 
             var favorites = await context.Favorites
-                .Where (f => f.UserId == user.Id)
+                .Where (f => f.Id == user.Id)
                 .Include(g => g.Id) 
                 .ToListAsync();
 
