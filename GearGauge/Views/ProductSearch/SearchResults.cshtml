@@ -1,0 +1,118 @@
+@model List<GearGauge.ViewModels.CanonicalSearchViewModel>
+@*
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Search Results</title>
+</head>
+
+<body>
+<h1>Search Results</h1>
+@if (Model.Any())
+{
+<form asp-controller="ProductSearch" asp-action="PostGetPriceGuide" method="post">
+<select id="searchResults">
+@foreach (var item in Model)
+{
+<option value="@item.CanonicalProductIds[0]">
+@if (item.Title != null)
+{
+@item.Title
+}
+</option>
+}
+</select>
+</form>
+}
+else
+{
+<p>No results found.</p>
+}
+</body>
+
+</html> *@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Search Results</title>
+</head>
+
+<body>
+    <h1>Search Results</h1>
+
+    @if (Model.Any())
+    {
+        <form asp-controller="ProductSearch" asp-action="PostSearch" method="post">
+            <div class="card-container">
+                @foreach (var item in Model)
+                {
+                    <div class="search-card">
+                        @*<a asp-action="PostTotalSearch" asp-controller="ProductSearch" method="post"
+                asp-route-id="@item.CanonicalProductIds[0]"> *@
+                        @if (item.Image?.Source != null)
+                        {
+                            <img src="@item.Image.Source" alt="@item.Title image" />
+                        }
+                        @if (item.Title != null)
+                        {
+                            <p>@item.Title</p>
+                        }
+                        @if (item.PriceMiddle != null)
+                        {
+                            <p>Fair Market Value: $@item.PriceMiddle</p>
+                        }
+                        @if (item.PriceMiddleThirtyDaysAgo != null)
+                        {
+                            <p>Fair Market Value (30 days ago): $@item.PriceMiddleThirtyDaysAgo</p>
+                        }
+                        @*Add buttons to allow user to add Model to inventory or watchlist. And link appropriately with asp.*@
+                        @if (item.Videos.Link != null)
+                        {
+                            <h2>Demo of Product:</h2>
+                            <iframe width='560' height='315' href="@item.Videos.Link" src="@item.Videos.Link" frameborder='0'
+                                allow='autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>
+                            @* <iframe src="@Model.Videos.Link" width="600" height="400"></iframe> *@
+                            @* <a href="@Model.Videos.Link"><img src="@Model.Videos.Thumbnail" alt=""></a> *@
+
+
+                        }
+                        @if (item.Title != null)
+                        {
+                            <p>Want to buy one?
+                                <a href="https://reverb.com/marketplace?query=@item.Title" target="_blank"
+                                    class="btn btn-primary">Click here!</a>
+                                <a href="https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2510209.m570.l1313&_nkw=@item.Title&_sacat=619"
+                                    target="_blank" class="btn btn-primary">Or here!</a>
+                                <a href="https://www.amazon.com/s?k=@item.Title" target="_blank" class="btn btn-primary">Or
+                                    here!</a>
+
+                            </p>
+                        }
+                        @* <input type="hidden" asp-for="@item.CanonicalProductIds[0]" /> *@
+
+
+                        @if (item.Title != null)
+                        {   <p>Already Have One?
+                                <a href="GearInventory/Add" target="_blank" class="btn btn-primary">Already have one?
+                                </a>
+                            </p>
+                        }
+                    </div>
+
+                }
+            </div>
+    }
+        </form>
+    }
+    else
+    {
+        <p>No results found.</p>
+    }
+</body>
+
+</html>

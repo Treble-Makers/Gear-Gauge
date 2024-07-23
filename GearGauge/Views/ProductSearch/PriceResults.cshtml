@@ -1,0 +1,93 @@
+@model GearGauge.ViewModels.CanonicalSearchViewModel
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Search Results</title>
+</head>
+
+<body>
+
+    <h1>Price Results</h1>
+
+    @if (Model != null)
+    {
+        @* <form asp-controller="ProductSearch" asp-action="PostGetPriceGuide" method="GET"> *@
+        @* @foreach (var item in Model) *@
+        
+            <div class="price-card">
+                <h2>@Model.Title</h2> <img src="@Model.Image?.Source" alt="@Model.Title image" />
+                <hr />
+                <h2>Price Information</h2>
+                @* <p>**Price Low:** @item.PriceLow.AmountCents (@item.PriceLow.Currency)</p> *@
+                <p>Price Middle: @Model.PriceMiddle (@Model.PriceMiddle)</p>
+                @* <p>**Price High:** @item.PriceHigh.AmountCents (@item.PriceHigh.Currency)</p> *@
+                @if (Model.PriceMiddleThirtyDaysAgo != null)
+                {
+                    <p>**Price Middle (30 Days Ago):** @Model.PriceMiddleThirtyDaysAgo (@Model.PriceMiddleThirtyDaysAgo)</p>
+                }
+                else
+                {
+                    <p>No price information found.</p>
+                }
+            </div>
+
+                @* <h2>Related Videos</h2>
+        @if (ViewBag.Videos != null)
+        {
+        <a asp-controller="YouTubeApi" asp-action="GetProductVideo" method="get" />
+        <ul class="video-list">
+        @foreach (var video in ViewBag.Videos)
+        {
+        <li>
+        <a href="@video.Link" target="_blank">@video.Title</a> (Published:
+        @video.PublishedAt?.ToString("yyyy-MM-dd"))
+        <br />
+        <img src="@video.Thumbnail" alt="@video.Title thumbnail" />
+        </li>
+
+        }
+        </ul>
+        }
+        else
+        {
+        <p>No related videos found.</p>
+        } *@
+            <div asp-controller="ProductSearch" asp-action="PostGetPriceGuide" method="get" style="display: flex;">
+                <h2>Related Videos</h2>
+                @if (ViewBag.Videos != null)
+                {
+                    @* <ul class="video-list"> *@
+                        @* @foreach (var video in ViewBag.Videos) *@
+                        @* { *@
+                            <li>
+                                <p>@Model.Videos</p> 
+                                @* <p>helpmepleaseplase</p> *@
+                                @* <iframe width="50vw" height="35vh" src="https://www.youtube.com/watch?v=zUALHw-kWkg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> *@
+                                @* @if (Model.Title = "Chase Bliss") *@
+                                @* { *@
+                                @* <iframe width="560" height="315" src="https://www.youtube.com/embed/zUALHw-kWkg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> *@
+                                @* } *@
+                            </li>
+                            }
+                        @* } *@
+                    @* </ul> *@
+                @* <form asp-controller="YouTubeApi" asp-action="GetProductVideo" method="get" style="display: flex;"> *@
+                @* { *@
+                @* } *@
+                else
+                {
+                    <p>No related videos found.</p>
+                }
+
+                    @* <input type="hidden" value="@Model.Title" /> *@
+                @* </form> *@
+            </div>
+        
+        @* </form> *@
+    }
+
+</body>
+
+</html>
