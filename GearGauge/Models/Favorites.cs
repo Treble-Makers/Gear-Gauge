@@ -15,7 +15,7 @@ public class Favorites
 
     public CanonicalSearchViewModel? Title { get; set; }
 
-    public int UserId { get; set; }
+    public string UserId { get; set; } // Changed to string to match IdentityUser.Id
     public User User { get; set; }
     public GearInventory? GearInventory { get; set; } 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

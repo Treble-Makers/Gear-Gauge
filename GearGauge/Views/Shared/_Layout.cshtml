@@ -40,12 +40,15 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Favorites" asp-action="List">Favorites</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="UserProfile" asp-action="Index">My Profile</a>
+                        </li>
+                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Gear Inventory
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
                                 <a class="dropdown-item" asp-area="" asp-controller="GearInventory"
                                     asp-action="Index">Gear Inventory</a>
                                 <a class="dropdown-item" asp-area="" asp-controller="GearInventory" asp-action="Add">Add
@@ -53,6 +56,7 @@
                                 <a class="dropdown-item" asp-area="" asp-controller="GearInventory"
                                     asp-action="Delete">Delete Gear Inventory</a>
                             </div>
+                        </li>
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

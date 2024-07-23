@@ -1,15 +1,14 @@
-@model GearGauge.ViewModels.UserProfileViewModel
+@model GearGauge.ViewModels.UserProfileUpdateViewModel
 
 @{
-    ViewData["Title"] = "User Profile";
+    ViewData["Title"] = "Edit Profile";
 }
 
 <h2>@ViewData["Title"]</h2>
 
-<div id="profile-container">
-    @if (Model.IsEditMode)
-    {
-        <form asp-action="Save" method="post" enctype="multipart/form-data">
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Update" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="UserName" class="control-label"></label>
@@ -49,51 +48,11 @@
             }
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
-                <button type="button" class="btn btn-secondary" onclick="toggleEditMode()">Cancel</button>
             </div>
         </form>
-    }
-    else
-    {
-        <dl class="row">
-            <dt class="col-sm-2">Username:</dt>
-            <dd class="col-sm-10">@Model.UserName</dd>
-            <dt class="col-sm-2">Email:</dt>
-            <dd class="col-sm-10">@Model.Email</dd>
-            <dt class="col-sm-2">Name:</dt>
-            <dd class="col-sm-10">@Model.Name</dd>
-            <dt class="col-sm-2">Address:</dt>
-            <dd class="col-sm-10">@Model.Address</dd>
-            <dt class="col-sm-2">About Me:</dt>
-            <dd class="col-sm-10">@Model.AboutMe</dd>
-        </dl>
-        @if (!string.IsNullOrEmpty(Model.CurrentProfilePictureUrl))
-        {
-            <div class="form-group">
-                <img src="@Model.CurrentProfilePictureUrl" alt="Profile Picture" style="max-width: 200px;" />
-            </div>
-        }
-        <div class="form-group">
-            <button type="button" class="btn btn-primary" onclick="toggleEditMode()">Edit</button>
-            <form asp-action="Delete" method="post" style="display: inline;">
-                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete your profile?')">Delete Profile</button>
-            </form>
-        </div>
-    }
+    </div>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script>
-        function toggleEditMode() {
-            var container = document.getElementById('profile-container');
-            var isEditMode = container.querySelector('form') !== null;
-            
-            if (isEditMode) {
-                location.reload();
-            } else {
-                container.innerHTML = '@Html.Raw(Html.Encode(await Html.PartialAsync("_EditProfile", Model)))';
-            }
-        }
-    </script>
 }
