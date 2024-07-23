@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GearGauge.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using GearGauge.Data;
+using GearGauge.Models;
 using System.Net.Mail;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
@@ -13,7 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace GearGauge.Controllers;
 public class ContactUsController : Controller
 {
-    private GearGaugeDbContext context;
+    private static GearGaugeDbContext context;
     public ContactUsController(GearGaugeDbContext dbContext)
     {
         context = dbContext;
@@ -26,28 +27,20 @@ public class ContactUsController : Controller
     }
 
     [HttpPost]
-    public IActionResult Index(ContactUsViewModel contactUsViewModel)
+    public IActionResult SendMessage(ContactUsViewModel contactUsViewModel)
     {
         if (ModelState.IsValid)
         {
-            try
+            var contactUs = new ContactUs
             {
-                MailMessage msz = new MailMessage();
-                msz.From = new MailAddress(contactUsViewModel.ContactEmail);
-                msz.To.Add("geargauge@hotmail.com");
-                msz.Body = contactUsViewModel.MessageBody;
-                SmtpClient smtp = new SmtpClient();
-                smtp.Host = "smtp.gmail.com";
-                smtp.Port = 587;
-                smtp.Credentials = new System.Net.NetworkCredential("geargauge@hotmail.com", "geargauge");
-                smtp.EnableSsl = true;
-                smtp.Send(msz);
-
-            }
-            catch{
-                ModelState.Clear();
-            }
+            UserName = contactUsViewModel.UserName,
+            ContactEmail = contactUsViewModel.ContactEmail,
+            MessageBody = contactUsViewModel.MessageBody
+            };
+           
         
+            context.ContactUs.Add(contactUs);
+            context.SaveChanges();
          //  string messageBody = $"Name: {this.ContactUs.UserName}\nEmail: {ContactUs.ContactEmail}\nMessage: {ContactUs.MessageBody}";
 
           // ViewBag.SuccessMessage = "Thank you for contacting us! We will get back to you soon.";

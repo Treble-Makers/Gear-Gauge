@@ -12,11 +12,7 @@ public class Favorite
     
     public int UserId { get; set; }
     public User User { get; set; }
-    public Gear Gear { get; set; } 
-
-    public int GearId { get; set;}
-  
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    
 
 }
         

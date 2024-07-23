@@ -1,19 +1,21 @@
 ﻿@using GearGauge.Models
+@model GearInventory
 
 
 
 <h1>Delete Gear Inventory</h1>
 
-<form method="post">
+<form method="post" asp-controller="GearInventory" asp-action="Delete">
     @foreach (var evt in ViewBag.gearInventories)
     {
         <div class="form-group">
             <label>
                 <span>@evt.Title</span>
-                <input type="checkbox" name="gearInventoryIds" value="@evt.Id" />
+                <input value="@evt.Id" name="Id" hidden/>
+                <input type="submit" value="Delete" />
             </label>
         </div>
     }
 
-        <input type="submit" value="Delete Selected Gear Inventory" class="btn btn-danger" />
+       @** <input type="submit" value="Delete Selected Gear Inventory" class="btn btn-danger" />*@
 </form>

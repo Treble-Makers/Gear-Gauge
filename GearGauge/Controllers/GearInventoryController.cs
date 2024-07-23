@@ -8,6 +8,7 @@ using GearGauge.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using GearGauge.Controllers;
 
 namespace GearGauge.Controllers
 {
@@ -22,14 +23,17 @@ namespace GearGauge.Controllers
 
         public IActionResult Index()
         {
-            List<GearInventory> gearInventoryList = context.GearInventories.Include(g => g.Tags).ToList();
+            
+            List<GearInventory> gearInventoryList = context.GearInventories.ToList();
             return View(gearInventoryList);
         }
 
         [HttpGet]
         public IActionResult Add()
         {
+            
             var gearInventories = context.GearInventories.ToList();
+           
             //var tags = context.Tags.ToList();
             GearInventory viewModel = new GearInventory();
             return View(viewModel);
@@ -41,35 +45,15 @@ namespace GearGauge.Controllers
         {
             if (ModelState.IsValid)
             {
-                string uniqueFileName = null;
-
-                if (addGearInventoryViewModel.ImageFile != null && addGearInventoryViewModel.ImageFile.Length > 0)
-                {
-                    string uploadsFolder = Path.Combine("wwwroot", "images");
-                    Directory.CreateDirectory(uploadsFolder);
-
-                    uniqueFileName = Guid.NewGuid().ToString() + "_" + addGearInventoryViewModel.ImageFile.FileName;
-
-                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-                    using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
-                    {
-                        addGearInventoryViewModel.ImageFile.CopyTo(fileStream);
-                    }
-
-                    uniqueFileName = "/images/" + uniqueFileName;
-                }
-                else
-                {
-                    return View("index");
-                }
+                
+             
 
                 GearInventory newGearInventory = new()
                 {
                     Title = addGearInventoryViewModel.Title,
                     Description = addGearInventoryViewModel.Description,
                     MarketValue = addGearInventoryViewModel.MarketValue,
-                    ImagePath = uniqueFileName
+                
                 };
 
                 if (addGearInventoryViewModel.SelectedTagIds != null)
@@ -107,14 +91,17 @@ namespace GearGauge.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult Delete(int[] Ids)
+        [HttpPost("GearInventory/Delete")]
+        public IActionResult Delete(GearInventoryViewModel gearInventoryViewModel)
+       
         {
-            foreach (int Id in Ids)
-            {
-                GearInventory theGearInventory = context.GearInventories.Find(Id);
-                context.GearInventories.Remove(theGearInventory);
-            }
+                GearInventory theGearInventory = context.GearInventories.Find(gearInventoryViewModel.Id);
+                Console.WriteLine("Found");
+                if (theGearInventory != null)
+                {
+                    context.GearInventories.Remove(theGearInventory);
+                }
+            
             context.SaveChanges();
             return Redirect("/GearInventory");
         }

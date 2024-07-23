@@ -2,7 +2,7 @@
 
 <h1>Contact Us!</h1>
 
-<form id="contactForm" asp-controller="Home" asp-action="ContactUs" method="post">
+<form asp-controller="ContactUs" asp-action="SendMessage" method="post">
     <!-- Form fields -->
     <div class="form-group">
         <label asp-for="UserName">UserName</label>
@@ -15,21 +15,22 @@
         <span asp-asp-validation-for="ContactEmail" class="text-muted"></span>
     </div>
     <div class="form-group">
-        <textarea id="message" asp-for="MessageBody" rows="10" cols="50" placeholder="Message"></textarea>
+        <textarea id="MessageBody" asp-for="MessageBody" rows="10" cols="50" placeholder="Message"></textarea>
         <span asp-asp-validation-for="MessageBody" class="text-muted"></span>
     </div>
     <div>
-        <button id="submitButton" type="submit" class="btn btn-success">Send</button>
+        @* <button id="submitButton" type="submit" class="btn btn-success">Send</button> *@
+        <button id="contactForm" type="submit" class="btn btn-success">Send</button>
     </div>
 </form>
 
-<div id="thankYouMessage" style="display:none;">
+@* <div id="thankYouMessage" style="display:none;">
     <h2>Thank You!</h2>
     <p>Your message has been successfully sent.</p>
   
     <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Return to Home Page</a>
 
-</div>
+</div> *@
 
 @section Scripts {
     <script>

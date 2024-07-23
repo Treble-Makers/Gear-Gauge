@@ -2,16 +2,67 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  position: absolute;
-  float:right;
+  display: flex;
   white-space: normal;
   text-align: center;
   word-break: break-all;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   transition: top 0.3s ease-out;
+  background-color: crimson;
 }
 .navbar.animated {
   top: -60px;
+}
+a.nav-linkDropdown{
+  display: flex;
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  transition: top 0.3s ease-out;
+  background-color: crimson;
+}
+
+nav.navbar.navbar-expand-lg.navbar-light.bg-light {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: crimson;
+}
+
+nav.navbar.navbar-expand-lg.navbar-light.bg-light .navbar-brand {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  transition: top 0.3s ease-out;
+}
+
+nav.navbar.navbar-expand-lg.navbar-light.bg-light .navbar-toggler {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  transition: top 0.3s ease-out;
+}
+
+nav.navbar.navbar-expand-lg.navbar-light.bg-light .collapse.navbar-collapse {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  transition: top 0.3s ease-out;
+}
+
+nav.navbar.navbar-expand-lg.navbar-light.bg-light .navbar-nav.ms-auto {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  transition: top 0.3s ease-out;
+}
+
+nav.navbar.navbar-expand-lg.navbar-light.bg-light .nav-item.dropdown {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  transition: top 0.3s ease-out;
+}
+
+nav.navbar.navbar-expand-lg.navbar-light.bg-light .nav-link.dropdown-toggle {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  transition: top 0.3s ease-out;
+}
+
+nav.navbar.navbar-expand-lg.navbar-light.bg-light .dropdown-menu {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  transition: top 0.3s ease-out;
 }
 
 a {
@@ -53,3 +104,43 @@ button.accept-policy {
   white-space: nowrap;
   line-height: 60px;
 }
+.navbarDropdown {
+  position: relative;
+  display: flex;
+}
+.topnav {
+  background-color: #333;
+  overflow: hidden;
+}
+
+/* Responsive navbar adjustments */
+.navbar {
+  display: flex;
+  justify-content: space-between; /* Aligns items to start and end */
+  align-items: center; /* Centers items vertically */
+  background-color: crimson; /* Sets a consistent background color */
+}
+
+.navbar-brand, .nav-linkDropdown {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  transition: top 0.3s ease-out;
+}
+
+/* Use media queries to adjust navbar behavior on smaller screens */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column; /* Stack navbar items vertically on small screens */
+  }
+  .navbar-brand, .nav-linkDropdown {
+    text-align: left; /* Align text to the left on small screens */
+  }
+
+  
+  }
+    .active-item {
+        color: green !important;
+    }
+
+    .normal-item {
+        color: rgba(255, 140, 0, 0.781) !important;
+    }
