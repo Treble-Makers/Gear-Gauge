@@ -23,6 +23,48 @@ a.nav-linkDropdown{
   background-color: crimson;
 }
 
+nav.navbar.navbar-expand-lg.navbar-light.bg-light {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: crimson;
+}
+
+nav.navbar.navbar-expand-lg.navbar-light.bg-light .navbar-brand {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  transition: top 0.3s ease-out;
+}
+
+nav.navbar.navbar-expand-lg.navbar-light.bg-light .navbar-toggler {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  transition: top 0.3s ease-out;
+}
+
+nav.navbar.navbar-expand-lg.navbar-light.bg-light .collapse.navbar-collapse {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  transition: top 0.3s ease-out;
+}
+
+nav.navbar.navbar-expand-lg.navbar-light.bg-light .navbar-nav.ms-auto {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  transition: top 0.3s ease-out;
+}
+
+nav.navbar.navbar-expand-lg.navbar-light.bg-light .nav-item.dropdown {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  transition: top 0.3s ease-out;
+}
+
+nav.navbar.navbar-expand-lg.navbar-light.bg-light .nav-link.dropdown-toggle {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  transition: top 0.3s ease-out;
+}
+
+nav.navbar.navbar-expand-lg.navbar-light.bg-light .dropdown-menu {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  transition: top 0.3s ease-out;
+}
+
 a {
   color: #0077cc;
 }
@@ -71,30 +113,34 @@ button.accept-policy {
   overflow: hidden;
 }
 
-/* Style the links inside the navigation bar */
-.topnav a {
-  float: left;
+/* Responsive navbar adjustments */
+.navbar {
   display: flex;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
+  justify-content: space-between; /* Aligns items to start and end */
+  align-items: center; /* Centers items vertically */
+  background-color: crimson; /* Sets a consistent background color */
 }
 
-/* Change the color of links on hover */
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
+.navbar-brand, .nav-linkDropdown {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  transition: top 0.3s ease-out;
 }
 
-/* Add an active class to highlight the current page */
-.topnav a.active {
-  background-color: #04AA6D;
-  color: white;
-}
+/* Use media queries to adjust navbar behavior on smaller screens */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column; /* Stack navbar items vertically on small screens */
+  }
+  .navbar-brand, .nav-linkDropdown {
+    text-align: left; /* Align text to the left on small screens */
+  }
 
-/* Hide the link that should open and close the topnav on small screens */
-.topnav .icon {
-  display: none;
-}
+  
+  }
+    .active-item {
+        color: green !important;
+    }
+
+    .normal-item {
+        color: rgba(255, 140, 0, 0.781) !important;
+    }
