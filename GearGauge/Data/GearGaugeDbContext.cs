@@ -44,12 +44,14 @@ namespace GearGauge.Data;
  
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<GearInventory>()
-                //.HasMany(g =>g.GearInventories)
-                //.WithMany(f =>f.Favorites)
                 .HasKey(g => g.Id);
 
               modelBuilder.Entity<Favorite>()
               .HasKey(f => f.Id);
 
+              modelBuilder.Entity<Favorite>()
+                .HasOne(f => f.GearInventory)
+                .WithMany(g => g.Favorites)
+                .HasForeignKey(f => f.GearInventory.Id);
         }
     }
