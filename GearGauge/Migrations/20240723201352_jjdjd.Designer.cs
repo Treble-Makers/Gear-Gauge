@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GearGauge.Migrations
 {
     [DbContext(typeof(GearGaugeDbContext))]
-    [Migration("20240721170536_removal")]
-    partial class removal
+    [Migration("20240723201352_jjdjd")]
+    partial class jjdjd
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -88,23 +88,21 @@ namespace GearGauge.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("GearId")
-                        .HasColumnType("int");
-
                     b.Property<int>("GearInventoryId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId1")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("GearId");
-
                     b.HasIndex("GearInventoryId");
+
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Favorites");
                 });
@@ -464,12 +462,6 @@ namespace GearGauge.Migrations
 
             modelBuilder.Entity("GearGauge.Models.Favorite", b =>
                 {
-                    b.HasOne("GearGauge.Models.Gear", "Gear")
-                        .WithMany()
-                        .HasForeignKey("GearId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("GearGauge.Models.GearInventory", "GearInventory")
                         .WithMany("Favorites")
                         .HasForeignKey("GearInventoryId")
@@ -478,11 +470,9 @@ namespace GearGauge.Migrations
 
                     b.HasOne("GearGauge.Models.User", "User")
                         .WithMany("Favorites")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("UserId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Gear");
 
                     b.Navigation("GearInventory");
 

@@ -37,21 +37,21 @@ namespace GearGauge.Data;
         modelBuilder.Entity<ContactUs>()
             .HasKey(c => c.Id);
 
-            modelBuilder.Entity<User>() //I think it's user?
-              .HasMany(u => u.Favorites)
-              .WithOne(f => f.User)
-              .HasForeignKey(f => f.Id);
+            // modelBuilder.Entity<User>() //I think it's user?
+            //   .HasMany(u => u.Favorites)
+            //   .WithOne(f => f.User)
+            //   .HasForeignKey(f => f.Id);
  
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<GearInventory>()
                 .HasKey(g => g.Id);
 
-              modelBuilder.Entity<Favorite>()
-              .HasKey(f => f.Id);
+              // modelBuilder.Entity<Favorite>()
+              // .HasKey(f => f.Id);
 
-              modelBuilder.Entity<Favorite>()
-                .HasOne(f => f.GearInventory)
-                .WithMany(g => g.Favorites)
-                .HasForeignKey(f => f.GearInventory.Id);
+              // modelBuilder.Entity<Favorite>()
+              //   .HasOne(f => f.GearInventory)
+              //   .WithMany(g => g.Favorites)
+              //   .HasForeignKey(f => f.GearInventory.Id);
         }
     }
