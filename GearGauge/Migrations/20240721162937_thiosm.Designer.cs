@@ -4,6 +4,7 @@ using GearGauge.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GearGauge.Migrations
 {
     [DbContext(typeof(GearGaugeDbContext))]
-    partial class GearGaugeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240721162937_thiosm")]
+    partial class thiosm
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,13 +72,24 @@ namespace GearGauge.Migrations
                     b.Property<string>("ContactEmail")
                         .HasColumnType("longtext");
 
+                    b.Property<int?>("ContactUsId")
+                        .HasColumnType("int");
+
                     b.Property<string>("MessageBody")
                         .HasColumnType("longtext");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("UserName")
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ContactUsId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("ContactUs");
                 });
@@ -459,6 +473,21 @@ namespace GearGauge.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("GearGauge.Models.ContactUs", b =>
+                {
+                    b.HasOne("GearGauge.Models.ContactUs", null)
+                        .WithMany("contacts")
+                        .HasForeignKey("ContactUsId");
+
+                    b.HasOne("GearGauge.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("GearGauge.Models.Favorite", b =>
                 {
                     b.HasOne("GearGauge.Models.Gear", "Gear")
@@ -583,6 +612,11 @@ namespace GearGauge.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("GearGauge.Models.ContactUs", b =>
+                {
+                    b.Navigation("contacts");
                 });
 
             modelBuilder.Entity("GearGauge.Models.Gear", b =>

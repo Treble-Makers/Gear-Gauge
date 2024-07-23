@@ -5,16 +5,18 @@ html {
 @media (min-width: 768px) {
   html {
     font-size: 16px;
+    font-variant-emoji: full-width;
   }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #0f0f0f;
+  box-shadow: 0 0 0 0.1rem rgb(119, 45, 45), 0 0 0 0.25rem #0f0f0f;
 }
 
 html {
   position: relative;
   min-height: 100%;
+  animation: both 0.5s;
 }
 
 body {
