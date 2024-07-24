@@ -70,52 +70,99 @@ public class UserProfileController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(UserProfileViewModel model)
+   
+public async Task<IActionResult> Edit(UserProfileViewModel model)
+{
+    if (!ModelState.IsValid)
     {
-        if (!ModelState.IsValid)
-        {
-            return View(model);
-        }
-
-        var user = await _userManager.GetUserAsync(User);
-        if (user == null)
-        {
-            return NotFound();
-        }
-
-        user.UserName = model.UserName;
-        user.Email = model.Email;
-        user.Name = model.Name;
-        user.Address = model.Address;
-        user.AboutMe = model.AboutMe;
-
-        if (model.ProfilePicture != null)
-        {
-            var uniqueFileName = GetUniqueFileName(model.ProfilePicture.FileName);
-            var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
-            var filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
-            {
-                await model.ProfilePicture.CopyToAsync(fileStream);
-            }
-
-            user.ProfilePictureUrl = "/images/" + uniqueFileName;
-        }
-
-        var result = await _userManager.UpdateAsync(user);
-        if (result.Succeeded)
-        {
-            return RedirectToAction(nameof(Index));
-        }
-
-        foreach (var error in result.Errors)
-        {
-            ModelState.AddModelError(string.Empty, error.Description);
-        }
-
         return View(model);
     }
+
+    var user = await _userManager.GetUserAsync(User);
+    if (user == null)
+    {
+        return NotFound();
+    }
+
+    user.UserName = model.UserName;
+    user.Email = model.Email;
+    user.Name = model.Name;
+    user.Address = model.Address;
+    user.AboutMe = model.AboutMe;
+
+    if (model.ProfilePicture != null)
+    {
+        var uniqueFileName = GetUniqueFileName(model.ProfilePicture.FileName);
+        var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+        var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+        using (var fileStream = new FileStream(filePath, FileMode.Create))
+        {
+            await model.ProfilePicture.CopyToAsync(fileStream);
+        }
+
+        user.ProfilePictureUrl = "/images/" + uniqueFileName;
+    }
+
+    var result = await _userManager.UpdateAsync(user);
+    if (result.Succeeded)
+    {
+        return RedirectToAction(nameof(Index));
+    }
+
+    foreach (var error in result.Errors)
+    {
+        ModelState.AddModelError(string.Empty, error.Description);
+    }
+
+    return View(model);
+}
+    // public async Task<IActionResult> Edit(UserProfileViewModel model)
+    // {
+    //     if (!ModelState.IsValid)
+    //     {
+    //         return View(model);
+    //     }
+
+    //     var user = await _userManager.GetUserAsync(User);
+    //     if (user == null)
+    //     {
+    //         return NotFound();
+    //     }
+
+    //     user.UserName = model.UserName;
+    //     user.Email = model.Email;
+    //     user.Name = model.Name;
+    //     user.Address = model.Address;
+    //     user.AboutMe = model.AboutMe;
+
+    //     if (model.ProfilePicture != null)
+    //     {
+    //         var uniqueFileName = GetUniqueFileName(model.ProfilePicture.FileName);
+    //         var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+    //         var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+    //         using (var fileStream = new FileStream(filePath, FileMode.Create))
+    //         {
+    //             await model.ProfilePicture.CopyToAsync(fileStream);
+    //         }
+
+    //         user.ProfilePictureUrl = "/images/" + uniqueFileName;
+    //     }
+
+    //     var result = await _userManager.UpdateAsync(user);
+    //     if (result.Succeeded)
+    //     {
+    //         return RedirectToAction(nameof(Index));
+    //     }
+
+    //     foreach (var error in result.Errors)
+    //     {
+    //         ModelState.AddModelError(string.Empty, error.Description);
+    //     }
+
+    //     return View(model);
+    // }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
