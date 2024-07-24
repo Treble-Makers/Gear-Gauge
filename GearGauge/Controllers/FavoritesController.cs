@@ -32,14 +32,14 @@ namespace GearGauge.Controllers
 
             var favorites = await _context.Favorites
                 .Where(f => f.UserId == user.Id)
-                .Include(f => f.Gear)
+                .Include(f => f.GearInventories)
                 .ToListAsync();
 
             return View(favorites);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddToFavorite(int gearId)
+        public async Task<IActionResult> AddToFavorite(GearInventory gearInventories)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -48,14 +48,14 @@ namespace GearGauge.Controllers
             }
 
             var existingFavorite = await _context.Favorites
-                .FirstOrDefaultAsync(f => f.GearId == gearId && f.UserId == user.Id);
+                .FirstOrDefaultAsync(f => f.GearInventories == gearInventories && f.UserId == user.Id);
             
             if (existingFavorite != null)
             {
-                return RedirectToAction("Detail", "GearInventory", new { id = gearId }); 
+                return RedirectToAction("Detail", "GearInventory", new { id = gearInventories.Id }); 
             }
 
-            var gear = await _context.Gear.FindAsync(gearId);  // Changed from GearInventory to Gear
+            var gear = await _context.Gear.FindAsync(gearInventories.Id); 
             if (gear == null)
             {
                 return NotFound();
@@ -63,19 +63,19 @@ namespace GearGauge.Controllers
 
             var favorite = new Favorites
             {
-                GearId = gearId,
+                // GearId = gearId,
                 UserId = user.Id,
-                Gear = gear
+                // Gear = gear
             };
 
             _context.Favorites.Add(favorite);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Detail", "GearInventory", new { id = gearId });
+            return RedirectToAction("Detail", "GearInventory", new { id = gearInventories.Id });
         }
 
         [HttpPost]
-        public async Task<IActionResult> RemoveFromFavorite(int gearId)
+        public async Task<IActionResult> RemoveFromFavorite(GearInventory gearInventories)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -84,7 +84,7 @@ namespace GearGauge.Controllers
             }
 
             var favorite = await _context.Favorites
-                .FirstOrDefaultAsync(f => f.GearId == gearId && f.UserId == user.Id);
+                .FirstOrDefaultAsync(f => f.GearInventories == gearInventories && f.UserId == user.Id);
 
             if (favorite != null)
             {

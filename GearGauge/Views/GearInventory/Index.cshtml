@@ -29,6 +29,7 @@
                 <td>
                     <a asp-controller="GearInventory" asp-action="Detail" asp-route-id="@item.Id">View</a> |
                     <a asp-controller="GearInventory" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-controller="Favorites" asp-action="AddToFavorites" asp-route-id="@item.Id">Add to Favorites</a>
                 </td>
             </tr>
         }

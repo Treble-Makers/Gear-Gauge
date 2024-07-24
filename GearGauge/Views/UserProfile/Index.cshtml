@@ -1,4 +1,5 @@
-@model GearGauge.ViewModels.UserProfileViewModel
+
+@*@model GearGauge.ViewModels.UserProfileViewModel
 
 @{
     ViewData["Title"] = "User Profile";
@@ -9,7 +10,7 @@
 <div id="profile-container">
     @if (Model.IsEditMode)
     {
-        <form asp-action="Save" method="post" enctype="multipart/form-data">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="UserName" class="control-label"></label>
@@ -49,7 +50,7 @@
             }
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
-                <button type="button" class="btn btn-secondary" onclick="toggleEditMode()">Cancel</button>
+                <a asp-action="Index" class="btn btn-secondary">Cancel</a>
             </div>
         </form>
     }
@@ -74,7 +75,7 @@
             </div>
         }
         <div class="form-group">
-            <button type="button" class="btn btn-primary" onclick="toggleEditMode()">Edit</button>
+            <a asp-action="Index" asp-route-isEditMode="true" class="btn btn-primary">Edit</a>
             <form asp-action="Delete" method="post" style="display: inline;">
                 <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete your profile?')">Delete Profile</button>
             </form>
@@ -84,16 +85,43 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script>
-        function toggleEditMode() {
-            var container = document.getElementById('profile-container');
-            var isEditMode = container.querySelector('form') !== null;
-            
-            if (isEditMode) {
-                location.reload();
-            } else {
-                container.innerHTML = '@Html.Raw(Html.Encode(await Html.PartialAsync("_EditProfile", Model)))';
-            }
-        }
-    </script>
 }
+
+
+
+*@  
+@model GearGauge.ViewModels.UserProfileViewModel
+
+@{
+    ViewData["Title"] = "User Profile";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">Username:</dt>
+        <dd class="col-sm-10">@Model.UserName</dd>
+        <dt class="col-sm-2">Email:</dt>
+        <dd class="col-sm-10">@Model.Email</dd>
+        <dt class="col-sm-2">Name:</dt>
+        <dd class="col-sm-10">@Model.Name</dd>
+        <dt class="col-sm-2">Address:</dt>
+        <dd class="col-sm-10">@Model.Address</dd>
+        <dt class="col-sm-2">About Me:</dt>
+        <dd class="col-sm-10">@Model.AboutMe</dd>
+    </dl>
+    @if (!string.IsNullOrEmpty(Model.CurrentProfilePictureUrl))
+    {
+        <div class="form-group">
+            <img src="@Model.CurrentProfilePictureUrl" alt="Profile Picture" style="max-width: 200px;" />
+        </div>
+    }
+</div>
+
+<div>
+    <a asp-action="Edit" class="btn btn-primary">Edit Profile</a>
+    <form asp-action="Delete" method="post" style="display: inline;">
+        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete your profile?')">Delete Profile</button>
+    </form>
+</div>
