@@ -37,9 +37,11 @@ public class GearGaugeDbContext : IdentityDbContext<User>
         //   .WithOne(f => f.Gear),
         //  .HasForeignKey<Comment>(c => c.GearId);
 
-        // modelBuilder.Entity<Comment>()
-        // .HasKey(c => c.Id);
-              
+        modelBuilder.Entity<Comment>()
+            .HasOne(c => c.ParentComment)
+            .WithMany(c => c.Replies)
+            .HasForeignKey(c => c.ParentCommentId)
+            .OnDelete(DeleteBehavior.Restrict);
              
         // modelBuilder.Entity<Favorites>()
         //     .HasOne<GearInventory>(f => f.GearInventories)

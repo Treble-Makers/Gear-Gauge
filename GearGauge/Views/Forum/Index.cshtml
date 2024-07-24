@@ -1,0 +1,64 @@
+@model List<GearGauge.Models.Comment>
+
+@{
+    ViewData["Title"] = "Forum";
+}
+
+<h2>Forum</h2>
+
+<form asp-action="PostComment" method="post">
+    <div class="form-group">
+        <textarea name="content" class="form-control" rows="3" placeholder="Write a comment..."></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Post Comment</button>
+</form>
+
+<hr />
+
+@foreach (var comment in Model)
+{
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">@comment.User.UserName</h5>
+            <h6 class="card-subtitle mb-2 text-muted">@comment.CreatedAt.ToString("g")</h6>
+            <p class="card-text">@comment.Content</p>
+            
+            <button class="btn btn-link" onclick="toggleReplyForm(@comment.Id)">Reply</button>
+            
+            <div id="replyForm@(comment.Id)" style="display:none;">
+                <form asp-action="PostComment" method="post">
+                    <input type="hidden" name="parentCommentId" value="@comment.Id" />
+                    <div class="form-group">
+                        <textarea name="content" class="form-control" rows="2" placeholder="Write a reply..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm">Post Reply</button>
+                </form>
+            </div>
+
+            @if (comment.Replies != null && comment.Replies.Any())
+            {
+                <div class="ml-5 mt-3">
+                    @foreach (var reply in comment.Replies)
+                    {
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <h6 class="card-title">@reply.User.UserName</h6>
+                                <h6 class="card-subtitle mb-2 text-muted">@reply.CreatedAt.ToString("g")</h6>
+                                <p class="card-text">@reply.Content</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        function toggleReplyForm(commentId) {
+            var form = document.getElementById('replyForm' + commentId);
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+}
