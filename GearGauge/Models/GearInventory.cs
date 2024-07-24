@@ -12,6 +12,7 @@ namespace GearGauge.Models;
     public int MarketValue { get; set; }
     public List<GearInventory> GearInventories { get; set; }
     public List<Gear> Gear { get; set; }
+    public byte[]? Image { get; set; }
 
     public List<Favorite> Favorites { get; set; }
    // public int CommentId { get; set; }

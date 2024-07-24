@@ -45,6 +45,12 @@ namespace GearGauge.Data;
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<GearInventory>()
                 .HasKey(g => g.Id);
+                modelBuilder.Entity<GearInventory>(entity =>
+                {
+                 entity.Property(g=> g.Image)
+                .HasColumnType("LONGBLOB")
+                .IsRequired(false);
+        });
 
               // modelBuilder.Entity<Favorite>()
               // .HasKey(f => f.Id);
