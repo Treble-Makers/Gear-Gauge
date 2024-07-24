@@ -8,22 +8,25 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using GearGauge.Data;
 
 namespace GearGauge.Controllers;
 
 [Authorize]
 public class UserProfileController : Controller
-{
-    private readonly UserManager<User> _userManager;
-    private readonly SignInManager<User> _signInManager;
-    private readonly IWebHostEnvironment _webHostEnvironment;
+ {
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly GearGaugeDbContext _context;
 
-    public UserProfileController(UserManager<User> userManager, SignInManager<User> signInManager, IWebHostEnvironment webHostEnvironment)
-    {
-        _userManager = userManager;
-        _signInManager = signInManager;
-        _webHostEnvironment = webHostEnvironment;
-    }
+        public UserProfileController(UserManager<User> userManager, SignInManager<User> signInManager, IWebHostEnvironment webHostEnvironment, GearGaugeDbContext context)
+        {
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _webHostEnvironment = webHostEnvironment;
+            _context = context;
+        }
 
     public async Task<IActionResult> Index()
     {
@@ -174,15 +177,62 @@ public async Task<IActionResult> Edit(UserProfileViewModel model)
             return NotFound();
         }
 
-        var result = await _userManager.DeleteAsync(user);
-        if (result.Succeeded)
-        {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
-        }
+        // var result = await _userManager.DeleteAsync(user);
+        // if (result.Succeeded)
+        // {
+        //     await _signInManager.SignOutAsync();
+        //     return RedirectToAction("Index", "Home");
+        // }
 
-        return RedirectToAction(nameof(Index));
-    }
+        // return RedirectToAction(nameof(Index));
+
+            using var transaction = await _context.Database.BeginTransactionAsync();
+
+            try
+            {
+                // Find all comments by this user
+                var userComments = await _context.Comments
+                    .Where(c => c.UserId == user.Id)
+                    .ToListAsync();
+
+                // For each comment
+                foreach (var comment in userComments)
+                {
+                    // If it's a parent comment, delete all replies
+                    if (comment.ParentCommentId == null)
+                    {
+                        var replies = await _context.Comments
+                            .Where(c => c.ParentCommentId == comment.Id)
+                            .ToListAsync();
+                        _context.Comments.RemoveRange(replies);
+                    }
+                }
+
+                // Delete all user's comments
+                _context.Comments.RemoveRange(userComments);
+
+                // Delete the user
+                var result = await _userManager.DeleteAsync(user);
+                if (result.Succeeded)
+                {
+                    await transaction.CommitAsync();
+                    await _signInManager.SignOutAsync();
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    await transaction.RollbackAsync();
+                    throw new Exception("Failed to delete user");
+                }
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                // Log the exception
+                ModelState.AddModelError(string.Empty, "An error occurred while deleting the profile. Please try again.");
+                return RedirectToAction(nameof(Index));
+            }
+        }
 
     private string GetUniqueFileName(string fileName)
     {
