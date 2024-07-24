@@ -41,11 +41,18 @@ namespace GearGauge.Controllers
 
         [HttpPost]
         [Route("/GearInventory/Add")]
-        public IActionResult Add(AddGearInventoryViewModel addGearInventoryViewModel)
+        public IActionResult Add(AddGearInventoryViewModel addGearInventoryViewModel, IFormFile Image)
         {
             if (ModelState.IsValid)
             {
-                
+                      if (Image != null && Image.Length > 0)
+                {
+                    using(var memoryStream = new MemoryStream())
+                    {
+                        Image.CopyTo(memoryStream);
+                        addGearInventoryViewModel.Image = memoryStream.ToArray();
+                    }
+                }
              
 
                 GearInventory newGearInventory = new()
@@ -53,6 +60,7 @@ namespace GearGauge.Controllers
                     Title = addGearInventoryViewModel.Title,
                     Description = addGearInventoryViewModel.Description,
                     MarketValue = addGearInventoryViewModel.MarketValue,
+                    Image = addGearInventoryViewModel.Image
                 
                 };
 
