@@ -35,7 +35,7 @@ namespace GearGauge.Controllers;
             return View(favorites);
         }
 
-        [HttpPost("AddToFavorites")]
+        [HttpGet("AddToFavorites")]
         // [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddToFavorites(int id)
         { 
