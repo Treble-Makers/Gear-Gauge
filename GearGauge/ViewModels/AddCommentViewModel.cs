@@ -9,7 +9,7 @@ namespace GearGauge.ViewModels
         [Required]
         public string? UserName { get; set; }
 
-        public string? Comment { get; set; } // is using Comment uniform in the other cs?
+        public string? Comment { get; set; }
 
         [Required]
         public int Id { get; set; }

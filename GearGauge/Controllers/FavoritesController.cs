@@ -32,7 +32,7 @@ namespace GearGauge.Controllers;
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddToFavorites(int id)
+        public async Task<IActionResult> List(int id)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -47,37 +47,39 @@ namespace GearGauge.Controllers;
             }
 
             var existingFavorite = await _context.Favorites
-                .FirstOrDefaultAsync(f => f.UserId == user.Id && f.GearInventoryId == id);
+                .FirstOrDefaultAsync(f => f.UserId == user.Id && f.GearInventory == gearInventory);
 
             if (existingFavorite == null)
             {
                 var favorite = new Favorites
                 {
                     UserId = user.Id,
-                    GearInventoryId = id
+                    GearInventory= gearInventory
                 };
                 _context.Favorites.Add(favorite);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
+            
+                return View("List", favorite);
             }
-
-            return RedirectToAction("Detail", "GearInventory", new { id = id });
+            return View();
+            // return RedirectToAction("AddToFavorites", "Favorites", new { id = id });
         }
 
-    [HttpPost]
-    public async Task<IActionResult> RemoveFromFavorites(int id)
-    {
-        var user = await _userManager.GetUserAsync(User);
-        var favorite = await _context.Favorites
-            .FirstOrDefaultAsync(f => f.UserId == user.Id && f.GearInventoryId == id);
+    // [HttpPost]
+    // public async Task<IActionResult> RemoveFromFavorites(int id)
+    // {
+    //     var user = await _userManager.GetUserAsync(User);
+    //     var favorite = await _context.Favorites
+    //         .FirstOrDefaultAsync(f => f.UserId == user.Id && f.GearInventory == gearInventory);
 
-        if (favorite != null)
-        {
-            _context.Favorites.Remove(favorite);
-            await _context.SaveChangesAsync();
-        }
+    //     if (favorite != null)
+    //     {
+    //         _context.Favorites.Remove(favorite);
+    //         await _context.SaveChangesAsync();
+    //     }
 
-        return RedirectToAction("Index");
-    }
+    //     return RedirectToAction("Index");
+    // }
 }
 
 

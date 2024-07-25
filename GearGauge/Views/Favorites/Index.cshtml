@@ -8,12 +8,12 @@
         @foreach (var favorite in Model)
         {
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <a asp-controller="GearInventory" asp-action="Detail" asp-route-id="@favorite.GearInventoryId">
+                <a asp-controller="GearInventory" asp-action="Detail" asp-route-id="@favorite.GearInventory">
                     @favorite.GearInventory.Title
                 </a>
-                <form asp-action="RemoveFromFavorites" asp-route-id="@favorite.GearInventoryId" method="post">
+                @* <form asp-action="RemoveFromFavorites" asp-route-id="@favorite.GearInventory" method="post">
                     <button type="submit" class="btn btn-danger btn-sm">Remove</button>
-                </form>
+                </form> *@
             </li>
         }
     </ul>

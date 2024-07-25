@@ -41,7 +41,7 @@ public class ProductSearchController : Controller
                 variables = new SearchRequestVariables()
                 {
                     offset = 0,
-                    sellCardLimit = 5,
+                    sellCardLimit = 2,
                     q = productSearchViewModel.SearchTerm,
                     excludedCategoryUuids = new string[]
                     {

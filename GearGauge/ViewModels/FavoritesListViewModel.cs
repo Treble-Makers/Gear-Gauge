@@ -15,7 +15,4 @@ public class FavoritesListViewModel
     public User? User { get; set; }
     public string? UserId { get; }
 
-    public Favorites? IsFavorite { get; set; } // {this is a bool} in view (if IsFavorite = true) display canonicalsearchviewmodel.title + price + image
-
-    public CanonicalSearchViewModel? CanonicalSearchViewModel { get; set; }
 }

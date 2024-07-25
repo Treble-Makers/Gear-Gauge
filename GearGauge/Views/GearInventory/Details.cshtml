@@ -1,4 +1,4 @@
-@model GearGauge.Models.GearInventory
+@* @model GearGauge.Models.GearInventory
 
 <h1>@Model.Title</h1>
 <p>@Model.Description</p>
@@ -9,4 +9,4 @@
     <form asp-controller="Favorites" asp-action="AddToFavorites" asp-route-id="@Model.Id" method="post">
         <button type="submit" class="btn btn-primary">Add to Favorites</button>
     </form>
-}
+} *@
