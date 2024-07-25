@@ -22,7 +22,12 @@ namespace GearGauge.Controllers;
 
         public async Task<IActionResult> List()
         {
-            var user = await _userManager.GetUserAsync(User);
+             var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            // var user = await _userManager.GetUserAsync(User);
             var favorites = await _context.Favorites
                 .Where(f => f.UserId == user.Id)
                 .Include(f => f.GearInventory)
@@ -30,10 +35,11 @@ namespace GearGauge.Controllers;
             return View(favorites);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> List(int id)
-        {
+        [HttpPost("AddToFavorites")]
+        // [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddToFavorites(int id)
+        { 
+            Console.WriteLine($"Adding to favorites: {id}");
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
@@ -59,7 +65,7 @@ namespace GearGauge.Controllers;
                 _context.Favorites.Add(favorite);
                 _context.SaveChanges();
             
-                return View("List", favorite);
+                return RedirectToAction("List", favorite);
             }
             return View();
             // return RedirectToAction("AddToFavorites", "Favorites", new { id = id });

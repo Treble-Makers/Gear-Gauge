@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GearGauge.Migrations
 {
     [DbContext(typeof(GearGaugeDbContext))]
-    [Migration("20240725015000_new")]
-    partial class @new
+    [Migration("20240725161731_something")]
+    partial class something
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
