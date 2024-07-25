@@ -1,74 +1,67 @@
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using GearGauge.Data;
 using GearGauge.Models;
-using Microsoft.AspNetCore.Authorization;
-using GearGauge.ViewModels;
+using System.Threading.Tasks;
 
 namespace GearGauge.Controllers;
 
-[Authorize]
-public class FavoritesController : Controller
-{
-    private readonly GearGaugeDbContext _context;
-    private readonly UserManager<User> _userManager;
-
-    public FavoritesController(GearGaugeDbContext context, UserManager<User> userManager)
+    [Authorize]
+    public class FavoritesController : Controller
     {
-        _context = context;
-        _userManager = userManager;
-    }
+        private readonly GearGaugeDbContext _context;
+        private readonly UserManager<User> _userManager;
 
-      public async Task<IActionResult> List()
-    {
-        var user = await _userManager.GetUserAsync(User);
-        var favorites = await _context.Favorites
-            .Where(f => f.UserId == user.Id)
-            .Include(f => f.GearInventory)
-            .ToListAsync();
-        return View(favorites);
-    }
-
-    public async Task<IActionResult> Index()
-    {
-        var user = await _userManager.GetUserAsync(User);
-        var favorites = await _context.Favorites
-            .Where(f => f.UserId == user.Id)
-            .Include(f => f.GearInventory)
-            .ToListAsync();
-        return View(favorites);
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> AddToFavorites(int id)
-    {
-        var user = await _userManager.GetUserAsync(User);
-        var gearInventory = await _context.GearInventories.FindAsync(id);
-
-        if (gearInventory == null)
+        public FavoritesController(GearGaugeDbContext context, UserManager<User> userManager)
         {
-            return NotFound();
+            _context = context;
+            _userManager = userManager;
         }
 
-        var existingFavorite = await _context.Favorites
-            .FirstOrDefaultAsync(f => f.UserId == user.Id && f.GearInventoryId == id);
-
-        if (existingFavorite == null)
+        public async Task<IActionResult> List()
         {
-            var favorite = new Favorites
+            var user = await _userManager.GetUserAsync(User);
+            var favorites = await _context.Favorites
+                .Where(f => f.UserId == user.Id)
+                .Include(f => f.GearInventory)
+                .ToListAsync();
+            return View(favorites);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddToFavorites(int id)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
             {
-                UserId = user.Id,
-                GearInventoryId = id
-            };
-            _context.Favorites.Add(favorite);
-            await _context.SaveChangesAsync();
-        }
+                return Unauthorized();
+            }
 
-        return RedirectToAction("Detail", "GearInventory", new { id });
-    }
+            var gearInventory = await _context.GearInventories.FindAsync(id);
+            if (gearInventory == null)
+            {
+                return NotFound();
+            }
+
+            var existingFavorite = await _context.Favorites
+                .FirstOrDefaultAsync(f => f.UserId == user.Id && f.GearInventoryId == id);
+
+            if (existingFavorite == null)
+            {
+                var favorite = new Favorites
+                {
+                    UserId = user.Id,
+                    GearInventoryId = id
+                };
+                _context.Favorites.Add(favorite);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("Detail", "GearInventory", new { id = id });
+        }
 
     [HttpPost]
     public async Task<IActionResult> RemoveFromFavorites(int id)

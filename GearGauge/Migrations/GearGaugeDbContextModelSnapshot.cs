@@ -96,7 +96,7 @@ namespace GearGauge.Migrations
                     b.Property<int?>("GearId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("GearInventoriesId")
+                    b.Property<int>("GearInventoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -107,7 +107,7 @@ namespace GearGauge.Migrations
 
                     b.HasIndex("GearId");
 
-                    b.HasIndex("GearInventoriesId");
+                    b.HasIndex("GearInventoryId");
 
                     b.HasIndex("UserId");
 
@@ -499,17 +499,21 @@ namespace GearGauge.Migrations
                         .WithMany("FavoriteGears")
                         .HasForeignKey("GearId");
 
-                    b.HasOne("GearGauge.Models.GearInventory", "GearInventories")
+                    b.HasOne("GearGauge.Models.GearInventory", "GearInventory")
                         .WithMany()
-                        .HasForeignKey("GearInventoriesId");
+                        .HasForeignKey("GearInventoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("GearGauge.Models.User", null)
+                    b.HasOne("GearGauge.Models.User", "User")
                         .WithMany("FavoriteGears")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("GearInventories");
+                    b.Navigation("GearInventory");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("GearGauge.Models.Gear", b =>

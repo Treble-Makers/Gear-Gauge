@@ -367,7 +367,7 @@ namespace GearGauge.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    GearInventoriesId = table.Column<int>(type: "int", nullable: true),
+                    GearInventoryId = table.Column<int>(type: "int", nullable: false),
                     GearId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -380,10 +380,11 @@ namespace GearGauge.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Favorites_GearInventories_GearInventoriesId",
-                        column: x => x.GearInventoriesId,
+                        name: "FK_Favorites_GearInventories_GearInventoryId",
+                        column: x => x.GearInventoryId,
                         principalTable: "GearInventories",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Favorites_Gear_GearId",
                         column: x => x.GearId,
@@ -492,9 +493,9 @@ namespace GearGauge.Migrations
                 column: "GearId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Favorites_GearInventoriesId",
+                name: "IX_Favorites_GearInventoryId",
                 table: "Favorites",
-                column: "GearInventoriesId");
+                column: "GearInventoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Favorites_UserId",
