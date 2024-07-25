@@ -40,7 +40,7 @@ namespace GearGauge.Controllers
         {
             if (string.IsNullOrEmpty(content))
             {
-                return BadRequest("Comment content cannot be empty.");
+                return BadRequest("Looks like you forgot to share something.");
             }
 
             var user = await _userManager.GetUserAsync(User);

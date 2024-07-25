@@ -1,47 +1,12 @@
 @model GearGauge.Models.GearInventory
 
 <h1>@Model.Title</h1>
-
-<form asp-controller="Favorites" asp-action="AddToFavorite" asp-route-gearId="@Model" method="post">
-    <button type="submit" class="btn btn-primary">Add to Favorites</button>
-</form>
+<p>@Model.Description</p>
+<p>Market Value: @Model.MarketValue</p>
 
 @if (User.Identity.IsAuthenticated)
 {
-    <partial name="_AddToFavoritePartial" model="@Model.Id" />
+    <form asp-controller="Favorites" asp-action="AddToFavorites" asp-route-id="@Model.Id" method="post">
+        <button type="submit" class="btn btn-primary">Add to Favorites</button>
+    </form>
 }
-
-@*@model GearGauge.Models.GearInventory
-
-<h2>@Model.Title</h2>
-<p>@Model.Description</p>
-
-<h3>Favorites</h3>
-
-<form asp-action="AddToFavorite" asp-controller="Favorites" method="post">
-    <input type="hidden" name="musicItemId" value="@Model.Id" />
-    <button type="submit" class="btn btn-primary">Add to Favorites</button>
-</form>
-
-<h3>Comments</h3> 
-@*created comments here *
-<form asp-action="Create" asp-controller="Comments" method="post">
-    <input type="hidden" name="musicItemId" value="@Model.Id" />
-    <div class="form-group">
-        <textarea name="content" class="form-control" rows="3"></textarea>
-    </div>
-
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Add Comment</button>
-    </div>
-</form>
-
-<ul class="list-group"> @*display list of comments here *
-    @foreach (var comment in Model.Comments)
-    {
-        <li class="list-group-item">
-            <p>@comment.Content</p>
-            <small>@comment.CreatedAt.ToString("g")</small>
-        </li>
-    }
-</ul>*@
