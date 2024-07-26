@@ -367,7 +367,7 @@ namespace GearGauge.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    GearInventoryId = table.Column<int>(type: "int", nullable: false),
+                    GearInventoryId = table.Column<int>(type: "int", nullable: true),
                     GearId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -383,8 +383,7 @@ namespace GearGauge.Migrations
                         name: "FK_Favorites_GearInventories_GearInventoryId",
                         column: x => x.GearInventoryId,
                         principalTable: "GearInventories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Favorites_Gear_GearId",
                         column: x => x.GearId,

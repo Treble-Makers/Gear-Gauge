@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GearGauge.Migrations
 {
     [DbContext(typeof(GearGaugeDbContext))]
-    [Migration("20240725161731_something")]
-    partial class something
+    [Migration("20240725180454_new")]
+    partial class @new
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -99,7 +99,7 @@ namespace GearGauge.Migrations
                     b.Property<int?>("GearId")
                         .HasColumnType("int");
 
-                    b.Property<int>("GearInventoryId")
+                    b.Property<int?>("GearInventoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -504,9 +504,7 @@ namespace GearGauge.Migrations
 
                     b.HasOne("GearGauge.Models.GearInventory", "GearInventory")
                         .WithMany()
-                        .HasForeignKey("GearInventoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GearInventoryId");
 
                     b.HasOne("GearGauge.Models.User", "User")
                         .WithMany("FavoriteGears")

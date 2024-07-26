@@ -96,7 +96,7 @@ namespace GearGauge.Migrations
                     b.Property<int?>("GearId")
                         .HasColumnType("int");
 
-                    b.Property<int>("GearInventoryId")
+                    b.Property<int?>("GearInventoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -501,9 +501,7 @@ namespace GearGauge.Migrations
 
                     b.HasOne("GearGauge.Models.GearInventory", "GearInventory")
                         .WithMany()
-                        .HasForeignKey("GearInventoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GearInventoryId");
 
                     b.HasOne("GearGauge.Models.User", "User")
                         .WithMany("FavoriteGears")
