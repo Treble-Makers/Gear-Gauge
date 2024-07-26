@@ -13,8 +13,9 @@ namespace GearGauge.Models;
     public byte[]? Image { get; set; }
     public List<GearInventory> GearInventories { get; set; }
     public List<Gear> Gear { get; set; }
-
-    public List<Favorite> Favorites { get; set; }
+   // public byte[] Image { get; set; }
+   // public IFormFile ImageFile { get; set; }
+    // public ICollection<Favorites> FavoriteGears { get; set; }
    // public int CommentId { get; set; }
    // public ICollection<Comment> Comments { get; set; } = new List<Comment>();
    // public Comment Comment { get; set; }

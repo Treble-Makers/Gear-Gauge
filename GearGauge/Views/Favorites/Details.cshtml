@@ -1,0 +1,10 @@
+@* @model GearGauge.Models.Favorite
+
+<h3>Favorites</h3>
+
+<form asp-action="AddToFavorite" asp-controller="Favorites" method="post">
+    <input type="hidden" name="GearInventory" value="@Model.Id" />
+    <button type="submit" class="btn btn-primary">Add to Favorites</button>
+</form>
+
+</ul> *@

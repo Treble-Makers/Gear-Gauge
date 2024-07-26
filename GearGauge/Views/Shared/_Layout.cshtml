@@ -8,7 +8,12 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/mycsstheme.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<<<<<<< HEAD
     <link rel="stylesheet" href="~/FairMarketValue.styles.css" asp-append-version="true" />
+=======
+    <link rel="stylesheet" href="~/GearGauge.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> @*font library*@
+>>>>>>> Tg-temp-branch
 </head>
 
 <body>
@@ -61,6 +66,7 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
                     <ul class="navbar-nav flex-grow-1">
+<<<<<<< HEAD
                         <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-left: 90%;">
                             <img src="https://banner2.cleanpng.com/20180628/zaz/kisspng-computer-icons-hamburger-button-menu-new-menu-5b34724be5a1f0.5796308115301637879406.jpg" style="height: 50px" alt="">
@@ -76,6 +82,43 @@
                             <a class="dropdown-item" asp-area="" asp-controller="ContactUs" asp-action="Index" style="display: grid; grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));"><img src="https://banner2.cleanpng.com/20191009/epy/transparent-contact-us-icon-contact-icon-5d9d97bbbbc260.5247328215706090837691.jpg" alt="" style="height: 100px">Contact Us</a>
                             <partial name="_LoginPartial" />
                         </div>
+=======
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="ContactUs"
+                                asp-action="Index">Contact Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home"
+                                asp-action="Privacy">Privacy</a>
+                        </li>
+                        @* <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Shared"
+                                asp-action="Watchlist">Watchlist</a>
+                        </li> *@
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Favorites" asp-action="List">Favorites</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="UserProfile" asp-action="Index">My Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Forum" asp-action="Index">Forum</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Gear Inventory
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-area="" asp-controller="GearInventory"
+                                    asp-action="Index">Gear Inventory</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="GearInventory" asp-action="Add">Add
+                                    Gear Inventory</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="GearInventory"
+                                    asp-action="Delete">Delete Gear Inventory</a>
+                            </div>
+                        </li>
+>>>>>>> Tg-temp-branch
                     </ul>
                 </div>
             </div>

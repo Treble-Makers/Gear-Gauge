@@ -114,6 +114,14 @@ namespace GearGauge.Controllers
             return Redirect("/GearInventory");
         }
 
-     
+     public async Task<IActionResult> Details(int id) // added this for my favorites
+{
+    var gearInventory = await context.GearInventories.FindAsync(id);
+    if (gearInventory == null)
+    {
+        return NotFound();
+    }
+    return View(gearInventory);
+}
     }
 }

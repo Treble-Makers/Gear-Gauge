@@ -11,6 +11,7 @@ namespace GearGauge.Models
         public string Name { get; set; }
 
         public virtual ICollection<Watchlist> Watchlists { get; set; }
+        public ICollection<Favorites> FavoriteGears { get; set; }
 
           public virtual Comment Comment { get; set; }
 
