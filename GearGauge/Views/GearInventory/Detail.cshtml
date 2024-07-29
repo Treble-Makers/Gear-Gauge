@@ -1,0 +1,17 @@
+@model GearGauge.Models.GearInventory
+@{
+  Layout = "_Layout";
+}
+
+
+<h1>Gear Details: </h1>
+
+<p>Title: @Model.Title</p>
+<p>Description: @Model.Description</p>
+<p>MarketValue: @Model.MarketValue</p>
+<p>Image: @Model.Image</p>
+
+<a href="/GearInventory/Edit/@(Model.Id)">Edit this entry</a>
+<br>
+
+<p>@Html.ActionLink("Delete this entry", "Delete", new { id = Model.Id })</p>

@@ -1,0 +1,23 @@
+﻿@using GearGauge.Models
+@model GearInventory
+
+<h1>Edit Info:</h1>
+<form asp-action="Edit" asp-controller="GearInventory" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" />
+  <label for="Title">Title</label>
+  <input id="Title" name="Title" type="text" value="@(Model.Title)">
+  <br>
+  <label for="Decription">Description</label>
+  <input id="Description" name="Description" type="text" value="@(Model.Description)">
+  <br>
+  <label for="MarketValue">MarketValue</label>
+  <input id="MarketValue" name="MarketValue" type="number" value="@(Model.MarketValue)">
+  <br>
+  <br>
+  <label for="Image">Image</label>
+  <input id="Image" name="Image" type="file">
+  <br>
+  <button type="submit" value="Edit">Submit Changes</button>
+</form>
+
+<a href="/GearInventory/Detail/@(Model.Id)"><p>Return to Details</p></a>
