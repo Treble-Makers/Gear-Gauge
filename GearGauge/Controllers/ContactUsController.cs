@@ -9,14 +9,18 @@ using GearGauge.Models;
 using System.Net.Mail;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 
 namespace GearGauge.Controllers;
+[Authorize]
 public class ContactUsController : Controller
 {
+    private readonly UserManager<User> userManager;
     private static GearGaugeDbContext context;
     public ContactUsController(GearGaugeDbContext dbContext)
     {
+        this.userManager = userManager;
         context = dbContext;
     }
     [HttpGet]
@@ -38,7 +42,6 @@ public class ContactUsController : Controller
             MessageBody = contactUsViewModel.MessageBody
             };
            
-        
             context.ContactUs.Add(contactUs);
             context.SaveChanges();
          //  string messageBody = $"Name: {this.ContactUs.UserName}\nEmail: {ContactUs.ContactEmail}\nMessage: {ContactUs.MessageBody}";

@@ -12,6 +12,8 @@ public class ContactUs
     public string? UserName { get; set; }
     public string? ContactEmail { get; set; }
     public string? MessageBody { get; set; }
+    public string? UserId { get; set; }
+    public User User { get; set; }
     // private  readonly string? GearEmail = "geargauge@hotmail.com";
     // public ICollection<ContactUs>? contacts { get; set; }
     

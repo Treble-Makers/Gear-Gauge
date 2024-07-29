@@ -18,7 +18,11 @@ public class User : IdentityUser
     public string? ProfilePictureUrl { get; set; }
 
     public ICollection<Favorites> FavoriteGears { get; set; }
-
+    public GearInventory gearInventory { get; set; }
+    public User()
+    {
+        
+    }
     public User(string userName, string email, string name, string address) : base()
     {
         FavoriteGears = new List<Favorites>();

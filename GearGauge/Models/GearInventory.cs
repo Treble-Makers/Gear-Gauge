@@ -10,6 +10,9 @@ namespace GearGauge.Models;
     public string Title { get; set; }
     public string Description { get; set; }
     public int MarketValue { get; set; }
+    [ForeignKey("User")]
+    public string UserId { get; set; }
+    public User User { get; set; }
     public byte[]? Image { get; set; }
     public List<GearInventory> GearInventories { get; set; }
     public List<Gear> Gear { get; set; }

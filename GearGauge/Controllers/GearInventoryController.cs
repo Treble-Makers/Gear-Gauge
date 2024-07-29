@@ -9,21 +9,29 @@ using GearGauge.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace GearGauge.Controllers;
-
+[Authorize]
 public class GearInventoryController : Controller
 {
     private readonly GearGaugeDbContext context;
+    private readonly UserManager<User> userManager;
 
-    public GearInventoryController(GearGaugeDbContext dbContext)
+    public GearInventoryController(GearGaugeDbContext dbContext, UserManager<User> userManager)
     {
         context = dbContext;
+        this.userManager = userManager;
     }
+  
 
     public IActionResult Index()
     {
-        List<GearInventory> gearInventoryList = context.GearInventories.ToList();
+        var userId = userManager.GetUserId(User);
+        List<GearInventory> gearInventoryList = context.GearInventories
+        .Where(g => g.UserId == userId)
+        .ToList();
         return View(gearInventoryList);
     }
 
@@ -93,6 +101,8 @@ public class GearInventoryController : Controller
                     }
                 }
             }
+            var userId = userManager.GetUserId(User);
+            newGearInventory.UserId = userId;
 
             context.GearInventories.Add(newGearInventory);
 
@@ -114,6 +124,13 @@ public class GearInventoryController : Controller
     {
         if (ModelState.IsValid)
         {
+            var existingGearInventory = context.GearInventories.FirstOrDefault(g => g.Id == gearInventory.Id);
+            if (existingGearInventory != null)
+            {
+                existingGearInventory.Title = gearInventory.Title;
+                existingGearInventory.Description = gearInventory.Description;
+                existingGearInventory.MarketValue = gearInventory.MarketValue;
+            }
             if (Image != null && Image.Length > 0)
             {
                 using (var memoryStream = new MemoryStream())
@@ -124,15 +141,11 @@ public class GearInventoryController : Controller
             }
             else
             {
-                var existingGearInventory = context
+                existingGearInventory = context
                     .GearInventories.AsNoTracking()
                     .FirstOrDefault(g => g.Id == gearInventory.Id);
-                if (existingGearInventory != null)
-                {
-                    gearInventory.Image = existingGearInventory.Image;
-                }
             }
-            context.GearInventories.Update(gearInventory);
+            context.GearInventories.Update(existingGearInventory);
             context.SaveChanges();
             
             return Redirect("/Detail");
@@ -160,15 +173,5 @@ public class GearInventoryController : Controller
             context.SaveChanges();
             return Redirect("/GearInventory");
         }
+}
 
-     public async Task<IActionResult> Details(int id) // added this for my favorites
-{
-    var gearInventory = await context.GearInventories.FindAsync(id);
-    if (gearInventory == null)
-    {
-        return NotFound();
-    }
-    return View(gearInventory);
-}
-    }
-}
