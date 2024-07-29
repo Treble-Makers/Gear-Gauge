@@ -6,27 +6,26 @@ namespace GearGauge.Models;
 
 public class User : IdentityUser
 {
-    
+    [StringLength(100)]
     public string? Name { get; set; }
 
-    public string? Address { get; set; }  // should this be ContactEmail instead? do we need address?
-    // public List<int>? GearId { get; set; } 
-   // public string? ProfilePictureUrl { get; set; } // TG added this for profile
-    public ICollection<Favorite> Favorites { get; set; } = new List<Favorite>(); // Favorite feature
-    public GearInventory? GearInventory { get; set; } // GearInventory feature
+    [StringLength(200)]
+    public string? Address { get; set; }
 
-    public User() : base() { }
+    [StringLength(500)]
+    public string? AboutMe { get; set; }
 
-    public User(string userName, string email, string name, string address)
-        : base()
+    public string? ProfilePictureUrl { get; set; }
+
+    public ICollection<Favorites> FavoriteGears { get; set; }
+
+    public User(string userName, string email, string name, string address) : base()
     {
-        // UserName = userName;
+        FavoriteGears = new List<Favorites>();
         UserName = userName;
         Email = email;
         Name = name;
         Address = address;
-       
     }
-
-
 }
+

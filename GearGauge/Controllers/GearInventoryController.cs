@@ -146,17 +146,29 @@ public class GearInventoryController : Controller
         return View();
     }
 
-    [HttpPost("GearInventory/Delete")]
-    public IActionResult Delete(GearInventoryViewModel gearInventoryViewModel)
-    {
-        GearInventory theGearInventory = context.GearInventories.Find(gearInventoryViewModel.Id);
-        Console.WriteLine("Found");
-        if (theGearInventory != null)
+        [HttpPost("GearInventory/Delete")]
+        public IActionResult Delete(GearInventoryViewModel gearInventoryViewModel)
+       
         {
-            context.GearInventories.Remove(theGearInventory);
+                GearInventory theGearInventory = context.GearInventories.Find(gearInventoryViewModel.Id);
+                Console.WriteLine("Found");
+                if (theGearInventory != null)
+                {
+                    context.GearInventories.Remove(theGearInventory);
+                }
+            
+            context.SaveChanges();
+            return Redirect("/GearInventory");
         }
 
-        context.SaveChanges();
-        return Redirect("/GearInventory");
+     public async Task<IActionResult> Details(int id) // added this for my favorites
+{
+    var gearInventory = await context.GearInventories.FindAsync(id);
+    if (gearInventory == null)
+    {
+        return NotFound();
+    }
+    return View(gearInventory);
+}
     }
 }

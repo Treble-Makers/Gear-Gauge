@@ -65,6 +65,7 @@ public class SearchResponse
 
 	public class CoreApimessagesImage
 	{
+		public int Id { get; set; }
 		public string Source { get; set; }
 		public string __typename { get; set; }
 	}
