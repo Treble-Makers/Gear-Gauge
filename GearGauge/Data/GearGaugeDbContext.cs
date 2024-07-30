@@ -19,7 +19,7 @@ public class GearGaugeDbContext : IdentityDbContext<User>
       
     public DbSet<Comment> Comments { get; set; }
     public DbSet<Favorites> Favorites { get; set; }
-    public DbSet<Tag> Tags { get; set; }
+    // public DbSet<Tag> Tags { get; set; }
     public DbSet<GearInventory> GearInventories { get; set; }
     
 
@@ -51,8 +51,8 @@ public class GearGaugeDbContext : IdentityDbContext<User>
             .HasMaxLength(500);
  
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<GearInventory>()
-                .HasMany(g => g.Tags);
+            modelBuilder.Entity<GearInventory>();
+                // .HasMany(g => g.Tags);
                 //.WithMany(t => t.GearInventories)
                 //.UsingEntity(j => j.ToTable("GearInventoryTags"));
 

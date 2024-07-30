@@ -49,9 +49,17 @@ public class GearInventoryController : Controller
     public IActionResult Detail(int Id)
     {
         GearInventory? gearInventory = context.GearInventories.SingleOrDefault(a => a.Id == Id);
-        if (gearInventory != null)
+        EditGearInventoryViewModel editGearInventoryViewModel = new EditGearInventoryViewModel
         {
-            return View("Detail", gearInventory);
+            Id = gearInventory.Id,
+            Title = gearInventory.Title,
+            Description = gearInventory.Description,
+            MarketValue = gearInventory.MarketValue,
+            Image = gearInventory.Image
+        };
+        if (editGearInventoryViewModel != null)
+        {
+            return View("Detail", editGearInventoryViewModel);
         }
         return View("Index");
     }
@@ -61,7 +69,15 @@ public class GearInventoryController : Controller
         GearInventory theGearInventory = context.GearInventories.Find(id);
         if (theGearInventory != null)
         {
-            return View(theGearInventory);
+            EditGearInventoryViewModel editGearInventoryViewModel = new EditGearInventoryViewModel
+            {
+                Id = theGearInventory.Id,
+                Title = theGearInventory.Title,
+                Description = theGearInventory.Description,
+                MarketValue = theGearInventory.MarketValue,
+                Image = theGearInventory.Image
+            };
+            return View(editGearInventoryViewModel);
         }
         return NotFound();
     }
@@ -90,17 +106,17 @@ public class GearInventoryController : Controller
                     Image = addGearInventoryViewModel.Image
                 };
 
-            if (addGearInventoryViewModel.SelectedTagIds != null)
-            {
-                foreach (var tagId in addGearInventoryViewModel.SelectedTagIds)
-                {
-                    var tag = context.Tags.Find(tagId);
-                    if (tag != null)
-                    {
-                        //newGearInventory.Tags.Add(tagId);
-                    }
-                }
-            }
+            // if (addGearInventoryViewModel.SelectedTagIds != null)
+            // {
+            //     foreach (var tagId in addGearInventoryViewModel.SelectedTagIds)
+            //     {
+            //         var tag = context.Tags.Find(tagId);
+            //         if (tag != null)
+            //         {
+            //             //newGearInventory.Tags.Add(tagId);
+            //         }
+            //     }
+            // }
             var userId = userManager.GetUserId(User);
             newGearInventory.UserId = userId;
 
@@ -111,17 +127,26 @@ public class GearInventoryController : Controller
             return Redirect("/GearInventory");
         }
 
-        addGearInventoryViewModel.AvailableTags = context
-            .Tags.ToList()
-            .Select(t => new SelectListItem { Value = t.Id.ToString(), Text = t.Name })
-            .ToList();
+        // addGearInventoryViewModel.AvailableTags = context
+        //     .Tags.ToList()
+        //     .Select(t => new SelectListItem { Value = t.Id.ToString(), Text = t.Name })
+        //     .ToList();
 
         return View(addGearInventoryViewModel);
     }
 
     [HttpPost]
-    public IActionResult Edit(GearInventory gearInventory, IFormFile Image)
+    public IActionResult Edit(EditGearInventoryViewModel gearInventory, IFormFile Image)
     {
+        if (!ModelState.IsValid)
+    {
+        var errors = ModelState.Values.SelectMany(v => v.Errors);
+        foreach (var error in errors)
+        {
+            Console.WriteLine(error.ErrorMessage);
+        }
+        // Inspect the errors in debug mode or log them
+    }
         if (ModelState.IsValid)
         {
             var existingGearInventory = context.GearInventories.FirstOrDefault(g => g.Id == gearInventory.Id);
@@ -148,8 +173,9 @@ public class GearInventoryController : Controller
             context.GearInventories.Update(existingGearInventory);
             context.SaveChanges();
             
-            return Redirect("/Detail");
+            return Redirect("/GearInventory/Detail/" + gearInventory.Id);
         }
+        Console.WriteLine("Not Valid");
         return View(gearInventory);
     }
 

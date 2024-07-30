@@ -1,23 +1,31 @@
-﻿@using GearGauge.Models
-@model GearInventory
+﻿@using GearGauge.ViewModels
+@model EditGearInventoryViewModel
 
 <h1>Edit Info:</h1>
 <form asp-action="Edit" asp-controller="GearInventory" method="post" enctype="multipart/form-data">
     <input type="hidden" asp-for="Id" />
-  <label for="Title">Title</label>
-  <input id="Title" name="Title" type="text" value="@(Model.Title)">
+   @*@ <p>@Model.Tags</p>
+    <input type="hidden" asp-for="@Model.Tags" />
+    <p>@Model.UserId</p>
+    <input type="hidden" asp-for="@Model.UserId" />
+    <p>@Model.User</p>
+    <input type="hidden" asp-for="@Model.User" />
+    <p>@Model.GearInventories</p>
+    <input type="hidden" asp-for="@Model.GearInventories" />*@
+  <label asp-for="Title">Title</label>
+  <input asp-for="Title" name="Title" type="text" value="@Model.Title">
   <br>
-  <label for="Decription">Description</label>
-  <input id="Description" name="Description" type="text" value="@(Model.Description)">
+  <label asp-for="Description">Description</label>
+  <input asp-for="Description" name="Description" type="text" value="@Model.Description">
   <br>
-  <label for="MarketValue">MarketValue</label>
-  <input id="MarketValue" name="MarketValue" type="number" value="@(Model.MarketValue)">
+  <label asp-for="MarketValue">MarketValue</label>
+  <input asp-for="MarketValue" name="MarketValue" type="number" value="@Model.MarketValue">
   <br>
   <br>
-  <label for="Image">Image</label>
-  <input id="Image" name="Image" type="file">
+  <label asp-for="Image">Image</label>
+  <input asp-for="Image" name="Image" type="file">
   <br>
-  <button type="submit" value="Edit">Submit Changes</button>
+  <button type="submit" class="btn btn-primary" value="Edit">Submit Changes</button>
 </form>
 
-<a href="/GearInventory/Detail/@(Model.Id)"><p>Return to Details</p></a>
+<a href="/GearInventory/Detail/@Model.Id"><p>Return to Details</p></a>
