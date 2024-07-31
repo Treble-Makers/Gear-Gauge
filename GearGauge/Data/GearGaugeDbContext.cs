@@ -24,7 +24,6 @@ namespace GearGauge.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // Define many-to-many relationship between GearInventory and Tag
             modelBuilder.Entity<GearInventoryTag>()
                 .HasKey(git => new { git.GearInventoryId, git.TagId });
 

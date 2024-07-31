@@ -1,0 +1,25 @@
+@model IEnumerable<GearGauge.Models.Watchlist>
+
+<h1>Your Watchlist</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Market Value</th>
+            <th>Date Added</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.GearInventory.Title</td>
+            <td>@item.GearInventory.Description</td>
+            <td>@item.GearInventory.MarketValue</td>
+            <td>@item.DateAdded</td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -12,79 +12,81 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 
-namespace GearGauge.Controllers;
-[Authorize]
-public class GearInventoryController : Controller
+namespace GearGauge.Controllers
 {
-    private readonly GearGaugeDbContext context;
-    private readonly UserManager<User> userManager;
-
-    public GearInventoryController(GearGaugeDbContext dbContext, UserManager<User> userManager)
+    [Authorize]
+    public class GearInventoryController : Controller
     {
-        context = dbContext;
-        this.userManager = userManager;
-    }
+        private readonly GearGaugeDbContext context;
+        private readonly UserManager<User> userManager;
 
-    public IActionResult Index()
-    {
-        var userId = userManager.GetUserId(User);
-        List<GearInventory> gearInventoryList = context.GearInventories
-            .Where(g => g.UserId == userId)
-            .ToList();
-        return View(gearInventoryList);
-    }
-
-    [HttpGet]
-    public IActionResult Add()
-    {
-        var viewModel = new AddGearInventoryViewModel
+        public GearInventoryController(GearGaugeDbContext dbContext, UserManager<User> userManager)
         {
-            AvailableTags = context.Tags.ToList()
-                .Select(t => new SelectListItem { Value = t.Id.ToString(), Text = t.Name })
-                .ToList()
-        };
-
-        return View(viewModel);
-    }
-
-    [HttpGet]
-    public IActionResult Detail(int Id)
-    {
-        GearInventory? gearInventory = context.GearInventories.SingleOrDefault(a => a.Id == Id);
-        if (gearInventory != null)
-        {
-            return View("Detail", gearInventory);
+            context = dbContext;
+            this.userManager = userManager;
         }
-        return View("Index");
-    }
 
-    public IActionResult Edit(int id)
-    {
-        GearInventory theGearInventory = context.GearInventories.Find(id);
-        if (theGearInventory != null)
+        public IActionResult Index()
         {
-            return View(theGearInventory);
+            var userId = userManager.GetUserId(User);
+            List<GearInventory> gearInventoryList = context.GearInventories
+                .Where(g => g.UserId == userId)
+                .ToList();
+            return View(gearInventoryList);
         }
-        return NotFound();
-    }
 
-    [HttpPost]
-    [Route("/GearInventory/Add")]
-    public IActionResult Add(AddGearInventoryViewModel addGearInventoryViewModel, IFormFile Image)
-    {
-        if (ModelState.IsValid)
+        [HttpGet]
+        public IActionResult Add()
         {
-            if (Image != null && Image.Length > 0)
+            var viewModel = new AddGearInventoryViewModel
             {
-                using (var memoryStream = new MemoryStream())
-                {
-                    Image.CopyTo(memoryStream);
-                    addGearInventoryViewModel.Image = memoryStream.ToArray();
-                }
-            }
+                AvailableTags = context.Tags.ToList()
+                    .Select(t => new SelectListItem { Value = t.Id.ToString(), Text = t.Name })
+                    .ToList()
+            };
 
-            GearInventory newGearInventory =
-                new()
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        public IActionResult Detail(int Id)
+        {
+            GearInventory gearInventory = context.GearInventories
+                .Include(g => g.Tags)
+                .FirstOrDefault(a => a.Id == Id);
+            if (gearInventory != null)
+            {
+                return View("Detail", gearInventory);
+            }
+            return View("Index");
+        }
+
+        public IActionResult Edit(int id)
+        {
+            GearInventory theGearInventory = context.GearInventories.Find(id);
+            if (theGearInventory != null)
+            {
+                return View(theGearInventory);
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        [Route("/GearInventory/Add")]
+        public IActionResult Add(AddGearInventoryViewModel addGearInventoryViewModel, IFormFile Image)
+        {
+            if (ModelState.IsValid)
+            {
+                if (Image != null && Image.Length > 0)
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        Image.CopyTo(memoryStream);
+                        addGearInventoryViewModel.Image = memoryStream.ToArray();
+                    }
+                }
+
+                GearInventory newGearInventory = new GearInventory
                 {
                     Title = addGearInventoryViewModel.Title,
                     Description = addGearInventoryViewModel.Description,
@@ -93,76 +95,77 @@ public class GearInventoryController : Controller
                     UserId = userManager.GetUserId(User)
                 };
 
-            if (addGearInventoryViewModel.SelectedTagIds != null)
-            {
-                foreach (var tagId in addGearInventoryViewModel.SelectedTagIds)
+                if (addGearInventoryViewModel.SelectedTagIds != null)
                 {
-                    var tag = context.Tags.Find(tagId);
-                    if (tag != null)
+                    foreach (var tagId in addGearInventoryViewModel.SelectedTagIds)
                     {
-                        // newGearInventory.Tags.Add(tagId); // Adjust this line based on your tagging logic
-                    }
-                }
-            }
-
-            context.GearInventories.Add(newGearInventory);
-            context.SaveChanges();
-
-            return Redirect("/GearInventory");
-        }
-
-        addGearInventoryViewModel.AvailableTags = context.Tags.ToList()
-            .Select(t => new SelectListItem { Value = t.Id.ToString(), Text = t.Name })
-            .ToList();
-
-        return View(addGearInventoryViewModel);
-    }
-
-    [HttpPost]
-    public IActionResult Edit(GearInventory gearInventory, IFormFile Image)
-    {
-        if (ModelState.IsValid)
-        {
-            var existingGearInventory = context.GearInventories.FirstOrDefault(g => g.Id == gearInventory.Id);
-            if (existingGearInventory != null)
-            {
-                existingGearInventory.Title = gearInventory.Title;
-                existingGearInventory.Description = gearInventory.Description;
-                existingGearInventory.MarketValue = gearInventory.MarketValue;
-
-                if (Image != null && Image.Length > 0)
-                {
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        Image.CopyTo(memoryStream);
-                        existingGearInventory.Image = memoryStream.ToArray();
+                        var tag = context.Tags.Find(tagId);
+                        if (tag != null)
+                        {
+                            newGearInventory.Tags.Add(new GearInventoryTag { GearInventory = newGearInventory, Tag = tag });
+                        }
                     }
                 }
 
-                context.GearInventories.Update(existingGearInventory);
+                context.GearInventories.Add(newGearInventory);
                 context.SaveChanges();
 
-                return Redirect("/GearInventory/Detail/" + gearInventory.Id);
+                return Redirect("/GearInventory");
             }
+
+            addGearInventoryViewModel.AvailableTags = context.Tags.ToList()
+                .Select(t => new SelectListItem { Value = t.Id.ToString(), Text = t.Name })
+                .ToList();
+
+            return View(addGearInventoryViewModel);
         }
-        return View(gearInventory);
-    }
 
-    public IActionResult Delete()
-    {
-        ViewBag.gearInventories = context.GearInventories.ToList();
-        return View();
-    }
-
-    [HttpPost("GearInventory/Delete")]
-    public IActionResult Delete(GearInventoryViewModel gearInventoryViewModel)
-    {
-        GearInventory theGearInventory = context.GearInventories.Find(gearInventoryViewModel.Id);
-        if (theGearInventory != null)
+        [HttpPost]
+        public IActionResult Edit(GearInventory gearInventory, IFormFile Image)
         {
-            context.GearInventories.Remove(theGearInventory);
-            context.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                var existingGearInventory = context.GearInventories.FirstOrDefault(g => g.Id == gearInventory.Id);
+                if (existingGearInventory != null)
+                {
+                    existingGearInventory.Title = gearInventory.Title;
+                    existingGearInventory.Description = gearInventory.Description;
+                    existingGearInventory.MarketValue = gearInventory.MarketValue;
+
+                    if (Image != null && Image.Length > 0)
+                    {
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            Image.CopyTo(memoryStream);
+                            existingGearInventory.Image = memoryStream.ToArray();
+                        }
+                    }
+
+                    context.GearInventories.Update(existingGearInventory);
+                    context.SaveChanges();
+
+                    return Redirect("/GearInventory/Detail/" + gearInventory.Id);
+                }
+            }
+            return View(gearInventory);
         }
-        return Redirect("/GearInventory");
+
+        public IActionResult Delete()
+        {
+            ViewBag.gearInventories = context.GearInventories.ToList();
+            return View();
+        }
+
+        [HttpPost("GearInventory/Delete")]
+        public IActionResult Delete(GearInventoryViewModel gearInventoryViewModel)
+        {
+            GearInventory theGearInventory = context.GearInventories.Find(gearInventoryViewModel.Id);
+            if (theGearInventory != null)
+            {
+                context.GearInventories.Remove(theGearInventory);
+                context.SaveChanges();
+            }
+            return Redirect("/GearInventory");
+        }
     }
 }

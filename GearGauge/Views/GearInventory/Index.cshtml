@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<GearGauge.Models.GearInventory>
 
-<h1>Gear Inventory</h1>
+<h1>Your Gear Inventory</h1>
 
 <p>
     <a asp-controller="GearInventory" asp-action="Add" class="btn btn-primary">Add Gear Inventory</a>
@@ -12,8 +12,7 @@
             <th>Title</th>
             <th>Description</th>
             <th>Market Value</th>
-            <th>Tags</th>
-            <th></th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -24,13 +23,8 @@
             <td>@item.Description</td>
             <td>@item.MarketValue</td>
             <td>
-                @foreach (var tag in item.Tags)
-                {
-                    <span class="badge badge-secondary">@tag.Tag.Name</span>
-                }
-            </td>
-            <td>
-                <a asp-controller="GearInventory" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                <a asp-controller="GearInventory" asp-action="Detail" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
+                <a asp-controller="GearInventory" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
                 <a asp-controller="GearInventory" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
             </td>
         </tr>

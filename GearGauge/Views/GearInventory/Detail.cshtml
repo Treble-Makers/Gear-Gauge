@@ -16,11 +16,45 @@
 <p>@Html.ActionLink("Delete this entry", "Delete", new { id = Model.Id })</p>
 
 <!-- Add the "Add to Watchlist" button -->
-<form method="post" asp-controller="Watchlist" asp-action="AddToWatchlist">
+<form id="watchlistForm" method="post">
     @Html.AntiForgeryToken()
-    <button class="btn btn-primary add-to-watchlist" data-gear-id="@Model.Id">Add to Watchlist</button>
+    <input type="hidden" name="gearInventoryId" value="@Model.Id" />
+    <button type="button" class="btn btn-primary add-to-watchlist">Add to Watchlist</button>
 </form>
 
+<div id="notification" style="display:none;" class="alert alert-success"></div>
+
 @section Scripts {
-    <script src="~/js/watchlist.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.add-to-watchlist').click(function() {
+                var formData = {
+                    ItemId: $('input[name="gearInventoryId"]').val(),
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                };
+
+                console.log("Form Data:", formData);
+
+                $.ajax({
+                    url: '/api/Watchlist',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(formData),
+                    success: function(response) {
+                        console.log("Response:", response);
+                        if (response.success) {
+                            $('#notification').text(response.message).show().delay(3000).fadeOut();
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function(response) {
+                        console.log("Error:", response);
+                        alert("An error occurred while adding to the watchlist.");
+                    }
+                });
+            });
+        });
+    </script>
 }
