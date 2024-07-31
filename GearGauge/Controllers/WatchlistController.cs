@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using GearGauge.Data;
 using GearGauge.Models;
 using System.Linq;
+using System;
 
 namespace GearGauge.Controllers
 {
@@ -35,16 +37,31 @@ namespace GearGauge.Controllers
             return Ok(watchlist);
         }
 
+        [Authorize] // Ensure only logged-in users can add to watchlist
         [HttpPost]
-        public IActionResult AddToWatchlist([FromBody] Watchlist watchlist)
+        public IActionResult AddToWatchlist([FromBody] WatchlistItemDto watchlistItemDto)
         {
-            if (ModelState.IsValid)
+            if (User.Identity.IsAuthenticated)
             {
-                _context.Watchlists.Add(watchlist);
-                _context.SaveChanges();
-                return CreatedAtAction(nameof(GetWatchlistItem), new { id = watchlist.WatchlistId }, watchlist);
+                if (ModelState.IsValid)
+                {
+                    var userId = User.Identity.Name; // Get the current user's identity
+                    var user = _context.Users.FirstOrDefault(u => u.UserName == userId);
+
+                    var watchlist = new Watchlist
+                    {
+                        UserId = int.Parse(user?.Id),
+                        GearId = watchlistItemDto.ItemId,
+                        DateAdded = DateTime.Now
+                    };
+
+                    _context.Watchlists.Add(watchlist);
+                    _context.SaveChanges();
+                    return CreatedAtAction(nameof(GetWatchlistItem), new { id = watchlist.WatchlistId }, watchlist);
+                }
+                return BadRequest(ModelState);
             }
-            return BadRequest(ModelState);
+            return Unauthorized(new { message = "Must be logged in to add items to watchlist" });
         }
 
         [HttpPut("{id}")]
@@ -76,4 +93,10 @@ namespace GearGauge.Controllers
             return NoContent();
         }
     }
+
+    public class WatchlistItemDto
+    {
+        public int ItemId { get; set; }
+    }
 }
+

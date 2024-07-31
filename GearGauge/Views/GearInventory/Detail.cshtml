@@ -1,17 +1,26 @@
 @model GearGauge.Models.GearInventory
 @{
-  Layout = "_Layout";
+    Layout = "_Layout";
 }
-
 
 <h1>Gear Details: </h1>
 
 <p>Title: @Model.Title</p>
 <p>Description: @Model.Description</p>
-<p>MarketValue: @Model.MarketValue</p>
+<p>Market Value: @Model.MarketValue</p>
 <p>Image: @Model.Image</p>
 
-<a href="/GearInventory/Edit/@(Model.Id)">Edit this entry</a>
+<a href="/GearInventory/Edit/@Model.Id">Edit this entry</a>
 <br>
 
 <p>@Html.ActionLink("Delete this entry", "Delete", new { id = Model.Id })</p>
+
+<!-- Add the "Add to Watchlist" button -->
+<form method="post" asp-controller="Watchlist" asp-action="AddToWatchlist">
+    @Html.AntiForgeryToken()
+    <button class="btn btn-primary add-to-watchlist" data-gear-id="@Model.Id">Add to Watchlist</button>
+</form>
+
+@section Scripts {
+    <script src="~/js/watchlist.js"></script>
+}
