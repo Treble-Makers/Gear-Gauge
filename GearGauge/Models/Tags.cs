@@ -11,12 +11,11 @@ namespace GearGauge.Models
         [Required]
         public string Name { get; set; }
 
-        public ICollection<GearInventory> GearInventories { get; set; }
+        public ICollection<GearInventoryTag> GearInventoryTags { get; set; }
 
         public Tag()
         {
-            GearInventories = new List<GearInventory>();
+            GearInventoryTags = new List<GearInventoryTag>();
         }
     }
 }
-

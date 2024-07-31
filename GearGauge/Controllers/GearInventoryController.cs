@@ -24,24 +24,26 @@ public class GearInventoryController : Controller
         context = dbContext;
         this.userManager = userManager;
     }
-  
 
     public IActionResult Index()
     {
         var userId = userManager.GetUserId(User);
         List<GearInventory> gearInventoryList = context.GearInventories
-        .Where(g => g.UserId == userId)
-        .ToList();
+            .Where(g => g.UserId == userId)
+            .ToList();
         return View(gearInventoryList);
     }
 
     [HttpGet]
     public IActionResult Add()
     {
-        var gearInventories = context.GearInventories.ToList();
+        var viewModel = new AddGearInventoryViewModel
+        {
+            AvailableTags = context.Tags.ToList()
+                .Select(t => new SelectListItem { Value = t.Id.ToString(), Text = t.Name })
+                .ToList()
+        };
 
-        //var tags = context.Tags.ToList();
-        GearInventory viewModel = new GearInventory();
         return View(viewModel);
     }
 
@@ -87,7 +89,8 @@ public class GearInventoryController : Controller
                     Title = addGearInventoryViewModel.Title,
                     Description = addGearInventoryViewModel.Description,
                     MarketValue = addGearInventoryViewModel.MarketValue,
-                    Image = addGearInventoryViewModel.Image
+                    Image = addGearInventoryViewModel.Image,
+                    UserId = userManager.GetUserId(User)
                 };
 
             if (addGearInventoryViewModel.SelectedTagIds != null)
@@ -97,22 +100,18 @@ public class GearInventoryController : Controller
                     var tag = context.Tags.Find(tagId);
                     if (tag != null)
                     {
-                        //newGearInventory.Tags.Add(tagId);
+                        // newGearInventory.Tags.Add(tagId); // Adjust this line based on your tagging logic
                     }
                 }
             }
-            var userId = userManager.GetUserId(User);
-            newGearInventory.UserId = userId;
 
             context.GearInventories.Add(newGearInventory);
-
             context.SaveChanges();
 
             return Redirect("/GearInventory");
         }
 
-        addGearInventoryViewModel.AvailableTags = context
-            .Tags.ToList()
+        addGearInventoryViewModel.AvailableTags = context.Tags.ToList()
             .Select(t => new SelectListItem { Value = t.Id.ToString(), Text = t.Name })
             .ToList();
 
@@ -130,25 +129,21 @@ public class GearInventoryController : Controller
                 existingGearInventory.Title = gearInventory.Title;
                 existingGearInventory.Description = gearInventory.Description;
                 existingGearInventory.MarketValue = gearInventory.MarketValue;
-            }
-            if (Image != null && Image.Length > 0)
-            {
-                using (var memoryStream = new MemoryStream())
+
+                if (Image != null && Image.Length > 0)
                 {
-                    Image.CopyTo(memoryStream);
-                    gearInventory.Image = memoryStream.ToArray();
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        Image.CopyTo(memoryStream);
+                        existingGearInventory.Image = memoryStream.ToArray();
+                    }
                 }
+
+                context.GearInventories.Update(existingGearInventory);
+                context.SaveChanges();
+
+                return Redirect("/GearInventory/Detail/" + gearInventory.Id);
             }
-            else
-            {
-                existingGearInventory = context
-                    .GearInventories.AsNoTracking()
-                    .FirstOrDefault(g => g.Id == gearInventory.Id);
-            }
-            context.GearInventories.Update(existingGearInventory);
-            context.SaveChanges();
-            
-            return Redirect("/Detail");
         }
         return View(gearInventory);
     }
@@ -159,19 +154,15 @@ public class GearInventoryController : Controller
         return View();
     }
 
-        [HttpPost("GearInventory/Delete")]
-        public IActionResult Delete(GearInventoryViewModel gearInventoryViewModel)
-       
+    [HttpPost("GearInventory/Delete")]
+    public IActionResult Delete(GearInventoryViewModel gearInventoryViewModel)
+    {
+        GearInventory theGearInventory = context.GearInventories.Find(gearInventoryViewModel.Id);
+        if (theGearInventory != null)
         {
-                GearInventory theGearInventory = context.GearInventories.Find(gearInventoryViewModel.Id);
-                Console.WriteLine("Found");
-                if (theGearInventory != null)
-                {
-                    context.GearInventories.Remove(theGearInventory);
-                }
-            
+            context.GearInventories.Remove(theGearInventory);
             context.SaveChanges();
-            return Redirect("/GearInventory");
         }
+        return Redirect("/GearInventory");
+    }
 }
-

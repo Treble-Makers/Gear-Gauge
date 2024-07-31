@@ -7,11 +7,6 @@ using GearGauge.ViewModels;
 
 var builder = WebApplication.CreateBuilder(args);
 var apiConnectionKey = builder.Configuration["apiConnectionKey"];
-// var apiConnectionKey = Configuration.GetSection(apiConnectionKey
-// ).Get<YouTubeSearchViewModel>();
-// _apiConnectionKey = apiConnectionKeyConfig.ServiceApiKey;
-
-
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -19,54 +14,31 @@ builder.Services.AddRazorPages();
 builder.Services.AddHttpClient();
 
 // Get the connection string from appsettings.json
-
-// var connectionString = builder.Configuration.GetConnectionString("geargauge");
 var connectionString = "server=localhost;user=geargauge;password=geargauge;database=geargauge";
-var serverVersion = new MySqlServerVersion(new Version(8, 4, 0));
+var serverVersion = new MySqlServerVersion(new Version(8, 0, 27));
 builder.Services.AddDbContext<GearGaugeDbContext>(dbContextOptions => dbContextOptions.UseMySql(connectionString, serverVersion));
 builder.Services.AddDefaultIdentity<User>
 (
     options =>
     {
-    options.SignIn.RequireConfirmedAccount = false;
-    options.Password.RequireDigit = false;
-    options.Password.RequiredLength = 8;
-    options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequireUppercase = false;
-    options.Password.RequireLowercase = false;}
+        options.SignIn.RequireConfirmedAccount = false;
+        options.Password.RequireDigit = false;
+        options.Password.RequiredLength = 8;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireUppercase = false;
+        options.Password.RequireLowercase = false;
+    }
 ).AddEntityFrameworkStores<GearGaugeDbContext>().AddDefaultTokenProviders();
 
-// builder.Services.AddDbContext<GearGaugeDbContext>(dbContextOptions => dbContextOptions.UseMySql(connectionString, serverVersion));
-// builder.Services.AddIdentity<User, IdentityRole>
-// (
-//     options =>
-//     {
-//     options.SignIn.RequireConfirmedAccount = false;
-//     options.Password.RequireDigit = false;
-//     options.Password.RequiredLength = 8;
-//     options.Password.RequireNonAlphanumeric = false;
-//     options.Password.RequireUppercase = false;
-//     options.Password.RequireLowercase = false;}
-// ).AddEntityFrameworkStores<GearGaugeDbContext>().AddDefaultTokenProviders();
-
-
-// public void ConfigureServices(IServiceCollection services)
-// {
-//     services.AddDbContext<GearGaugeDbContext>(options => options.UseMySql(Configure.GetConnectionString(connectionString)));
-
-//     services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<GearGaugeDbContext>().AddDefaultTokenProviders();
-// }
-
-//--- end of connection syntax
-
-
 var app = builder.Build();
+
+// Seed the initial tags
+SeedTags(app.Services);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -85,3 +57,20 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+void SeedTags(IServiceProvider services)
+{
+    using (var scope = services.CreateScope())
+    {
+        var context = scope.ServiceProvider.GetRequiredService<GearGaugeDbContext>();
+        if (!context.Tags.Any())
+        {
+            context.Tags.AddRange(
+                new Tag { Name = "WTB" },
+                new Tag { Name = "WTT" },
+                new Tag { Name = "WTS" }
+            );
+            context.SaveChanges();
+        }
+    }
+}
